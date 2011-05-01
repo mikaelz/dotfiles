@@ -1,0 +1,42 @@
+own_window yes
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+double_buffer yes
+text_buffer_size 4096
+
+use_spacer none
+use_xft yes
+xftfont monospace:size=8
+
+update_interval 3.0
+
+maximum_width 800
+
+draw_shades no
+
+draw_outline no
+draw_borders no
+draw_graph_borders no
+uppercase no
+
+stippled_borders 3
+
+border_width 1
+
+default_color white
+
+own_window_colour brown
+own_window_transparent yes
+
+alignment bottom_left
+
+gap_x 800
+gap_y 150
+
+TEXT
+/var/log/syslog
+${execi 6 tail -n6 /var/log/syslog | fold -w130}
+
+/var/log/apache2/error.log
+${execi 6 tail -n6 /var/log/apache2/error.log | fold -w130}
