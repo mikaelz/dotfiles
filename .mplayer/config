@@ -1,0 +1,13 @@
+ao="alsa" #audio out
+mixer-channel="Master"
+srate=48000
+
+vo="xv" #video out
+# zoom="1" #Allow sofware scaling if I use x11 for vo
+aid="1" # default audio channel
+#sid="0" # default subtitle
+
+double="yes" #double buffering(recommended for subtitles)
+monitoraspect="16:9" #I'm on a widescreen laptop so keeps 4:3 content from stretching
+
+stop-xscreensaver="yes"
