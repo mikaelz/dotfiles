@@ -1,11 +1,11 @@
 [default]
 ao=alsa #audio out
 # vo=xv #video out
-vo=vdpau,
+vo=vdpau,xv
 # zoom="1" #Allow sofware scaling if I use x11 for vo
 monitoraspect="16:9" #I'm on a widescreen laptop so keeps 4:3 content from stretching
 stop-xscreensaver=yes
 
 [vo.vdpau]
 profile-desc="profile for VDPAU video output"
-vc=ffmpeg12vdpau,ffwmv3vdpau,ffvc1vdpau,ffh264vdpau
+vc=ffmpeg12vdpau,ffwmv3vdpau,ffvc1vdpau,ffh264vdpau,ffodivx
