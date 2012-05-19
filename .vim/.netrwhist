@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/Users/mike/Sites/reklamabratislava/pommo'
+let g:netrw_dirhist_2='/Users/mike/Sites/firemny/templates/optimal'
+let g:netrw_dirhist_3='/Users/mike/Sites/cz-motorsport'
+let g:netrw_dirhist_4='/Users/mike/Sites/inzertny/templates/inzercia/css'
