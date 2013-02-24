@@ -87,11 +87,11 @@ set timeoutlen=500            " lower timeout for mappings [msec]
 " reading and writing files
 set fileformats=unix,dos,mac  " list of file formats to look for when editing a file
 set backup                    " keep a backup after overwriting a file 
-set backupdir=/tmp            " list of directories to put backup files in
+set backupdir^=/tmp//         " list of directories to put backup files in
 
 " the swap file
 set swapfile                  " use a swap file for this buffer
-set directory=/tmp            " list of directories for the swap file
+set directory^=/tmp//         " list of directories for the swap file
 
 " command line editing
 set history=200               " how many command lines are remembered
