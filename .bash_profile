@@ -4,17 +4,20 @@
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export PATH="/usr/local/mysql/bin:/opt/local/bin:/opt/local/sbin:~/bin:$PATH"
 
 if [ -f /opt/local/etc/bash_completion ]; then
 	. /opt/local/etc/bash_completion
 fi
+
+EDITOR="/usr/bin/vim"
+export EDITOR
 
 PS1='\u@\h:\w\$ '
 
 alias grep='grep --colour=always' 
 alias ls='ls -Fh' 
 alias vi='vim' 
-alias cp='cp -v' 
-alias mv='mv -v' 
+alias cp='cp -iv' 
+alias mv='mv -iv' 
 alias rm='rm -i' 
