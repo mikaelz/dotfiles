@@ -7,9 +7,9 @@ snippet inc
 snippet inc1
 	include_once '${1:file}';${2}
 snippet req
-	require '${1:file}';${2}
+	require('${1:file}');${2}
 snippet req1
-	require_once '${1:file}';${2}
+	require_once('${1:file}');${2}
 snippet glob
 	$GLOBALS['${1:variable}']${2: = }${3:something}${4:;}${5}
 snippet cook
@@ -26,7 +26,7 @@ snippet sess
 	$_SESSION['${1:variable}']${2}
 snippet isn
 	is_numeric(${1:variable})${2}
-snippet iss
+snippet is
 	isset(${1:variable})${2}
 # Start Docblock
 snippet /*
@@ -152,7 +152,7 @@ snippet def
 snippet def?
 	${1}defined('${2}')${3}
 snippet wh
-	while (${1:$row}) {
+	while ($r = ${1:$q}) {
 		${2:// code...}
 	}
 # do ... while
@@ -179,18 +179,16 @@ snippet elseif
 	elseif (${1:/* condition */}) {
 		${2:// code...}
 	}
-# Tertiary conditional
-snippet iff
-	 (${1:condition}) ? ${2:a} : ${3:b};${4}
+# ternary operator
+snippet t
+	 ${1:condition} ? ${2:a} : ${3:b};${4}
 snippet switch
 	switch ($${1:variable}) {
 		case '${2:value}':
 			${3:// code...}
 			break;
-		${5}
 		default:
 			${4:// code...}
-			break;
 	}
 snippet case
 	case '${1:value}':
@@ -227,7 +225,9 @@ snippet label
 snippet br
 	<br${1: class="clr"}>${2}
 snippet div
-	<div class="${1:classname}">${2}</div><!-- /${3:$1} -->
+	<div class="${1:classname}">
+		${2}
+	</div>
 snippet fieldset
 	<fieldset>
 		<legend>${1:name}</legend>
@@ -254,18 +254,14 @@ snippet select
 snippet opt
 	<option value="${1:option}">${2:$1}</option>${3}
 snippet table
-	<table border="${1:0}" cellspacing="${2:0}" cellpadding="${3:0}">
-		<thead>
-			<tr>
-				<th>${4:Header}</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>${5:Data}</td>
-			</tr>
-		</tbody>
-	</table>${6}
+	<table class="${1:tbl}">
+		<tr>
+			<th>${2:Header}</th>
+		</tr>
+		<tr>
+			<td>${3:Data}</td>
+		</tr>
+	</table>${4}
 snippet tr
 	<tr>
 		<td>${1:text}</td>
@@ -311,19 +307,23 @@ snippet style
 snippet link
 	<link rel="stylesheet" href="${1:filename.css}" media="${2:media|print}"/>${3}
 snippet debug
-	echo '<br><pre>'; print_r(${1:variable}); echo '</pre><br>';${2:exit;}
+	echo "\n\nDEBUG<br><pre>"; print_r(${1:variable}); echo "</pre><br>\n\n";${2:exit;}
 snippet vard
 	var_dump(${1:variable});${2:exit;}
 
 # SQL
+snippet dber
+	if ($database->is_error()) return;
 snippet q
 	$q = "${1:query}";
 	$q = $database->query($q);
 snippet qs
-	SELECT ${1:*} FROM ${2:table} WHERE ${3:column} = '${4:value}' ${5:LIMIT 1}
+	SELECT ${1:*} FROM ".TABLE_PREFIX."${2:table} WHERE ${3:column} = '${4:value}' ${5:LIMIT 1};
 snippet qu
-	UPDATE ${1:table} SET ${2:column} = '${3:value}' WHERE ${4:column} = '${5:value}' ${6:LIMIT 1}
+	UPDATE ".TABLE_PREFIX."${1:table} SET ${2:column} = '${3:value}' WHERE ${4:column} = '${5:value}' ${6:LIMIT 1};
 snippet qi
-	INSERT INTO ${1:table} (${2:column}) VALUES ('${3:value}')
+	INSERT INTO ".TABLE_PREFIX."${1:table} (${2:column}) VALUES ('${3:value}');
 snippet qd
-	DELETE FROM ${1:table} WHERE ${2:column} = '${3:value}' ${4:LIMIT 1}
+	DELETE FROM ".TABLE_PREFIX."${1:table} WHERE ${2:column} = '${3:value}' ${4:LIMIT 1};
+snippet ut
+	UNIX_TIMESTAMP(${1:NOW()})

@@ -24,7 +24,7 @@ snippet t
 	${1:/* condition */} ? ${2:a} : ${3:b}
 # switch
 snippet switch
-	switch(${1:expression}) {
+	switch (${1:expression}) {
 		case '${3:case}':
 			${4:// code}
 			break;
@@ -75,10 +75,16 @@ snippet gett
 snippet ajax
 	$.ajax({
 		url: base_url + '/ajax/${1:get.php}',
-		data: ${2:data},
-		success: function(resp) {
-			${3:code}
+		data: ${2:'data=' + id},
+		success: function(res) {
+			${3:console.log(res);}
 		}
 	});
 snippet log
 	console.log(${1});
+snippet jqinit
+	;(function ( $, window, document, undefined ) {
+	
+		${1:code...}
+
+	})( jQuery, window, document );
