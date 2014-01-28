@@ -25,15 +25,17 @@ set number		              " show the line number for each line
 set background=dark           " the background color brightness
 set synmaxcol=400             " maximum column to look for syntax items 
 set hlsearch     		      " highlight all matches for the last used search pattern
-set cursorline                " highlight the screen line of the cursor
-set colorcolumn=80            " columns to highlight, match to 'textwidth'
+" set cursorline                " highlight the screen line of the cursor
+" set colorcolumn=80            " columns to highlight, match to 'textwidth'
 
 " multiple windows
 set laststatus=2	          " always show status line
 set statusline=%<%F
 set statusline+=%w%h%m%r      " options
-set statusline+=\ \ %y/%{&ff}
-set statusline+=\ cwd:%{getcwd()}
+set statusline+=\ %y/%{&ff}
+set statusline+=\/%{''.(&fenc!=''?&fenc:&enc).''} " encoding
+set statusline+=\ %{(&bomb?\",BOM\":\"\")}        " encoding2
+set statusline+=\CWD:%{getcwd()}
 set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " right aligned file nav info
 
 set hidden                    " don't unload a buffer when no longer shown in a window
@@ -45,7 +47,9 @@ set tabpagemax=16             " maximum number of tab pages to open for -p
 
 " terminal
 set ttyfast                   " terminal connection is fast
-set titlestring=%f title      " when not empty, use for the window title
+set title
+set titlelen=70
+" set titlestring=%f            " when not empty, use for the window title
 
 " using the mouse
 set mouse=a                   " enable mouse support
@@ -96,7 +100,10 @@ set directory^=/tmp//         " list of directories for the swap file
 " command line editing
 set history=200               " how many command lines are remembered
 set wildmode=full             " specifies how command line completion works
-set wildignore+=*.o,*.obj,*.pyc,*.DS_Store,*.db " list of patterns to ignore files for file name completion
+set wildignore+=*.o,*.obj,*.pyc,*.db " list of patterns to ignore files for file name completion
+set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
+set wildignore+=.DS_Store,.git,.hg,.svn
+set wildignore+=*~,*.swp,*.tmp
 set wildmenu                  " command-line completion shows a list of matches
 
 " executing external commands
@@ -107,16 +114,19 @@ set encoding=utf-8            " character encoding used in Vim: latin1, utf-8
 set fileencoding=utf-8        " character encoding for the current file
 
 " various
+set virtualedit=block         " when to use virtual editing
 set gdefault                  " use the 'g' flag for ':substitute'
 
 
 syntax on
 filetype plugin indent on
 
-colorscheme molokai
-
 " Enable extended % matching
 ru macros/matchit.vim
+
+if $TERM == 'xterm-256color' || $TERM == 'screen-256color'
+    set t_Co=256
+endif
 
 if has('gui_running')
 	set guicursor=a:blinkon0 " Disable blinking cursor
@@ -134,6 +144,11 @@ else
 		let @" = old
 	endf
 endif
+
+" http://vimcolorschemetest.googlecode.com/svn/html/index-html.html
+" colorscheme wombat256
+" colorscheme gardener
+colorscheme xoria256
 
 
 " correct some spelling mistakes Insert mode
@@ -165,6 +180,7 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 " http://www.reddit.com/r/vim/comments/ozr5h/convert_every_text_file_to_unix_format_if_not/c3lhgpe
 autocmd BufWritePre * set ff=unix
 " autocmd BufWritePre * :make
+autocmd BufEnter * let &titlestring = ' ' . expand("%:f")
 
 " let php_folding = 1
 let php_noShortTags = 1
@@ -183,6 +199,8 @@ nnoremap <leader>n :setlocal number!<CR>
 
 " \p toggle paste mode
 nnoremap <leader>p :set paste!<CR>
+
+inoremap jk <ESC>
 
 " disable arrow keys
 nnoremap <up> <nop>
@@ -204,3 +222,5 @@ vnoremap > >gv
 " list opened buffers
 nnoremap <leader>l :ls<cr>:b<space>
 
+let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
+let g:syntastic_csslint_options="--ignore=box-sizing"
