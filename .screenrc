@@ -1,0 +1,52 @@
+#
+# ~/.screenrc
+#
+# Thanks to:
+# https://www.gnu.org/software/screen/manual/screen.html#Command-Summary
+# http://www.debian-administration.org/articles/560
+# http://www.alexandrulazar.com/junk/articles/.screenrc
+
+startup_message off
+
+shell -$SHELL # https://serverfault.com/a/458071
+
+vbell on # no annoying audible bell
+vbell_msg "  !! Something interesting has happened !!  "
+activity "%c activity -> %n%f %t"
+bell "%c bell -> %n%f %t^G"
+
+autodetach on  # autodetach session on hangup instead of terminating screen completely
+altscreen on
+defscrollback 5000
+defutf8 on
+defnonblock on
+msgwait 1 # message timeout 1 second
+shelltitle "$ |bash"
+
+defmonitor on # turn monitoring on
+activity "%"  # tell me when stuff happens!
+
+# allow bold colors - necessary for some reason
+attrcolor b ".I"
+
+# http://www4.cs.fau.de/~jnweiger/screen-faq.html
+# https://stackoverflow.com/a/4833946
+# http://pjkh.com/articles/osx-iterm-screen-vim-256-colors/
+term screen-256color
+termcapinfo screen* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+termcapinfo screen* ti@:te@ # make scrollbar work
+
+defbce on # erase background with current bg color
+
+bind R eval "source $HOME/.screenrc" "echo '.screenrc reloaded!'"
+bind % screen -t htop htop
+
+screen -t netlog 0 watch -n 2 -d lsof -iTCP -P
+screen 1 mc
+screen 2
+screen 3
+screen 4
+
+backtick 0 0 0 whoami # set "%0`" to equal the output of `whoami`
+
+hardstatus alwayslastline "%{.bW} %-w%{.rW}%n %t%{-}%+w %=%{..} %l | %0`@%H | %D %c:%s %d.%m.%Y"
