@@ -1,0 +1,178 @@
+# 
+# ~/.muttrc
+#
+# Thanks to:
+# http://stevelosh.com/blog/2012/10/the-homely-mutt/
+
+macro index <f2> '<change-folder>imaps://imap.websupport.sk:993<enter>'
+macro index <f3> '<change-folder>imaps://imap.gmail.com:993<enter>'
+macro attach s "<save-entry><bol>~/Downloads/<eol>"
+
+folder-hook 'gmail.com' 'source ~/.mutt/imap.gmail'
+folder-hook 'websupport.sk' 'source ~/.mutt/imap.neville'
+
+set my_tmpsecret=`gpg -o ~/.mutt/.tmp -d ~/.mutt/.passwd.gpg`
+set my_gpass=`awk '/gmail:/ {print $2}' ~/.mutt/.tmp`
+set my_npass=`awk '/neville:/ {print $2}' ~/.mutt/.tmp`
+set my_del=`rm -f ~/.mutt/.tmp`
+
+source '~/.mutt/imap.neville'
+
+mailboxes =INBOX
+
+set attach_charset="iso-8859-2:utf-8"
+set mbox_type="Maildir"
+set charset="utf-8"
+set send_charset="utf-8"
+set assumed_charset="utf-8"
+set editor="vim -c 'set syntax=mail ft=mail enc=utf-8'"
+set forward_format="Fwd: %s"
+set date_format="%Y-%m-%d %T"
+set index_format="%4C %Z [%d] %-30.30F (%-4.4c/%X) %s"
+
+set status_chars  = " *%A"
+set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+
+# contacts querying
+# set query_command = "goobook query '%s'"
+set query_command = "abook --mutt-query '%s'"
+bind editor <Tab> complete-query
+bind editor ^T    complete
+
+set mime_forward=ask-no
+set imap_check_subscribed
+set mail_check=3600
+set timeout=300
+set imap_keepalive=300
+set header_cache="~/.mutt/cache/headers"
+set message_cachedir="~/.mutt/cache/bodies"
+set certificate_file="~/.mutt/certificates"
+set move=no
+set copy=no # save copies of outgoing
+set auto_tag=yes
+set include=yes
+set reverse_name
+set fast_reply
+set edit_headers
+set sort=reverse-date
+set sort_browser=reverse-date
+set mark_old=no
+set pager_index_lines = 10
+set pager_context = 3
+set pager_stop
+set menu_scroll
+set tilde
+unset markers
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+alternative_order text/plain text/enriched text/html
+
+set sig_dashes=no
+set sig_on_top
+set signature="~/.mutt/signature"
+set mailcap_path="~/.mutt/mailcap"
+unset use_ipv6
+
+auto_view text/html
+alternative_order text/plain text/html
+
+# do not show all headers, just a few
+ignore          *
+unignore        From Reply-To To Cc Bcc Date Subject X-Mailer User-Agent
+unhdr_order     *
+hdr_order       From: Reply-To: To: Cc: Bcc: Date: Subject: X-Mailer: User-Agent:
+
+alternative_order text/plain text/html *
+auto_view text/html
+
+bind editor <space> noop 
+
+bind index G imap-fetch-mail
+bind index j next-entry
+bind index k previous-entry
+bind index l previous-page
+bind index h next-page
+bind pager H display-toggle-weed
+bind pager j next-line
+bind pager k previous-line
+bind pager l next-entry
+bind pager h previous-entry
+
+# colors
+color normal    white black
+color attachment brightwhite black
+color hdrdefault cyan black
+color indicator black cyan
+color quoted    green black
+color signature cyan black
+color status    brightgreen blue
+color tilde blue black
+color tree  red black
+
+# headers
+color header    brightblue      black   ^(Delivered-|X-Original-|Envelope-)?To:
+color header    brightblue      black   ^Bcc:
+color header    brightblue      black   ^Cc:
+color header    brightgreen     black   ^From
+color header    brightgreen     black   From:|-from:
+color header    brightgreen     black   Return-[Pp]ath:
+color header    brightgreen     black   ^(X-)?Sender:
+color header    brightgreen     black   ^Reply-To:
+color header    brightgreen     black   ^Mail-Followup-To:
+color header    brightgreen     black   ^X-Disposition-Notification-To:
+color header    brightgreen     black   ^X-URL:
+color header    magenta         black   ^Date:
+color header    magenta         black   ^Delivery-date:
+color header    magenta         black   ^Posted:
+color header    magenta         black   ^NNTP-Posting-Date:
+color header    brightcyan      black   ^Subject:
+color header    brightwhite     black   ^X-All-Your-Base-Are-Belong-To:
+color header    green           black   ^Received:
+color header    green           black   ^Message-ID:
+color header    green           black   ^References:
+color header    green           black   ^In-Reply-To:
+color header    green           black   ^Organi[sz]ation:
+color header    green           black   ^X-Trace:
+color header    green           black   ^Injection-Info:
+color header    yellow          black   ^X-Spam-
+color header    red             black   ^Status:
+color header    red             black   ^Content-Length:
+color header    red             black   ^Lines:
+color header    brightyellow    black   ^(X-)?Mime
+color header    brightyellow    black   ^(Old-)?Content-(Type|Disposition|Transfer-Encoding):
+color header    brightyellow    black   ^User-Agent:
+color header    brightyellow    black   ^X-Mailer[A-Za-z-]*:
+color header    brightyellow    black   ^X-Editor:
+color header    brightyellow    black   ^X-Operating-System:
+color header    brightyellow    black   ^X-Newsreader:
+color header    brightyellow    black   ^X-Accept-Language:
+color header    brightyellow    black   ^X-MSMail-
+color header    brightyellow    black   ^(X-)?Priority:
+color header    brightyellow    black   ^(X-)?Priority:
+color header    brightyellow    black   ^X-HTTP-UserAgent:
+color header    brightblack     black   ^X-HotPOP-Delivered-To:
+color header    brightblack     black   ^X-Face:
+mono  header    bold                    ^From:
+mono  header    bold                    ^To:
+mono  header    bold                    ^Cc:
+mono  header    bold                    ^Subject:
+mono  header    bold                    ^X-All-Your-Base-Are-Belong-To:
+
+# email highlighting
+color body      brightmagenta   black   "[-a-z_0-9%.]+@[-a-z_0-9.]*[-a-z_0-9]"
+mono  body      bold                    "[-a-z_0-9%.]+@[-a-z_0-9.]*[-a-z_0-9]"
+
+# bad pgp signature
+color body      brightwhite     red     "Bad signature from.*"
+mono  body      bold                    "Bad signature from.*"
+
+# formatting
+color body      brightwhite     black   "(^| |\t)\\*[a-z0-9]([a-z0-9-]* ){,3}[a-z0-9,.!?-]*\\*"
+color body      brightyellow    black "(^| |\t)_[a-z0-9]([a-z0-9-]* ){,6}[a-z0-9,.!?-]+_"
+color body      brightyellow    black "(^| |\t)_[a-z0-9][a-z0-9,.!?_-]*_"
+
+# misc
+color body      brightblack     black   "^[-_=*]{3,}\n"
+color body      yellow          black   "^SPAM:"
+
+color index     red             default ~N
+color index     yellow          default ~O
