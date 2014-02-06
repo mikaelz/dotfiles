@@ -8,7 +8,7 @@
 
 startup_message off
 
-shell -$SHELL # https://serverfault.com/a/458071
+defshell -bash # dash makes it a login shell
 
 vbell on # no annoying audible bell
 vbell_msg "  !! Something interesting has happened !!  "
