@@ -14,7 +14,7 @@ export LC_CTYPE="en_US.UTF-8"
 
 export HISTSIZE=5000
 export HISTFILESIZE=5000
-export HISTIGNORE="&:ls:[bf]g:exit"
+export HISTIGNORE="&:ls:[bf]g:exit:config:netrc:clear"
 export HISTCONTROL=ignoreboth
 
 # append to the history file, don't overwrite it
@@ -37,6 +37,10 @@ case "$TERM" in
         # https://stackoverflow.com/a/2069095
         export PS1='\[\033k\033\\\]'$PS1
         ;;
+    xterm-256*)
+        # https://stackoverflow.com/a/2069095
+        export PS1='\[\033k\033\\\]'$PS1
+        ;;
 esac
 
 alias ls='ls -Fh' 
@@ -47,5 +51,5 @@ alias ss='ssh -C'
 alias cp='cp -v' 
 alias mv='mv -v' 
 alias rm='rm -iv' 
-alias grep='grep --colour=auto --exclude-dir=\.svn' 
+alias grep='grep -n --colour=auto --exclude-dir=\.svn --exclude-dir=\.git' 
 alias server='open http://localhost:8000 && python -m SimpleHTTPServer'
