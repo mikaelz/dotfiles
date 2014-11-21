@@ -1,0 +1,20 @@
+
+# completion of symbolic links to directories
+set mark-symlinked-directories on
+
+# no more double tab
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+
+# enable 8bit input
+set meta-flag on
+set input-meta on
+
+# turns off 8th bit stripping
+set convert-meta off
+
+# keep the 8th bit for display
+set output-meta on
+
+# none, visible or audible
+set bell-style none
