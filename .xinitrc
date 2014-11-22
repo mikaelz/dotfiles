@@ -12,4 +12,8 @@ fi
 
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
+if [ "pidof mpdscribble >& /dev/null" > 0 ]; then
+    [[ -f ~/.mpdscribble/mpdscribble.conf ]] && mpdscribble;
+fi
+
 exec awesome -c .config/awesome/rc.lua
