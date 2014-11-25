@@ -333,13 +333,10 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86AudioNext", function () mpc:next()        mpc:update() end),
     awful.key({ }, "XF86AudioPrev", function () mpc:previous()    mpc:update() end),
     -- PrintScrn
-    awful.key(
-        {},
-        "Print",
-        function()
-            awful.util.spawn("screenshot",false)
-        end
-    )
+    -- awful.key({ }, "Print", function() awful.util.spawn(os.getenv("HOME") .. "/bin/screenshot",false) end),
+    -- Alternate for PrintScreen, only one hand needed as on OSX
+    awful.key({ modkey, "Control" }, 3, function() awful.util.spawn_with_shell("sleep 0.5 &&" .. os.getenv("HOME") .. "/bin/screenshot-select",false) end),
+    awful.key({ modkey, "Control" }, 4, function() awful.util.spawn_with_shell(os.getenv("HOME") .. "/bin/screenshot",false) end)
 )
 
 clientkeys = awful.util.table.join(
@@ -377,14 +374,14 @@ for i = 1, 4 do
                         end
                   end),
         -- Toggle tag.
-        awful.key({ modkey, "Control" }, "#" .. i + 9,
+        --[[ awful.key({ modkey, "Control" }, "#" .. i + 9,
                   function ()
                       local screen = mouse.screen
                       local tag = awful.tag.gettags(screen)[i]
                       if tag then
                          awful.tag.viewtoggle(tag)
                       end
-                  end),
+                  end), --]]
         -- Move client to tag.
         awful.key({ modkey, "Shift" }, "#" .. i + 9,
                   function ()
