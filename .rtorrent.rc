@@ -59,11 +59,10 @@ schedule = throttle_2,07:00:00,20:00:00,upload_rate=200
 #bind = rakshasa.no
 
 # Port range to use for listening.
-#port_range = 6890-6999
-port_range = 49164-49164
+port_range = 6890-6999
 
 # Start opening ports at a random position within the port range.
-#port_random = no
+port_random = yes
 
 # Check hash for finished torrents. Might be usefull until the bug is
 # fixed that causes lack of diskspace not to be properly reported.
