@@ -1,3 +1,9 @@
+--
+-- ~/.config/awesome/rc.lua
+-- 
+-- Ideas:
+-- https://github.com/jcmuller/my-awesome-wm-config/blob/master/rc.lua
+--
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -17,6 +23,14 @@ local menubar = require("menubar")
 require('textvolume')
 require('yawn')
 yawn.register(820252) -- Guta WOEID
+
+
+function run_once(prg)
+	if not prg then
+		do return nil end
+	end
+	awful.util.spawn_with_shell("pgrep -u $USER -x " .. prg .. " || (" .. prg .. ")")
+end
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -90,7 +104,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[2])
+    tags[s] = awful.tag({ 1, 2, 3, 4 }, s, layouts[2])
 end
 -- }}}
 
@@ -303,9 +317,17 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "F1", function() awful.screen.focus(1) end),
     awful.key({ modkey }, "F2", function() awful.screen.focus(2) end),
     awful.key({ modkey, "Control" }, "l", function () awful.util.spawn("xlock -mode blank") end),
-    -- Multimedia
+    -- Media keys controlling volume
     awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 5%+", false) end),
     awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 5%-", false) end),
+    -- Mediakeys directly control Tomahawk
+--[[ 
+    awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.tomahawk /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")  end),
+    awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.tomahawk /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")  end),
+    awful.key({ }, "XF86AudioStop", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.tomahawk /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop")  end),
+    awful.key({ }, "XF86AudioNext", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.tomahawk /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")  end),
+ --]]
+    -- Media keys controlling MPD
     awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer set Master toggle", false) end),
     awful.key({ }, "XF86AudioPlay", function () mpc:toggle_play() mpc:update() end),
     awful.key({ }, "XF86AudioNext", function () mpc:next()        mpc:update() end),
@@ -342,8 +364,8 @@ clientkeys = awful.util.table.join(
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
--- This should map on the top row of your keyboard, usually 1 to 9.
-for i = 1, 9 do
+-- This should map on the top row of your keyboard, usually 1 to 4.
+for i = 1, 4 do
     globalkeys = awful.util.table.join(globalkeys,
         -- View tag only.
         awful.key({ modkey }, "#" .. i + 9,
@@ -405,15 +427,15 @@ awful.rules.rules = {
                      raise = true,
                      keys = clientkeys,
                      buttons = clientbuttons } },
-    { rule = { class = "MPlayer" },
-      properties = { floating = true } },
-    { rule = { class = "pinentry" },
-      properties = { floating = true } },
-    { rule = { class = "gimp" },
-      properties = { floating = true } },
+    { rule = { class = "Gimp" },
+      properties = { floating = true, tags[1][3] } },
     -- Set Firefox to always map on tags number 2 of screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { tag = tags[1][2] } },
+    { rule = { class = "Chromium" },
+      properties = { tag = tags[1][1] } },
+    { rule = { class = "Thunderbird" },
+      properties = { tag = tags[2][2] } },
+    { rule = { class = "Filezilla" },
+      properties = { tag = tags[1][2] } }
 }
 -- }}}
 
@@ -488,4 +510,9 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+-- }}}
+
+-- {{{ Autostart
+run_once("chromium")
+run_once(terminal)
 -- }}}
