@@ -25,13 +25,6 @@ require('yawn')
 yawn.register(820252) -- Guta WOEID
 
 
-function run_once(prg)
-	if not prg then
-		do return nil end
-	end
-	awful.util.spawn_with_shell("pgrep -u $USER -x " .. prg .. " || (" .. prg .. ")")
-end
-
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -114,7 +107,9 @@ myawesomemenu = {
    { "manual", terminal .. " -e man awesome" },
    { "edit config", editor_cmd .. " " .. awesome.conffile },
    { "restart", awesome.restart },
-   { "quit", awesome.quit }
+   { "quit", awesome.quit },
+   { "reboot system", "sudo shutdown -r now" },
+   { "halt system", "sudo shutdown -h now" }
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
@@ -510,6 +505,13 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 -- {{{ Autostart
+function run_once(prg)
+	if not prg then
+		do return nil end
+	end
+	awful.util.spawn_with_shell("pgrep -u $USER -x " .. prg .. " || (" .. prg .. ")")
+end
+
 run_once("chromium")
 run_once(terminal)
 -- }}}
