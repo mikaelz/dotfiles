@@ -16,4 +16,10 @@ if [ "pidof mpdscribble >& /dev/null" > 0 ]; then
     [[ -f ~/.mpdscribble/mpdscribble.conf ]] && mpdscribble;
 fi
 
+~/.dropbox-dist/dropboxd &
+
+urxvtd -q -o -f &
+
+numlockx &
+
 exec awesome -c .config/awesome/rc.lua
