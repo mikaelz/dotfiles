@@ -1,0 +1,4 @@
+#
+# ~/.xsession
+
+xset -b
