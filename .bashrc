@@ -11,7 +11,6 @@ if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-# Set terminal colors
 alias ls='ls --color=auto -Fh' 
 
 if [ "$(uname)" == "Darwin" ]; then
@@ -21,17 +20,17 @@ if [ "$(uname)" == "Darwin" ]; then
     alias ls='ls -GFh' 
 
     # http://hints.macworld.com/article.php?story=20031015173932306
-    PROMPT_COMMAND='echo -ne "\033]0;${HOSTNAME%%.*}: ${PWD/#$HOME/~}\007"'
-    case "$TERM" in
-        screen*)
-            # https://stackoverflow.com/a/2069095
-            export PS1='\[\033k\033\\\]'$PS1
-            ;;
-        xterm-256*)
-            # https://stackoverflow.com/a/2069095
-            export PS1='\[\033k\033\\\]'$PS1
-            ;;
-    esac
+#     PROMPT_COMMAND='echo -ne "\033]0;${HOSTNAME%%.*}: ${PWD/#$HOME/~}\007"'
+#     case "$TERM" in
+#         screen*)
+#             # https://stackoverflow.com/a/2069095
+#             export PS1='\[\033k\033\\\]'$PS1
+#             ;;
+#         xterm-256*)
+#             # https://stackoverflow.com/a/2069095
+#             export PS1='\[\033k\033\\\]'$PS1
+#             ;;
+#     esac
 
 fi
 
@@ -41,6 +40,7 @@ if [ "$(uname)" == "Linux" ]; then
 fi
 
 export PS1='\u@\h:\w\$ '
+export PS1='\[\033k\033\\\]'$PS1
 
 export LANG="en_US.UTF-8"
 export LOCALE="UTF-8"
@@ -62,22 +62,52 @@ shopt -s checkwinsize
 if [ -f /opt/local/etc/bash_completion ]; then
 	source /opt/local/etc/bash_completion
 fi
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
 
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
 [ -r /usr/share/git/completion/git-prompt.sh ] && . /usr/share/git/completion/git-prompt.sh
 
 
-alias ll='ls -Fhla' 
-alias lsize='ls -FShla' 
+# navigation
+alias D="pushd ~/Downloads"
+alias wrk='cd /home/http' 
+
+# configs
+alias eA="vi ~/.config/awesome/rc.lua"
+alias eB="vi ~/.bashrc"
+alias rB="source ~/.bashrc; echo '[ done ] source ~/.bashrc'"
+alias eZ="vi ~/.zshrc"
+alias rZ="source ~/.zshrc; echo '[ done ] source ~/.zshrc'"
+alias eV="vi ~/.vimrc"
+
+# commands
+alias v='vim' 
+alias k='exit' 
+alias la='ls -Fa' 
+alias ll='ls -Fhl' 
 alias vi='vim' 
-alias ss='ssh -C' 
-alias cp='cp -v' 
+alias cp='cp -rv' 
 alias mv='mv -v' 
 alias rm='rm -iv' 
-alias rm='rm -iv' 
+alias ss='DISPLAY=:0 import -window root'
+alias yt="youtube-viewer"
+alias yd="youtube-dl"
+alias ssc='ssh -C' 
+alias scp='scp -r' 
+alias lla='ls -Fhla' 
+alias lsize='ls -FShla' 
+alias mkdir='mkdir -p' 
 alias pidstat='pidstat -dlu' 
-alias grep='grep --colour=auto --exclude-dir=\.svn --exclude-dir=\.git' 
-alias server='open http://localhost:8000 && python -m SimpleHTTPServer'
-alias xlock='xlock -mode blank' 
 
+# search
+alias grep='grep --colour=auto --exclude-dir=\.svn --exclude-dir=\.git' 
+alias g='grep -i' 
+alias gr='grep -ir' 
+
+# misc
+alias nethogs='sudo nethogs ens33' 
+alias xlock='xlock -mode blank' 
+alias httpd='screen -S http python3 -m http.server 8080'
