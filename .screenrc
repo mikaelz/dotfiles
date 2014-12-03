@@ -8,7 +8,8 @@
 
 startup_message off
 
-defshell -bash # dash makes it a login shell
+#defshell -bash # dash makes it a login shell
+shelltitle "$ |bash"
 
 vbell on # no annoying audible bell
 vbell_msg "  !! Something interesting has happened !!  "
@@ -21,7 +22,6 @@ defscrollback 5000
 defutf8 on
 defnonblock on
 msgwait 1 # message timeout 1 second
-shelltitle "$ |bash"
 
 defmonitor on # turn monitoring on
 activity "%"  # tell me when stuff happens!
@@ -32,7 +32,8 @@ attrcolor b ".I"
 # http://www4.cs.fau.de/~jnweiger/screen-faq.html
 # https://stackoverflow.com/a/4833946
 # http://pjkh.com/articles/osx-iterm-screen-vim-256-colors/
-term screen-256color
+# term screen-256color
+term xterm-256color
 termcapinfo screen* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 termcapinfo screen* ti@:te@ # make scrollbar work
 
@@ -41,11 +42,16 @@ defbce on # erase background with current bg color
 bind R eval "source $HOME/.screenrc" "echo '.screenrc reloaded!'"
 bind % screen -t htop htop
 
-screen -t netlog 0 watch -n 2 -d lsof -iTCP -P
-screen 1 mc
-screen 2
-screen 3
-screen 4
+# read and write screen clipboard to X clipboard.
+bind > eval writebuf "exec sh -c 'xsel -bi </tmp/screen-exchange'"
+bind < eval "exec sh -c 'xsel -bo >/tmp/screen-exchange'" readbuf
+
+screen 0
+# screen 1
+# screen 2
+# screen 3
+# screen 4
+# screen 5
 
 backtick 0 0 0 whoami # set "%0`" to equal the output of `whoami`
 
