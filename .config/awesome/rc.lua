@@ -52,7 +52,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+beautiful.init(os.getenv("HOME") .. "/.config/awesome/theme/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvtc"
@@ -107,9 +107,7 @@ myawesomemenu = {
    { "manual", terminal .. " -e man awesome" },
    { "edit config", editor_cmd .. " " .. awesome.conffile },
    { "restart", awesome.restart },
-   { "quit", awesome.quit },
-   { "reboot system", "sudo shutdown -r now" },
-   { "halt system", "sudo shutdown -h now" }
+   { "quit", awesome.quit }
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
@@ -127,18 +125,18 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- {{{ Wibox
 
 cpuwidget = wibox.widget.textbox()
-vicious.register(cpuwidget, vicious.widgets.cpu, "CPU1: <b>$2%</b> CPU2: <b>$3%</b> ", 2)
+vicious.register(cpuwidget, vicious.widgets.cpu, "<b>cpu</b> $2/$3% ", 2)
 cpuwidget:buttons( awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e htop") end) )
 
 memwidget = wibox.widget.textbox()
-vicious.register(memwidget, vicious.widgets.mem, "MEM: <b>$1%</b> SWAP: <b>$5%</b> ", 2)
+vicious.register(memwidget, vicious.widgets.mem, "<b>mem</b> $1% <b>swp</b> $5% ", 2)
 
 diowidget = wibox.widget.textbox()
-vicious.register(diowidget, vicious.widgets.dio, "HDD: <b>${sda1 read_mb}/${sda1 write_mb}</b>MB ", 2)
+vicious.register(diowidget, vicious.widgets.dio, "<b>sda</b> ${sda1 read_kb}/${sda1 write_kb} <b>sdb</b> ${sdb1 read_kb}/${sdb1 write_kb} ", 2)
 diowidget:buttons( awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e sudo iotop") end) )
 
 netwidget = wibox.widget.textbox()
-vicious.register(netwidget, vicious.widgets.net, "NET: <b>${ens33 down_kb}/${ens33 up_kb}</b>kb ", 2)
+vicious.register(netwidget, vicious.widgets.net, "<b>net</b> ${ens33 down_kb}/${ens33 up_kb} ", 2)
 
 -- Create a textclock widget
 mytextclock = awful.widget.textclock()
@@ -330,8 +328,8 @@ globalkeys = awful.util.table.join(
     -- PrintScrn
     -- awful.key({ }, "Print", function() awful.util.spawn(os.getenv("HOME") .. "/bin/screenshot",false) end),
     -- Alternate for PrintScreen, only one hand needed as on OSX
-    awful.key({ modkey, "Control" }, 3, function() awful.util.spawn_with_shell("sleep 0.5 &&" .. os.getenv("HOME") .. "/bin/screenshot-select",false) end),
-    awful.key({ modkey, "Control" }, 4, function() awful.util.spawn_with_shell(os.getenv("HOME") .. "/bin/screenshot",false) end)
+    awful.key({ modkey, "Control" }, 3, function() awful.util.spawn_with_shell(os.getenv("HOME") .. "/bin/screenshot",false) end),
+    awful.key({ modkey, "Control" }, 4, function() awful.util.spawn_with_shell("sleep 0.5 &&" .. os.getenv("HOME") .. "/bin/screenshot-select",false) end)
 )
 
 clientkeys = awful.util.table.join(
@@ -426,6 +424,8 @@ awful.rules.rules = {
       properties = { tag = tags[1][1] } },
     { rule = { class = "Thunderbird" },
       properties = { tag = tags[2][2] } },
+    { rule = { class = "Pidgin", role="buddy_list" },
+      properties = { tag = tags[2][2] } },
     { rule = { class = "Filezilla" },
       properties = { tag = tags[1][2] } }
 }
@@ -513,5 +513,7 @@ function run_once(prg)
 end
 
 run_once("chromium")
+run_once("thunderbird")
+run_once("pidgin")
 run_once(terminal)
 -- }}}
