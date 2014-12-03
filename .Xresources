@@ -163,7 +163,7 @@ URxvt*saveLines: 5000
 ! URxvt*pastableTabs: boolean
 
 ! True: blink the cursor. False: do not blink the cursor [default]; option -bc.
-! URxvt*cursorBlink: boolean
+URxvt*cursorBlink: true
 
 ! True: Make the cursor underlined. False: Make the cursor a box [default]; option -uc.
 ! URxvt*cursorUnderline: boolean
