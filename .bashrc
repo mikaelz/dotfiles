@@ -110,4 +110,5 @@ alias gr='grep -ir'
 # misc
 alias nethogs='sudo nethogs ens33' 
 alias xlock='xlock -mode blank' 
-alias httpd='screen -S http python3 -m http.server 8080'
+alias web='python3 -m http.server 8080'
+
