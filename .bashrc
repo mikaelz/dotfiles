@@ -20,17 +20,13 @@ if [ "$(uname)" == "Darwin" ]; then
     alias ls='ls -GFh' 
 
     # http://hints.macworld.com/article.php?story=20031015173932306
-#     PROMPT_COMMAND='echo -ne "\033]0;${HOSTNAME%%.*}: ${PWD/#$HOME/~}\007"'
-#     case "$TERM" in
-#         screen*)
-#             # https://stackoverflow.com/a/2069095
-#             export PS1='\[\033k\033\\\]'$PS1
-#             ;;
-#         xterm-256*)
-#             # https://stackoverflow.com/a/2069095
-#             export PS1='\[\033k\033\\\]'$PS1
-#             ;;
-#     esac
+     PROMPT_COMMAND='echo -ne "\033]0;${HOSTNAME%%.*}: ${PWD/#$HOME/~}\007"'
+     case "$TERM" in
+         screen*|xterm*)
+             # https://stackoverflow.com/a/2069095
+             export PS1='\[\033k\033\\\]'$PS1
+             ;;
+     esac
 
 fi
 
@@ -51,23 +47,22 @@ export HISTFILESIZE=5000
 export HISTIGNORE="&:ls:[bf]g:exit:config:netrc:clear"
 export HISTCONTROL=ignoreboth
 
-# append to the history file, don't overwrite it
-shopt -s histappend
-shopt -s cmdhist
-shopt -s cdspell
-# Make bash check its window size after a process completes
-shopt -s checkwinsize
+export GREP_OPTIONS='--color=auto'
+
+shopt -s histappend   # append to the history file, don't overwrite it
+shopt -s cmdhist      # combine multiline commands in history
+shopt -s cdspell      # `cd` tries to fix typos
+shopt -s dirspell # 2>/dev/null
+shopt -s autocd   # 2>/dev/null
+shopt -s checkwinsize # resize ouput to fit window
 
 
-if [ -f /opt/local/etc/bash_completion ]; then
-	source /opt/local/etc/bash_completion
-fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+[ -r /opt/local/etc/bash_completion ] && . /opt/local/etc/bash_completion
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
-
 [ -r /usr/share/git/completion/git-prompt.sh ] && . /usr/share/git/completion/git-prompt.sh
 
 
@@ -103,7 +98,7 @@ alias mkdir='mkdir -p'
 alias pidstat='pidstat -dlu' 
 
 # search
-alias grep='grep --colour=auto --exclude-dir=\.svn --exclude-dir=\.git' 
+alias grep='grep --exclude-dir=\.svn --exclude-dir=\.git' 
 alias g='grep -i' 
 alias gr='grep -ir' 
 
