@@ -47,13 +47,11 @@ export HISTFILESIZE=5000
 export HISTIGNORE="&:ls:[bf]g:exit:config:netrc:clear"
 export HISTCONTROL=ignoreboth
 
-export GREP_OPTIONS='--color=auto'
-
 shopt -s histappend   # append to the history file, don't overwrite it
 shopt -s cmdhist      # combine multiline commands in history
 shopt -s cdspell      # `cd` tries to fix typos
-shopt -s dirspell # 2>/dev/null
-shopt -s autocd   # 2>/dev/null
+shopt -s dirspell
+shopt -s autocd
 shopt -s checkwinsize # resize ouput to fit window
 
 
@@ -68,7 +66,7 @@ fi
 
 # navigation
 alias D="pushd ~/Downloads"
-alias wrk='cd /home/http' 
+alias W='cd /home/http' 
 
 # configs
 alias eA="vi ~/.config/awesome/rc.lua"
@@ -98,7 +96,7 @@ alias mkdir='mkdir -p'
 alias pidstat='pidstat -dlu' 
 
 # search
-alias grep='grep --exclude-dir=\.svn --exclude-dir=\.git' 
+alias grep='grep --color=auto --exclude-dir=\.svn --exclude-dir=\.git' 
 alias g='grep -i' 
 alias gr='grep -ir' 
 
