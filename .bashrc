@@ -110,5 +110,5 @@ alias gr='grep -ir'
 # misc
 alias nethogs='sudo nethogs ens33' 
 alias xlock='xlock -mode blank' 
-alias web='python3 -m http.server 8080'
+alias webshare='echo "Visit http://$(hostname):8080/"; python3 -m http.server 8080'
 
