@@ -1,8 +1,6 @@
 call pathogen#infect()
 
 " settings according to :options order
-
-
 " important
 set nocompatible              " behave very Vi compatible (not advisable)
 
@@ -10,6 +8,7 @@ set nocompatible              " behave very Vi compatible (not advisable)
 set ignorecase                " ignore case when using a search pattern
 set smartcase                 " override 'ignorecase' when pattern has upper case characters
 set incsearch                 " show match for partly typed search command
+set hlsearch     		      " highlight all matches for the last used search pattern
 
 " tags
 
@@ -23,10 +22,10 @@ set number		              " show the line number for each line
 
 " syntax, highlighting and spelling
 set background=dark           " the background color brightness
-set synmaxcol=400             " maximum column to look for syntax items 
-set hlsearch     		      " highlight all matches for the last used search pattern
-" set cursorline                " highlight the screen line of the cursor
-" set colorcolumn=80            " columns to highlight, match to 'textwidth'
+set synmaxcol=400             " maximum column to look for syntax items
+set cursorline                " highlight the screen line of the cursor
+" set colorcolumn=80          " columns to highlight, match to 'textwidth'
+ set showmatch                " hight matching [{()}]
 
 " multiple windows
 set laststatus=2	          " always show status line
@@ -43,7 +42,7 @@ set splitright                " a new window is put right of the current one
 
 " multiple tab pages
 set showtabline=2             " always show tab line
-set tabpagemax=16             " maximum number of tab pages to open for -p
+" set tabpagemax=16             " maximum number of tab pages to open for -p
 
 " terminal
 set ttyfast                   " terminal connection is fast
@@ -68,11 +67,12 @@ set textwidth=80              " line length above which to break a line
 set backspace=2               " specifies what <BS>, CTRL-W, etc. in Insert mode
 set formatoptions=qrn12       " list of flags how automatic formatting works, :help fo-table
 set completeopt=menu          " use a popup menu for Insert mode completion
+set pumheight=15              " Determines the maximum number of items to show in the popup menu for Insert mode completion
 set omnifunc=syntaxcomplete#Complete " function for filetype-specific Insert mode completion
 set nrformats=                " "alpha", "octal" and/or "hex" format for CTRL-A and CTRL-X
 
 " tabs and indenting
-set tabstop=4                 " number of spaces a <Tab> in the text stands for 
+set tabstop=4                 " number of spaces a <Tab> in the text stands for
 set shiftwidth=4              " number of spaces used for each step of (auto)indent
 set smarttab                  " a <Tab> in an indent inserts 'shiftwidth' spaces
 set softtabstop=4             " if non-zero, number of spaces to insert for a <Tab>
@@ -81,8 +81,10 @@ set autoindent                " automatically set the indent of a new line
 set smartindent               " do clever autoindenting
 
 " folding
-set nofoldenable              " dont fold by default
-set foldnestmax=3             " maximum fold depth for foldmethod 'indent' or 'syntax'
+set foldenable                " fold by default
+set foldlevelstart=0          " open folds level
+set foldnestmax=5             " maximum fold depth for foldmethod 'indent' or 'syntax'
+set foldmethod=indent         " fold based on indent level
 
 " diff mode
 " mapping
@@ -90,7 +92,7 @@ set timeoutlen=500            " lower timeout for mappings [msec]
 
 " reading and writing files
 set fileformats=unix,dos,mac  " list of file formats to look for when editing a file
-set backup                    " keep a backup after overwriting a file 
+set backup                    " keep a backup after overwriting a file
 set backupdir^=/tmp//         " list of directories to put backup files in
 
 " the swap file
@@ -103,7 +105,8 @@ set wildmode=full             " specifies how command line completion works
 set wildignore+=*.o,*.obj,*.pyc,*.db " list of patterns to ignore files for file name completion
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
 set wildignore+=.DS_Store,.git,.hg,.svn
-set wildignore+=*~,*.swp,*.tmp
+set wildignore+=*~,*.swp,*.tmp,*/tmp/*,*.zip
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 set wildmenu                  " command-line completion shows a list of matches
 
 " executing external commands
@@ -116,7 +119,7 @@ set fileencoding=utf-8        " character encoding for the current file
 " various
 set virtualedit=block         " when to use virtual editing
 set gdefault                  " use the 'g' flag for ':substitute'
-
+set autoread
 
 syntax on
 filetype plugin indent on
@@ -146,9 +149,11 @@ else
 endif
 
 " http://vimcolorschemetest.googlecode.com/svn/html/index-html.html
+colorscheme molokai
+" colorscheme xoria256
 " colorscheme wombat256
 " colorscheme gardener
-colorscheme xoria256
+" colorscheme greenvision
 
 
 " correct some spelling mistakes Insert mode
@@ -171,10 +176,11 @@ cabbrev ~? ~/
 
 " autocomplete funcs and identifiers for languages
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType sql set omnifunc=sqlcomplete#CompleteSQL
 
 " this will make it impossible to save in any other format than unix
 " http://www.reddit.com/r/vim/comments/ozr5h/convert_every_text_file_to_unix_format_if_not/c3lhgpe
@@ -185,11 +191,12 @@ autocmd BufEnter * let &titlestring = ' ' . expand("%:f")
 " let php_folding = 1
 let php_noShortTags = 1
 let php_sql_query = 1
-let php_htmlInStrings = 1 
+let php_htmlInStrings = 1
 let php_baselib = 1
 
 command W :w
 command Q :q
+command E :q
 
 " \<space> clear search results
 nnoremap <leader><space> :noh<CR>
@@ -200,27 +207,76 @@ nnoremap <leader>n :setlocal number!<CR>
 " \p toggle paste mode
 nnoremap <leader>p :set paste!<CR>
 
-inoremap jk <ESC>
+" list opened buffers
+nnoremap <leader>b :ls<cr>:b<space>
 
 " disable arrow keys
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
+nnoremap <Up> :echomsg "use k"<cr>
+nnoremap <Down> :echomsg "use j"<cr>
+nnoremap <Left> :echomsg "use h"<cr>
+nnoremap <Right> :echomsg "use l"<cr>
 
 nnoremap j gj
 nnoremap k gk
+
+" Strips whitespace
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+vnoremap <C-c> "*y
 
 " visual shifting (does not exit Visual mode)
 vnoremap < <gv
 vnoremap > >gv
 
-" list opened buffers
-nnoremap <leader>l :ls<cr>:b<space>
+let g:phpcomplete_parse_docblock_comments = 1
 
-let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
-let g:syntastic_csslint_options="--ignore=box-sizing"
+let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+let g:syntastic_csslint_args = "--ignore=outline-none"
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_error_symbol = '●'
+let g:syntastic_style_error_symbol = '‣'
+let g:syntastic_warning_symbol = '○'
+let g:syntastic_style_warning_symbol = '▹'
+autocmd ColorScheme * highlight SyntasticError ctermbg=red  guibg=#960000
+autocmd ColorScheme * highlight SyntasticWarning ctermbg=red guibg=#AEA100
+autocmd ColorScheme * highlight SyntasticStyleError ctermbg=yellow guibg=#960000
+autocmd ColorScheme * highlight SyntasticStyleWarning ctermbg=yellow guibg=#960000
+
+highlight SyntasticErrorLine guibg=#2f0000
+
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_user_command = 'find %s -type f'
+let g:ctrlp_extensions = ['tag','dir','line','mixed']
+let g:ctrlp_follow_symlinks = 1
+
+" https://github.com/Shougo/neocomplete.vim
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+" let g:neocomplete#enable_auto_select = 1
+
+" Define keyword
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Whitespace fixes
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
+nnoremap <leader>w :w<CR>
+inoremap <leader>w <Esc>:w<CR>
+vnoremap <leader>w <Esc>:w<CR>
+
+nnoremap <leader>q :q<CR>
+inoremap <leader>q <Esc>:q<CR>
+vnoremap <leader>q <Esc>:q<CR>
+
+nnoremap <leader>t :tabnew<CR>
+inoremap <leader>t <Esc>:tabnew<CR>
