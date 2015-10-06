@@ -12,14 +12,22 @@ snippet sizing
 	   -moz-box-sizing: border-box;
 	        box-sizing: border-box;
 snippet transition
-	-webkit-transition: all .$1s; 
-	   -moz-transition: all .$1s; 
-	     -o-transition: all .$1s; 
-	        transition: all .${1:5}s; 
+	-webkit-transition: all .$1s;
+	   -moz-transition: all .$1s;
+	     -o-transition: all .$1s;
+	        transition: all .${1:5}s;
 snippet gradient
 	background-color: #${1:fff};
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#$1), to(#${2:000}));
 	background-image: -webkit-linear-gradient(top, #$1, #$2);
 	background-image:    -moz-linear-gradient(top, #$1, #$2);
 	background-image:      -o-linear-gradient(top, #$1, #$2);
-	background-image:         linear-gradient(to bottom, #$1, #$2); 
+	background-image:         linear-gradient(to bottom, #$1, #$2);
+snippet rotate
+	-webkit-transform: rotate(${1:10}deg);
+		-ms-transform: rotate($1deg);
+			transform: rotate($1deg);
+snippet scale
+	-webkit-transform: scale(${1:1.1});
+		-ms-transform: scale($1);
+			transform: scale($1);

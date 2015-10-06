@@ -1,5 +1,5 @@
 snippet php
-	<?php ${1} ?>
+	<?php${1}?>
 snippet ec
 	echo '${1:string}'${2};
 snippet inc
@@ -7,27 +7,27 @@ snippet inc
 snippet inc1
 	include_once '${1:file}';${2}
 snippet req
-	require('${1:file}');${2}
+	require '${1:file}';
 snippet req1
-	require_once('${1:file}');${2}
+	require_once '${1:file}';
 snippet glob
 	$GLOBALS['${1:variable}']${2: = }${3:something}${4:;}${5}
 snippet cook
-	$_COOKIE['${1:variable}']${2}
-snippet files
-	$_FILES['${1:variable}']${2}
+	$_COOKIE['${1:variable}']
+snippet file
+	$_FILES['${1:variable}']
 snippet get
-	$_GET['${1:variable}']${2}
+	$_GET['${1:variable}']
 snippet post
-	$_POST['${1:variable}']${2}
+	$_POST['${1:variable}']
 snippet serv
-	$_SERVER['${1:variable}']${2}
+	$_SERVER['${1:variable}']
 snippet sess
-	$_SESSION['${1:variable}']${2}
+	$_SESSION['${1:variable}']
 snippet isn
-	is_numeric(${1:variable})${2}
+	is_numeric(${1:variable})
 snippet is
-	isset(${1:variable})${2}
+	isset(${1:variable})
 # Start Docblock
 snippet /*
 	/**
@@ -49,7 +49,7 @@ snippet doc_vp
 	 * @var ${2:string}
 	 **/${3}
 # Class Variable
-snippet doc_v
+snippet docv
 	/**
 	 * ${3:undocumented class variable}
 	 *
@@ -57,7 +57,7 @@ snippet doc_v
 	 **/
 	${1:var} $${2};${5}
 # Class
-snippet doc_c
+snippet docc
 	/**
 	 * ${3:undocumented class}
 	 *
@@ -96,7 +96,7 @@ snippet doc_s
 	 **/
 	${1}function ${2}(${3});${7}
 # Function
-snippet doc_f
+snippet docf
 	/**
 	 * ${4:undocumented function}
 	 *
@@ -108,7 +108,7 @@ snippet doc_f
 		${7}
 	}
 # Header
-snippet doc_h
+snippet doch
 	/**
 	 * ${1}
 	 *
@@ -122,7 +122,7 @@ snippet doc_h
 	 * Define DocBlock
 	 *//
 # Interface
-snippet doc_i
+snippet doci
 	/**
 	 * ${2:undocumented class}
 	 *
@@ -152,7 +152,7 @@ snippet def
 snippet def?
 	${1}defined('${2}')${3}
 snippet wh
-	while ($r = ${1:$q}) {
+	while ($row = ${1:$q->fetchRow()}) {
 		${2:// code...}
 	}
 # do ... while
@@ -183,10 +183,11 @@ snippet elseif
 snippet t
 	 ${1:condition} ? ${2:a} : ${3:b};${4}
 snippet switch
-	switch ($${1:variable}) {
+	switch (${1:variable}) {
 		case '${2:value}':
 			${3:// code...}
 			break;
+
 		default:
 			${4:// code...}
 	}
@@ -206,8 +207,6 @@ snippet fun
 	${1:public }function ${2:FunctionName}(${3}) {
 		${4:// code...}
 	}
-snippet array
-	$${1:arrayName} = array('${2}' => ${3});${4}
 
 # HTML
 snippet nbs
@@ -307,23 +306,38 @@ snippet style
 snippet link
 	<link rel="stylesheet" href="${1:filename.css}" media="${2:media|print}"/>${3}
 snippet debug
-	echo "\n\nDEBUG<br><pre>"; print_r(${1:variable}); echo "</pre><br>\n\n";${2:exit;}
+	echo "DEBUG: <pre>"; print_r(${1:'test'}); echo "</pre>";exit; // @TODO remove this debug line
+snippet debugd
+	echo "DEBUG: <pre>"; print_r(\Doctrine\Common\Util\Debug::dump(${1:'$var'}, 3)); echo "</pre>";exit; // @TODO remove this debug line
 snippet vard
-	var_dump(${1:variable});${2:exit;}
+	var_dump(${1:variable});exit;
+snippet redir
+	header('HTTP/1.1 301 Moved Permanently');
+	header('Location: ${1:URL}');
+snippet wpq
+		$args = array(
+			'post_type'   => '${1:post}',
+			'post_status' => 'publish',
+			'fields'      => array( 'post_ID', 'post_title' ),
+		);
+		$wpq = new WP_Query( $args );
 
 # SQL
 snippet dber
-	if ($database->is_error()) return;
+	if ($database->is_error()) {
+		echo '<p class="notice">${1:error}</p>';
+		return;
+	}
 snippet q
-	$q = "${1:query}";
-	$q = $database->query($q);
+	${1:$q} = "${2:sql}";
+	${3:$1} = $database->query(${4:$1});
 snippet qs
-	SELECT ${1:*} FROM ".TABLE_PREFIX."${2:table} WHERE ${3:column} = '${4:value}' ${5:LIMIT 1};
+	SELECT ${1:*} FROM ".TABLE_PREFIX."${2:table} WHERE ${3:column} = '${4:value}' ${5:LIMIT 1}
 snippet qu
-	UPDATE ".TABLE_PREFIX."${1:table} SET ${2:column} = '${3:value}' WHERE ${4:column} = '${5:value}' ${6:LIMIT 1};
+	UPDATE ".TABLE_PREFIX."${1:table} SET ${2:column} = '${3:value}' WHERE ${4:column} = '${5:value}' ${6:LIMIT 1}
 snippet qi
-	INSERT INTO ".TABLE_PREFIX."${1:table} (${2:column}) VALUES ('${3:value}');
+	INSERT INTO ".TABLE_PREFIX."${1:table} (${2:column}) VALUES ('${3:value}')
 snippet qd
-	DELETE FROM ".TABLE_PREFIX."${1:table} WHERE ${2:column} = '${3:value}' ${4:LIMIT 1};
+	DELETE FROM ".TABLE_PREFIX."${1:table} WHERE ${2:column} = '${3:value}' ${4:LIMIT 1}
 snippet ut
 	UNIX_TIMESTAMP(${1:NOW()})

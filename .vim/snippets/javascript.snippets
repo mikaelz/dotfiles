@@ -71,20 +71,26 @@ snippet get
 	getElementsBy${1:TagName}('${2}')${3}
 # Get Element
 snippet gett
-	getElementBy${1:Id}('${2}')${3}
+	getElementBy${1:Id}( '${2}' )${3}
 snippet ajax
 	$.ajax({
-		url: base_url + '/ajax/${1:get.php}',
-		data: ${2:'data=' + id},
-		success: function(res) {
-			${3:console.log(res);}
+		url: base_url+'/ajax/${1:get.php}',
+		data: ${2:'id='+id},
+		success: function(resp) {
+			${3:console.log(resp);}
 		}
 	});
 snippet log
 	console.log(${1});
 snippet jqinit
-	;(function ( $, window, document, undefined ) {
+	;(function ($, window, document, undefined) {
 	
 		${1:code...}
 
 	})( jQuery, window, document );
+snippet jqready
+	jQuery(document).ready(function($) {
+	
+		${1:code...}
+
+	});
