@@ -25,15 +25,15 @@ local city_id = nil
 sky_na = icon_path .. "na.png"
 local sky = nil
 local chosen_color = nil
-local language = string.gsub(os.getenv("LANG"), ".utf8", "") 
+local language = string.gsub(os.getenv("LANG"), ".utf8", "")
 
 icon = wibox.widget.imagebox()
 widget = wibox.widget.textbox()
 
 function execute(url, callback)
- 
+
     -- Reads from url, then runs the callback function on it
-    
+
     local f = io.popen("curl --connect-timeout 1 -fsm 3 '" .. url .. "'" )
     local ws = f:read("*all")
     f:close()
@@ -50,7 +50,7 @@ function fetch_weather()
     execute(api_url..chosen_units..city_id, function(text)
 
         -- In case of no connection, widgets won't display
-        if text == "" 
+        if text == ""
         then
             sky = sky_na
             weather_data = "Service not avaible"
@@ -88,7 +88,7 @@ function fetch_weather()
             elseif forecast == "Mostly Cloudy" then sky = icon_path .. "19.png"
             end
         end
- 
+
         if sky == nil then
             if forecast == "Cloudy" then sky = icon_path .. "18.png"
             elseif forecast == "Sunny" then sky = icon_path .. "10.png"
@@ -98,7 +98,7 @@ function fetch_weather()
                    forecast == "Blowing Snow" then sky = icon_path .. "12.png"
             elseif forecast:find("Snow Showers") ~= nil or
                    forecast:find("Snow") ~= nil or
-                   forecast:find("Sleet") ~= nil then sky = icon_path .. "11.png"            
+                   forecast:find("Sleet") ~= nil then sky = icon_path .. "11.png"
             elseif forecast == "Mixed Rain And Snow" then sky = icon_path .. "02.png"
             elseif forecast == "Mixed Rain And Sleet" then sky = icon_path .. "04.png"
             elseif forecast == "Mixed Rain And Hail" then sky = icon_path .. "03.png"
@@ -110,7 +110,7 @@ function fetch_weather()
                    forecast:find("Drizzle") ~= nil then sky = icon_path .. "07.png"
             elseif forecast:find("Showers") ~= nil or
                    forecast:find("Thunderstorm") ~= nil or
-                   forecast:find("Thunder") ~= nil then sky = icon_path .. "08.png" 
+                   forecast:find("Thunder") ~= nil then sky = icon_path .. "08.png"
             elseif forecast == "Hail" then sky = icon_path .. "14.png"
             elseif forecast == "Foggy" or forecast == "Haze" then sky = icon_path .. "16.png"
             else sky = sky_na
@@ -120,7 +120,7 @@ function fetch_weather()
         -- Setting widgets
         icon:set_image(sky)
         widget:set_markup("<b>" .. forecast .. ", " .. units .. "°C</b> ")
-        
+
     end)
 end
 

@@ -1,6 +1,6 @@
 --
 -- ~/.config/awesome/rc.lua
--- 
+--
 -- Ideas:
 -- https://github.com/jcmuller/my-awesome-wm-config/blob/master/rc.lua
 --
@@ -97,7 +97,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4 }, s, layouts[2])
+    tags[s] = awful.tag({ 1, 2, 3, 4, 5 }, s, layouts[2])
 end
 -- }}}
 
@@ -120,6 +120,29 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
+-- }}}
+
+-- MPD
+-- http://awesome.naquadah.org/wiki/Awesompd#How_to_start
+local awesompd = require("awesompd/awesompd")
+musicwidget = awesompd:create()
+musicwidget.scrolling = false
+musicwidget.output_size = 30
+musicwidget.update_interval = 10
+musicwidget.path_to_icons = "/home/mike/.config/awesome/awesompd/icons"
+musicwidget.show_album_cover = false
+musicwidget.album_cover_size = 50
+musicwidget.ldecorator = "|"
+musicwidget.rdecorator = "|"
+musicwidget.servers = {
+	{ server = "localhost",
+	port = 6600 } }
+	musicwidget:register_buttons({
+	{ "Control", awesompd.MOUSE_SCROLL_UP, musicwidget:command_prev_track() },
+	{ "Control", awesompd.MOUSE_SCROLL_DOWN, musicwidget:command_next_track() },
+	{ "", awesompd.MOUSE_RIGHT, musicwidget:command_show_menu() }
+})
+musicwidget:run()
 -- }}}
 
 -- {{{ Wibox
@@ -225,6 +248,7 @@ for s = 1, screen.count() do
     right_layout:add(diowidget)
     right_layout:add(netwidget)
     right_layout:add(volume_widget)
+	right_layout:add(musicwidget.widget)
     right_layout:add(yawn.widget)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
@@ -314,7 +338,7 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 5%+", false) end),
     awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 5%-", false) end),
     -- Mediakeys directly control Tomahawk
---[[ 
+--[[
     awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.tomahawk /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")  end),
     awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.tomahawk /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")  end),
     awful.key({ }, "XF86AudioStop", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.tomahawk /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop")  end),
@@ -325,6 +349,9 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86AudioPlay", function () mpc:toggle_play() mpc:update() end),
     awful.key({ }, "XF86AudioNext", function () mpc:next()        mpc:update() end),
     awful.key({ }, "XF86AudioPrev", function () mpc:previous()    mpc:update() end),
+    -- awful.key({ }, "XF86AudioPlay", function () awful.util.spawn_with_shell("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause") end),
+    -- awful.key({ }, "XF86AudioNext", function () awful.util.spawn_with_shell("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next") end),
+    -- awful.key({ }, "XF86AudioPrev", function () awful.util.spawn_with_shell("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous") end),
     -- PrintScrn
     -- awful.key({ }, "Print", function() awful.util.spawn(os.getenv("HOME") .. "/bin/screenshot",false) end),
     -- Alternate for PrintScreen, only one hand needed as on OSX
@@ -354,8 +381,8 @@ clientkeys = awful.util.table.join(
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
--- This should map on the top row of your keyboard, usually 1 to 4.
-for i = 1, 4 do
+-- This should map on the top row of your keyboard, usually 1 to 5.
+for i = 1, 5 do
     globalkeys = awful.util.table.join(globalkeys,
         -- View tag only.
         awful.key({ modkey }, "#" .. i + 9,
@@ -420,14 +447,20 @@ awful.rules.rules = {
     { rule = { class = "Gimp" },
       properties = { floating = true, tags[1][3] } },
     -- Set Firefox to always map on tags number 2 of screen 1.
-    { rule = { class = "Chromium" },
+    { rule = { class = "chromium" },
       properties = { tag = tags[1][1] } },
+    { rule = { class = "Spotify" },
+      properties = { tag = tags[1][7] } },
+    -- { rule = { class = "Firefox" },
+      -- properties = { tag = tags[1][1] } },
+    { rule = { class = "Tor Browser" },
+      properties = { tag = tags[1][3] } },
     { rule = { class = "Thunderbird" },
       properties = { tag = tags[2][2] } },
     { rule = { class = "Pidgin", role="buddy_list" },
       properties = { tag = tags[2][2] } },
     { rule = { class = "Filezilla" },
-      properties = { tag = tags[1][2] } }
+       properties = { tag = tags[1][2] } }
 }
 -- }}}
 
@@ -513,7 +546,11 @@ function run_once(prg)
 end
 
 run_once("chromium")
-run_once("thunderbird")
-run_once("pidgin")
-run_once(terminal)
+run_once("urxvtc")
+run_once("filezilla")
+-- run_once("thunderbird")
+-- run_once("spotify")
+-- run_once("firefox")
+-- run_once("tor-browser-en")
+-- run_once("pidgin")
 -- }}}

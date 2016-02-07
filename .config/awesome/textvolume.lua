@@ -18,10 +18,10 @@ function update_volume(widget)
 
    if string.find(status, "on", 1, true) then
    -- For the volume number percentage 
-       volume = "VOL: <b>" .. volume .. "%</b> "
+       volume = "<b>vol</b> " .. volume .. "% "
    else
    -- For displaying the mute status.
-       volume = "VOL: <b>MUTE</b> "
+       volume = "<b>vol</b> MUTE "
        
    end
    widget:set_markup(volume)
