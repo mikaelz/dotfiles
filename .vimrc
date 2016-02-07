@@ -81,7 +81,7 @@ set autoindent                " automatically set the indent of a new line
 set smartindent               " do clever autoindenting
 
 " folding
-set foldenable                " fold by default
+set nofoldenable              " fold by default
 set foldlevelstart=0          " open folds level
 set foldnestmax=5             " maximum fold depth for foldmethod 'indent' or 'syntax'
 set foldmethod=indent         " fold based on indent level
@@ -104,9 +104,8 @@ set history=200               " how many command lines are remembered
 set wildmode=full             " specifies how command line completion works
 set wildignore+=*.o,*.obj,*.pyc,*.db " list of patterns to ignore files for file name completion
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
-set wildignore+=.DS_Store,.git,.hg,.svn
-set wildignore+=*~,*.swp,*.tmp,*/tmp/*,*.zip
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
+set wildignore+=*~,*.swp,*.tmp,*.zip
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/.DS_Store,*/vendor
 set wildmenu                  " command-line completion shows a list of matches
 
 " executing external commands
@@ -149,9 +148,9 @@ else
 endif
 
 " http://vimcolorschemetest.googlecode.com/svn/html/index-html.html
-colorscheme molokai
+" colorscheme molokai
 " colorscheme xoria256
-" colorscheme wombat256
+colorscheme wombat256
 " colorscheme gardener
 " colorscheme greenvision
 
@@ -176,11 +175,13 @@ cabbrev ~? ~/
 
 " autocomplete funcs and identifiers for languages
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS noci
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType sql set omnifunc=sqlcomplete#CompleteSQL
+
+au BufNewFile,BufRead *.less set filetype=css
 
 " this will make it impossible to save in any other format than unix
 " http://www.reddit.com/r/vim/comments/ozr5h/convert_every_text_file_to_unix_format_if_not/c3lhgpe
@@ -198,39 +199,10 @@ command W :w
 command Q :q
 command E :q
 
-" \<space> clear search results
-nnoremap <leader><space> :noh<CR>
-
-" \n toggle line number
-nnoremap <leader>n :setlocal number!<CR>
-
-" \p toggle paste mode
-nnoremap <leader>p :set paste!<CR>
-
-" list opened buffers
-nnoremap <leader>b :ls<cr>:b<space>
-
-" disable arrow keys
-nnoremap <Up> :echomsg "use k"<cr>
-nnoremap <Down> :echomsg "use j"<cr>
-nnoremap <Left> :echomsg "use h"<cr>
-nnoremap <Right> :echomsg "use l"<cr>
-
-nnoremap j gj
-nnoremap k gk
-
-" Strips whitespace
-nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
-
-vnoremap <C-c> "*y
-
-" visual shifting (does not exit Visual mode)
-vnoremap < <gv
-vnoremap > >gv
-
 let g:phpcomplete_parse_docblock_comments = 1
 
-let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+" let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+let g:syntastic_php_checkers = ['php', 'phpmd']
 let g:syntastic_csslint_args = "--ignore=outline-none"
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_error_symbol = '●'
@@ -246,9 +218,9 @@ highlight SyntasticErrorLine guibg=#2f0000
 
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_user_command = 'find %s -type f'
 let g:ctrlp_extensions = ['tag','dir','line','mixed']
 let g:ctrlp_follow_symlinks = 1
+let g:ctrlp_user_command = 'find %s -type f -not \( -iname tags -o -path "*/.svn/*" -o -path "*/.git/*" -o -path "*/vendor/*" -o -path "*/.idea/*" -o -path "*/cache/*" \)'
 
 " https://github.com/Shougo/neocomplete.vim
 let g:neocomplete#enable_at_startup = 1
@@ -261,6 +233,58 @@ if !exists('g:neocomplete#keyword_patterns')
     let g:neocomplete#keyword_patterns = {}
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+let g:php_cs_fixer_path = "/srv/http/bin/php-cs-fixer" " define the path to the php-cs-fixer.phar
+let g:php_cs_fixer_level = "symfony"              " which level ?
+let g:php_cs_fixer_config = "default"             " configuration
+let g:php_cs_fixer_php_path = "php"               " Path to PHP
+" If you want to define specific fixers:
+"let g:php_cs_fixer_fixers_list = "linefeed,short_tag,indentation"
+let g:php_cs_fixer_enable_default_mapping = 0     " Enable the mapping by default (<leader>pcd)
+let g:php_cs_fixer_dry_run = 0
+let g:php_cs_fixer_verbose = 0
+
+" clear search results
+nnoremap <leader><space> :noh<CR>
+
+" list opened buffers
+nnoremap <leader>b :ls<cr>:b<space>
+
+" open taglist
+nnoremap <F2> :TlistOpen<CR>
+inoremap <F2> <Esc>:TlistOpen<CR>
+
+" open quickfix list
+nnoremap <F3> :copen<CR>
+inoremap <F3> <Esc>:copen<CR>
+
+nnoremap <F4> :Vexplore<CR>
+inoremap <F4> <Esc>:Vexplore<CR>
+
+" toggle paste mode
+nnoremap <F5> :set paste!<CR>
+
+nnoremap <leader>n :tabnew<CR>
+inoremap <leader>n <Esc>:tabnew<CR>
+
+" strips whitespace
+nnoremap <F8> :%s/\s\+$//<cr>:let @/=''<CR>
+
+" run php-cs-fixer on file
+nnoremap <F9> :call PhpCsFixerFixFile()<CR>
+inoremap <F9> <Esc>:call PhpCsFixerFixFile()<CR>
+
+" toggle line number
+nnoremap <F11> :setlocal number!<CR>
+
+nnoremap j gj
+nnoremap k gk
+
+vnoremap <C-c> "+y
+
+" visual shifting (does not exit Visual mode)
+vnoremap < <gv
+vnoremap > >gv
 
 " Whitespace fixes
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -278,5 +302,8 @@ nnoremap <leader>q :q<CR>
 inoremap <leader>q <Esc>:q<CR>
 vnoremap <leader>q <Esc>:q<CR>
 
-nnoremap <leader>t :tabnew<CR>
-inoremap <leader>t <Esc>:tabnew<CR>
+" disable arrow keys
+nnoremap <Up> :echomsg "use k"<cr>
+nnoremap <Down> :echomsg "use j"<cr>
+nnoremap <Left> :echomsg "use h"<cr>
+nnoremap <Right> :echomsg "use l"<cr>
