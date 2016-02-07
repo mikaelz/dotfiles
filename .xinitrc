@@ -20,7 +20,10 @@ pgrep -u mike -x dropboxd || ~/.dropbox-dist/dropboxd &
 pgrep -u mike -x urxvtd || urxvtd -q -o -f &
 pgrep -u mike -x irssi || /usr/bin/screen -d -m -S irssi /usr/bin/irssi
 
+eval $(ssh-agent)
+ssh-add ~/.ssh/id_rsa
+
 numlockx &
-xetroot -cursor_name left_ptr &
+xsetroot -cursor_name left_ptr &
 
 exec awesome -c .config/awesome/rc.lua
