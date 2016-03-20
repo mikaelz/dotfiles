@@ -147,9 +147,6 @@ musicwidget:run()
 -- }}}
 
 -- {{{ Wibox
-
--- cpuwidget = wibox.widget.textbox()
--- vicious.register(cpuwidget, vicious.widgets.cpu, "<b>cpu</b> $1-$2-$3-$4-$5-$6-$7-$8 ", 2)
 cpuwidget = awful.widget.graph()
 cpuwidget:set_width(50)
 cpuwidget:set_background_color("#494B4F")
@@ -169,6 +166,25 @@ fswidget:buttons( awful.button({ }, 1, function () awful.util.spawn(terminal .. 
 netwidget = wibox.widget.textbox()
 vicious.register(netwidget, vicious.widgets.net, "<b>net</b> ${eno1 down_kb}/${eno1 up_kb} ", 2)
 netwidget:buttons( awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e nethogs") end) )
+
+-- Keyboard map indicator and changer
+kbdcfg = {}
+kbdcfg.cmd = "setxkbmap"
+kbdcfg.layout = { { "us", "", "US" }, { "sk", "qwerty", "SK" } }
+kbdcfg.current = 1  -- us is our default layout
+kbdcfg.widget = wibox.widget.textbox()
+kbdcfg.widget:set_text(" " .. kbdcfg.layout[kbdcfg.current][3] .. " ")
+kbdcfg.switch = function ()
+  kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
+  local t = kbdcfg.layout[kbdcfg.current]
+  kbdcfg.widget:set_text(" " .. t[3] .. " ")
+  os.execute( kbdcfg.cmd .. " " .. t[1] .. " " .. t[2] )
+end
+
+ -- Mouse bindings
+kbdcfg.widget:buttons(
+ awful.util.table.join(awful.button({ }, 1, function () kbdcfg.switch() end))
+)
 
 -- Create a textclock widget
 mytextclock = awful.widget.textclock()
@@ -259,6 +275,7 @@ for s = 1, screen.count() do
     right_layout:add(volume_widget)
 	right_layout:add(musicwidget.widget)
     -- right_layout:add(yawn.widget)
+    right_layout:add(kbdcfg.widget)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
@@ -327,7 +344,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
-
+    -- Alt + Right Shift switches the current keyboard layout
+    awful.key({ "Mod1" }, "Shift_L", function () kbdcfg.switch() end),
     -- Prompt
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
 
