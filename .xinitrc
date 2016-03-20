@@ -12,18 +12,14 @@ fi
 
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
-if [ "pidof mpdscribble >& /dev/null" > 0 ]; then
-    [[ -f ~/.mpdscribble/mpdscribble.conf ]] && mpdscribble;
-fi
-
 pgrep -u mike -x dropboxd || ~/.dropbox-dist/dropboxd &
 pgrep -u mike -x urxvtd || urxvtd -q -o -f &
-pgrep -u mike -x irssi || /usr/bin/screen -d -m -S irssi /usr/bin/irssi
+# pgrep -u mike -x irssi || /usr/bin/screen -d -m -S irssi /usr/bin/irssi
 
 eval $(ssh-agent)
-ssh-add ~/.ssh/id_rsa
 
 numlockx &
+xscreensaver &
 xsetroot -cursor_name left_ptr &
 
 exec awesome -c .config/awesome/rc.lua
