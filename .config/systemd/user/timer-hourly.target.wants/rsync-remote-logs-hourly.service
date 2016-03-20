@@ -1,0 +1,13 @@
+[Unit]
+Description=Rsync log files from remote hosts
+# Requires=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/mike/bin/rsync-remote-logs-hourly.sh
+Nice=19
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7
+
+[Install]
+WantedBy=timer-hourly.target

@@ -1,0 +1,13 @@
+[Unit]
+Description=MySQL dump data from remote hosts
+# Requires=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/mike/bin/remote-mysqldump-daily.sh
+Nice=19
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7
+
+[Install]
+WantedBy=timer-daily.target

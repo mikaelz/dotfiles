@@ -1,0 +1,13 @@
+#
+# ~/.config/systemd/user/mpdscribble.service
+
+[Unit]
+Description=MPD Scribble service
+Requires=mpd.service
+After=mpd.service
+
+[Service]
+ExecStart=/usr/bin/mpdscribble --no-daemon --conf /home/mike/.mpdscribble/mpdscribble.conf
+
+[Install]
+WantedBy=default.target
