@@ -55,7 +55,7 @@ end
 beautiful.init(os.getenv("HOME") .. "/.config/awesome/theme/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvtc"
+terminal = "urxvt"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -454,22 +454,23 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons } },
     { rule = { class = "Gimp" },
-      properties = { floating = true, tags[1][3] } },
-    -- Set Firefox to always map on tags number 2 of screen 1.
+      properties = { tags[1][3] } },
     { rule = { class = "chromium" },
       properties = { tag = tags[1][1] } },
-    { rule = { class = "Spotify" },
-      properties = { tag = tags[1][7] } },
-    -- { rule = { class = "Firefox" },
-      -- properties = { tag = tags[1][1] } },
     { rule = { class = "Tor Browser" },
       properties = { tag = tags[1][3] } },
+    { rule = { instance = "work" },
+      properties = { tag = tags[2][1] } },
+    { rule = { instance = "logs" },
+      properties = { tag = tags[2][6] } },
     { rule = { class = "Thunderbird" },
       properties = { tag = tags[2][2] } },
     { rule = { class = "Pidgin", role="buddy_list" },
       properties = { tag = tags[2][2] } },
     { rule = { class = "Filezilla" },
-       properties = { tag = tags[1][2] } }
+       properties = { tag = tags[1][2] } },
+   { rule_any = { class = { "MPlayer", "gimp", "feh", "mupdf" } },
+       properties = { floating = true } }
 }
 -- }}}
 
@@ -555,7 +556,8 @@ function run_once(prg)
 end
 
 run_once("chromium")
-run_once("urxvtc")
+run_once("urxvt -name work -e screen")
+run_once("urxvt -name logs -e logs.sh")
 run_once("filezilla")
 -- run_once("thunderbird")
 -- run_once("spotify")
