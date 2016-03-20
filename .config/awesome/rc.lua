@@ -126,14 +126,15 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- http://awesome.naquadah.org/wiki/Awesompd#How_to_start
 local awesompd = require("awesompd/awesompd")
 musicwidget = awesompd:create()
+musicwidget.font = "Sans"
 musicwidget.scrolling = false
 musicwidget.output_size = 30
 musicwidget.update_interval = 10
 musicwidget.path_to_icons = "/home/mike/.config/awesome/awesompd/icons"
 musicwidget.show_album_cover = false
 musicwidget.album_cover_size = 50
-musicwidget.ldecorator = "|"
-musicwidget.rdecorator = "|"
+musicwidget.ldecorator = "| "
+musicwidget.rdecorator = " |"
 musicwidget.servers = {
 	{ server = "localhost",
 	port = 6600 } }
@@ -147,19 +148,27 @@ musicwidget:run()
 
 -- {{{ Wibox
 
-cpuwidget = wibox.widget.textbox()
-vicious.register(cpuwidget, vicious.widgets.cpu, "<b>cpu</b> $1-$2-$3-$4-$5-$6-$7-$8 ", 2)
+-- cpuwidget = wibox.widget.textbox()
+-- vicious.register(cpuwidget, vicious.widgets.cpu, "<b>cpu</b> $1-$2-$3-$4-$5-$6-$7-$8 ", 2)
+cpuwidget = awful.widget.graph()
+cpuwidget:set_width(50)
+cpuwidget:set_background_color("#494B4F")
+cpuwidget:set_color({ type = "linear", from = { 0, 0 }, to = { 50, 0 },
+stops = { { 0, "#FF5656" }, { 0.5, "#88A175" }, { 1, "#AECF96" } }})
+vicious.cache(vicious.widgets.cpu)
+vicious.register(cpuwidget, vicious.widgets.cpu, "$1", 3)
 cpuwidget:buttons( awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e htop") end) )
 
 memwidget = wibox.widget.textbox()
 vicious.register(memwidget, vicious.widgets.mem, "<b>mem</b> $1% <b>swp</b> $5% ", 2)
 
-diowidget = wibox.widget.textbox()
-vicious.register(diowidget, vicious.widgets.dio, "<b>sda</b> ${sda1 read_kb}/${sda1 write_kb} <b>sdb</b> ${sdb1 read_kb}/${sdb1 write_kb} ", 2)
-diowidget:buttons( awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e sudo iotop") end) )
+fswidget = wibox.widget.textbox()
+vicious.register(fswidget, vicious.widgets.fs, "<b>sda</b> ${/ used_gb}/${/ size_gb} <b>sdb</b> ${/data used_gb}/${/data size_gb} ", 2)
+fswidget:buttons( awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e sudo iotop") end) )
 
 netwidget = wibox.widget.textbox()
 vicious.register(netwidget, vicious.widgets.net, "<b>net</b> ${eno1 down_kb}/${eno1 up_kb} ", 2)
+netwidget:buttons( awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e nethogs") end) )
 
 -- Create a textclock widget
 mytextclock = awful.widget.textclock()
@@ -245,7 +254,7 @@ for s = 1, screen.count() do
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(cpuwidget)
     right_layout:add(memwidget)
-    right_layout:add(diowidget)
+    right_layout:add(fswidget)
     right_layout:add(netwidget)
     right_layout:add(volume_widget)
 	right_layout:add(musicwidget.widget)
