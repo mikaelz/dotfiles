@@ -84,6 +84,7 @@ alias eV="vi ~/.vimrc"
 
 # commands
 alias k='exit'
+alias h='history'
 alias la='ls -Fa'
 alias ll='ls -Fhl'
 alias cp='cp -rv'
@@ -92,6 +93,7 @@ alias rm='rm -iv'
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 alias ss='DISPLAY=:0 import -window root'
+alias gs='git status .'
 alias yt="youtube-viewer"
 alias yd="youtube-dl"
 alias scp='scp -r'
