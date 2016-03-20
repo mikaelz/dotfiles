@@ -1,13 +1,16 @@
-[default]
-ao=alsa       #audio
-vo=vdpau,xv,  # video
-sid=0	      #subtitle
-double=yes
-# zoom="1" #Allow sofware scaling if I use x11 for vo
-nolirc=yes
-monitoraspect="16:9" #I'm on a widescreen laptop so keeps 4:3 content from stretching
-stop-xscreensaver=yes
 
-[vo.vdpau]
-profile-desc="profile for VDPAU video output"
-vc=ffmpeg12vdpau,ffwmv3vdpau,ffvc1vdpau,ffh264vdpau,ffodivx,ffmpeg,
+ao=alsa
+# https://wiki.archlinux.org/index.php/MPlayer#Enabling_VDPAU
+vo=vdpau,xv,
+vc=ffh264vdpau,ffmpeg12vdpau,ffodivxvdpau,ffwmv3vdpau,ffvc1vdpau,
+heartbeat-cmd="xscreensaver-command -deactivate >&- 2>&- &"
+double=yes #double buffering(recommended for subtitles)
+
+# mixer-channel="Master"
+# srate=48000
+#
+# zoom="1" #Allow sofware scaling if I use x11 for vo
+# aid="1" #audio channel
+# sid="0" #subtitle set
+#
+# monitoraspect="16:9" #I'm on a widescreen laptop so keeps 4:3 content from stretching
