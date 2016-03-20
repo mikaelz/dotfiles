@@ -21,8 +21,8 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 
 require('textvolume')
-require('yawn')
-yawn.register(820252) -- Guta WOEID
+-- require('yawn')
+-- yawn.register(820252) -- Guta WOEID
 
 
 -- {{{ Error handling
@@ -97,7 +97,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5 }, s, layouts[2])
+    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6 }, s, layouts[2])
 end
 -- }}}
 
@@ -148,7 +148,7 @@ musicwidget:run()
 -- {{{ Wibox
 
 cpuwidget = wibox.widget.textbox()
-vicious.register(cpuwidget, vicious.widgets.cpu, "<b>cpu</b> $2/$3% ", 2)
+vicious.register(cpuwidget, vicious.widgets.cpu, "<b>cpu</b> $1-$2-$3-$4-$5-$6-$7-$8 ", 2)
 cpuwidget:buttons( awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e htop") end) )
 
 memwidget = wibox.widget.textbox()
@@ -159,7 +159,7 @@ vicious.register(diowidget, vicious.widgets.dio, "<b>sda</b> ${sda1 read_kb}/${s
 diowidget:buttons( awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e sudo iotop") end) )
 
 netwidget = wibox.widget.textbox()
-vicious.register(netwidget, vicious.widgets.net, "<b>net</b> ${ens33 down_kb}/${ens33 up_kb} ", 2)
+vicious.register(netwidget, vicious.widgets.net, "<b>net</b> ${eno1 down_kb}/${eno1 up_kb} ", 2)
 
 -- Create a textclock widget
 mytextclock = awful.widget.textclock()
@@ -249,7 +249,7 @@ for s = 1, screen.count() do
     right_layout:add(netwidget)
     right_layout:add(volume_widget)
 	right_layout:add(musicwidget.widget)
-    right_layout:add(yawn.widget)
+    -- right_layout:add(yawn.widget)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
@@ -333,7 +333,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "p", function() menubar.show() end),
     awful.key({ modkey }, "F1", function() awful.screen.focus(1) end),
     awful.key({ modkey }, "F2", function() awful.screen.focus(2) end),
-    awful.key({ modkey, "Control" }, "l", function () awful.util.spawn("xlock -mode blank") end),
+    awful.key({ modkey, "Control" }, "l", function () awful.util.spawn("xscreensaver-command -lock") end),
     -- Media keys controlling volume
     awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 5%+", false) end),
     awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 5%-", false) end),
@@ -381,8 +381,8 @@ clientkeys = awful.util.table.join(
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
--- This should map on the top row of your keyboard, usually 1 to 5.
-for i = 1, 5 do
+-- This should map on the top row of your keyboard, usually 1 to 6.
+for i = 1, 6 do
     globalkeys = awful.util.table.join(globalkeys,
         -- View tag only.
         awful.key({ modkey }, "#" .. i + 9,

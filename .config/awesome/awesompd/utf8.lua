@@ -57,7 +57,7 @@ function utf8.charbytes (s, i)
    -- argument defaults
    i = i or 1
    local c = string.byte(s, i)
-   
+
    -- determine bytes needed for character, based on RFC 3629
    if c > 0 and c <= 127 then
       -- UTF8-1
@@ -85,18 +85,18 @@ function utf8.len (s)
    local pos = 1
    local bytes = string.len(s)
    local len = 0
-   
+
    while pos <= bytes and len ~= chars do
       local c = string.byte(s,pos)
       len = len + 1
-      
+
       pos = pos + utf8.charbytes(s, pos)
    end
-   
+
    if chars ~= nil then
       return pos - 1
    end
-   
+
    return len
 end
 
@@ -108,7 +108,7 @@ function utf8.sub (s, i, j)
    if i == nil then
       return ""
    end
-   
+
    local pos = 1
    local bytes = string.len(s)
    local len = 0
@@ -122,25 +122,25 @@ function utf8.sub (s, i, j)
    if startChar > endChar then
       return ""
    end
-   
+
    -- byte offsets to pass to string.sub
    local startByte, endByte = 1, bytes
-   
+
    while pos <= bytes do
       len = len + 1
-      
+
       if len == startChar then
 	 startByte = pos
       end
-      
+
       pos = pos + utf8.charbytes(s, pos)
-      
+
       if len == endChar then
 	 endByte = pos - 1
 	 break
       end
    end
-   
+
    return string.sub(s, startByte, endByte)
 end
 
