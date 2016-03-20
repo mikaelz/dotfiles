@@ -5,6 +5,7 @@ vo=vdpau,xv,
 vc=ffh264vdpau,ffmpeg12vdpau,ffodivxvdpau,ffwmv3vdpau,ffvc1vdpau,
 heartbeat-cmd="xscreensaver-command -deactivate >&- 2>&- &"
 double=yes #double buffering(recommended for subtitles)
+xineramascreen=1
 
 # mixer-channel="Master"
 # srate=48000
