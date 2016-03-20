@@ -35,7 +35,7 @@ COMPLETION_WAITING_DOTS="true"
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -53,12 +53,11 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(colored-man composer cp screen svn-fast-info symfony2)
 
 # User configuration
-
 export PATH="$HOME/Dropbox/home/bin:/opt/subversion/bin:/opt/local/bin:$PATH"
 export EDITOR=vim
 export VISUAL=$EDITOR
 export PAGER=less
-export S_COLORS=auto
+export LS_COLORS=auto
 export VDPAU_DRIVER=nvidia
 
 source $ZSH/oh-my-zsh.sh
@@ -67,7 +66,6 @@ source $ZSH/oh-my-zsh.sh
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-
 alias D='cd ~/Downloads'
 alias W='cd /srv/http'
 alias mike='autossh -M 0 mike'
@@ -112,11 +110,7 @@ alias httpwritable="sudo chown -R http:http .; sudo chmod -R g+w ."
 alias _wwwwritable="sudo chown -R _www:_www .; sudo chmod -R g+w ."
 alias git-graph="git log --graph --abbrev-commit --decorate --date=relative --all"
 alias git-last-commited-files="git diff-tree -r HEAD@{0}"
-
-# search
 alias grep='grep --colour=auto --exclude-dir={.git,.svn,CVS} --exclude=tags'
-
-# misc
 alias nethogs='sudo nethogs eno1'
 alias xlock='xlock -mode blank'
 alias httpserve='python3 -m http.server'
@@ -133,6 +127,11 @@ fi
 
 if [[ "$(uname)" == "Darwin" ]]; then
     export PATH="/usr/local/php5-5.6.17-20160108-105408/bin:/usr/local/mysql-5.6.24-osx10.8-x86_64/bin:$PATH"
+fi
+
+if [ -f $HOME/.dircolors ]
+then
+    eval `dircolors -b $HOME/.dircolors`
 fi
 
 # zsh is able to auto-do some kungfoo
