@@ -1,0 +1,8 @@
+-R
+--tag-relative=yes
+--exclude=.svn
+--exclude=.git
+--exclude=node_modules
+--langmap=php:.engine.inc.module.theme.install.php
+--PHP-kinds=+cf-v
+--languages=php
