@@ -5,8 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-# ZSH_THEME="gentoo"
-ZSH_THEME="mike"
+ZSH_THEME="gentoo"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -60,6 +59,7 @@ export EDITOR=vim
 export VISUAL=$EDITOR
 export PAGER=less
 export S_COLORS=auto
+export VDPAU_DRIVER=nvidia
 
 source $ZSH/oh-my-zsh.sh
 
@@ -70,12 +70,9 @@ source $ZSH/oh-my-zsh.sh
 
 alias D='cd ~/Downloads'
 alias W='cd /srv/http'
-alias ac='cd /srv/http/atechcomp'
-alias lpc='cd /srv/http/lacne-pc.sk'
-alias fpc='cd /srv/http/felujitottpc'
-alias cen='cd /srv/http/centralis'
 alias mike='autossh -M 0 mike'
 alias zeus='autossh -M 0 zeus'
+alias jarvis='autossh -M 0 jarvis'
 
 # configs
 alias eA="vi ~/.config/awesome/rc.lua"
@@ -111,12 +108,14 @@ alias svn_diff_prev="svn diff -r COMMITTED:PREV "
 alias svn_cleanup="svn status --no-ignore | grep '^\?' | sed 's/^\?     //'  | xargs rm -rf"
 alias httpwritable="sudo chown -R http:http .; sudo chmod -R g+w ."
 alias _wwwwritable="sudo chown -R _www:_www .; sudo chmod -R g+w ."
+alias git-graph="git log --graph --abbrev-commit --decorate --date=relative --all"
+alias git-last-commited-files="git diff-tree -r HEAD@{0}"
 
 # search
 alias grep='grep --colour=auto --exclude-dir={.git,.svn,CVS} --exclude=tags'
 
 # misc
-alias nethogs='sudo nethogs ens33'
+alias nethogs='sudo nethogs eno1'
 alias xlock='xlock -mode blank'
 alias httpserve='python3 -m http.server'
 
@@ -131,7 +130,7 @@ if [[ "$(uname)" == "Linux" ]]; then
 fi
 
 if [[ "$(uname)" == "Darwin" ]]; then
-    export PATH="/usr/local/php5-5.6.17-20160108-105408/bin:$PATH"
+    export PATH="/usr/local/php5-5.6.17-20160108-105408/bin:/usr/local/mysql-5.6.24-osx10.8-x86_64/bin:$PATH"
 fi
 
 # zsh is able to auto-do some kungfoo
