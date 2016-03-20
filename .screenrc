@@ -8,8 +8,8 @@
 
 startup_message off
 
-#defshell -bash # dash makes it a login shell
-shelltitle "$ |bash"
+# defshell -bash # dash makes it a login shell
+# shelltitle "$ |zsh"
 
 vbell on # no annoying audible bell
 vbell_msg "  !! Something interesting has happened !!  "
@@ -32,8 +32,8 @@ attrcolor b ".I"
 # http://www4.cs.fau.de/~jnweiger/screen-faq.html
 # https://stackoverflow.com/a/4833946
 # http://pjkh.com/articles/osx-iterm-screen-vim-256-colors/
-# term screen-256color
-term xterm-256color
+term screen-256color
+# term xterm-256color
 termcapinfo screen* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 termcapinfo screen* ti@:te@ # make scrollbar work
 
@@ -46,12 +46,10 @@ bind % screen -t htop htop
 bind > eval writebuf "exec sh -c 'xsel -bi </tmp/screen-exchange'"
 bind < eval "exec sh -c 'xsel -bo >/tmp/screen-exchange'" readbuf
 
-screen 0
-# screen 1
-# screen 2
-# screen 3
-# screen 4
-# screen 5
+screen -t 0
+screen -t 1
+
+select 0
 
 backtick 0 0 0 whoami # set "%0`" to equal the output of `whoami`
 
