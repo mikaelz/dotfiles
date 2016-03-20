@@ -12,11 +12,10 @@ fi
 
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
-pgrep -u mike -x dropboxd || ~/.dropbox-dist/dropboxd &
-pgrep -u mike -x urxvtd || urxvtd -q -o -f &
-# pgrep -u mike -x irssi || /usr/bin/screen -d -m -S irssi /usr/bin/irssi
-
-eval $(ssh-agent)
+pgrep -u "${USER}" -x dropbox || ~/.dropbox-dist/dropboxd &
+pgrep -u "${USER}" -x ssh-agent || eval $(ssh-agent)
+# pgrep -u "${USER}" -x urxvtd || urxvtd -q -o -f &
+# pgrep -u "${USER}" -x irssi || /usr/bin/screen -d -m -S irssi /usr/bin/irssi
 
 numlockx &
 xscreensaver &
