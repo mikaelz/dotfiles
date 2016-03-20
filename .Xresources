@@ -1,3 +1,17 @@
+xscreensaver.mode: blank
+xscreensaver.timeout: 0:05:00
+xscreensaver.cycle: 0:05:00
+xscreensaver.lockTimeout: 0:01:00
+xscreensaver.passwdTimeout: 0:00:10
+xscreensaver.dpmsEnabled: True
+xscreensaver.dpmsQuickoffEnabled: False
+xscreensaver.dpmsStandby: 0:10:00
+xscreensaver.dpmsSuspend: 0:10:00
+xscreensaver.dpmsOff: 0:10:00
+xscreensaver.lock: True
+xscreensaver.splash: False
+xscreensaver.logFile:/home/mike/xscreensaver.log
+
 ! Compile xft: Attempt to find a visual with the given bit depth; option -depth.
 ! URxvt*depth: bitdepth
 
@@ -16,7 +30,7 @@ URxvt*foreground: gray
 ! Use the specified colour for the colour value n, where 0-7 corresponds to low-intensity (normal) colours and 8-15 corresponds to high-
 ! URxvt*colorn: colour
 
-! 
+!
 ! URxvt*colorBD: colour
 
 ! Use the specified colour to display bold or italic characters when the foreground colour is the default. If font styles are not available
@@ -72,7 +86,7 @@ URxvt*foreground: gray
 
 ! URxvt*boldFont: fontlist
 
-! 
+!
 ! URxvt*italicFont: fontlist
 
 ! The font list to use for displaying bold, italic or bold italic characters, respectively.
@@ -189,7 +203,7 @@ URxvt*cursorBlink: true
 ! The characters used as delimiters for double-click word selection (whitespace delimiting is added automatically if resource is given).
 ! URxvt*cutchars: string
 
-! 
+!
 ! URxvt*{|}
 
 ! OverTheSpot, OffTheSpot, Root; option -pt.
@@ -231,7 +245,7 @@ URxvt*cursorBlink: true
 ! Compile frills: Associate string with keysym sym. The intervening resource name keysym. cannot be omitted.
 ! URxvt*keysym.sym: string
 
-! URxvt*perl-ext-common: string
+URxvt*perl-ext-common: default,matcher
 
 ! Comma-separated list(s) of perl extension scripts (default: "default") to use in this terminal instance; option -pe.
 ! URxvt*perl-ext: string
@@ -240,7 +254,7 @@ URxvt*cursorBlink: true
 ! URxvt*perl-eval: string
 
 ! Colon-separated list of additional directories that hold extension scripts. When looking for perl extensions, urxvt will first look in these
-! URxvt*perl-lib: path
+URxvt*perl-lib: /usr/lib/urxvt/perl/
 
 ! Additional selection patterns, see the urxvtperl(3) manpage for details.
 ! URxvt*selection.pattern-idx: perl-regex
@@ -252,7 +266,7 @@ URxvt*cursorBlink: true
 URxvt*searchable-scrollback: ""
 
 ! Specifies the program to be started with a URL argument. Used by the "selection-popup" and "matcher" perl extensions.
-! URxvt*url-launcher: string
+URxvt*url-launcher: /usr/bin/chromium
 
 ! Compile frills: Sets the WM_TRANSIENT_FOR property to the given window id.
 ! URxvt*transient-for: windowid
