@@ -22,7 +22,7 @@ set number		              " show the line number for each line
 
 " syntax, highlighting and spelling
 set background=dark           " the background color brightness
-set synmaxcol=400             " maximum column to look for syntax items
+set synmaxcol=800             " maximum column to look for syntax items
 set cursorline                " highlight the screen line of the cursor
 " set colorcolumn=80          " columns to highlight, match to 'textwidth'
  set showmatch                " hight matching [{()}]
@@ -180,8 +180,10 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType sql set omnifunc=sqlcomplete#CompleteSQL
+autocmd FileType javascript let b:syntastic_checkers = findfile('.eslintrc', '.;') != '' ? ['eslint'] : ['standard']
 
 au BufNewFile,BufRead *.less set filetype=css
+au BufRead,BufNewFile *.tpl set filetype=html
 
 " this will make it impossible to save in any other format than unix
 " http://www.reddit.com/r/vim/comments/ozr5h/convert_every_text_file_to_unix_format_if_not/c3lhgpe
@@ -234,7 +236,7 @@ if !exists('g:neocomplete#keyword_patterns')
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-let g:php_cs_fixer_path = "/srv/http/bin/php-cs-fixer" " define the path to the php-cs-fixer.phar
+let g:php_cs_fixer_path = "/bin/php-cs-fixer" " define the path to the php-cs-fixer.phar
 let g:php_cs_fixer_level = "symfony"              " which level ?
 let g:php_cs_fixer_config = "default"             " configuration
 let g:php_cs_fixer_php_path = "php"               " Path to PHP
@@ -264,15 +266,16 @@ inoremap <F4> <Esc>:Vexplore<CR>
 " toggle paste mode
 nnoremap <F5> :set paste!<CR>
 
+nnoremap <F6> :Gstatus<CR>
+
 nnoremap <leader>n :tabnew<CR>
 inoremap <leader>n <Esc>:tabnew<CR>
 
 " strips whitespace
 nnoremap <F8> :%s/\s\+$//<cr>:let @/=''<CR>
 
-" run php-cs-fixer on file
-nnoremap <F9> :call PhpCsFixerFixFile()<CR>
-inoremap <F9> <Esc>:call PhpCsFixerFixFile()<CR>
+nnoremap <F9> :update<bar>make<CR>
+inoremap <F9> <Esc>:update<bar>make<CR>
 
 " toggle line number
 nnoremap <F11> :setlocal number!<CR>
@@ -302,8 +305,7 @@ nnoremap <leader>q :q<CR>
 inoremap <leader>q <Esc>:q<CR>
 vnoremap <leader>q <Esc>:q<CR>
 
-" disable arrow keys
-nnoremap <Up> :echomsg "use k"<cr>
-nnoremap <Down> :echomsg "use j"<cr>
-nnoremap <Left> :echomsg "use h"<cr>
-nnoremap <Right> :echomsg "use l"<cr>
+nmap <silent> <UP>    :prev<CR>
+nmap <silent> <DOWN>  :next<CR>
+nmap <silent> <LEFT>  :cprev<CR>
+nmap <silent> <RIGHT> :cnext<CR>
