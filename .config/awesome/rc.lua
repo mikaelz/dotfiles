@@ -471,10 +471,12 @@ awful.rules.rules = {
                      raise = true,
                      keys = clientkeys,
                      buttons = clientbuttons } },
-    { rule = { class = "Gimp" },
-      properties = { tags[1][3] } },
     { rule = { class = "chromium" },
       properties = { tag = tags[1][1] } },
+    { rule = { class = "Filezilla" },
+      properties = { tag = tags[1][2] } },
+    { rule = { class = "Gimp-2.8" },
+      properties = { tag = tags[1][3], floating = true } },
     { rule = { class = "Tor Browser" },
       properties = { tag = tags[1][3] } },
     { rule = { instance = "work" },
@@ -485,10 +487,8 @@ awful.rules.rules = {
       properties = { tag = tags[2][2] } },
     { rule = { class = "Pidgin", role="buddy_list" },
       properties = { tag = tags[2][2] } },
-    { rule = { class = "Filezilla" },
-       properties = { tag = tags[1][2] } },
-   { rule_any = { class = { "MPlayer", "gimp", "feh", "mupdf" } },
-       properties = { floating = true } }
+    { rule_any = { class = { "MPlayer", "feh", "mupdf" } },
+      properties = { floating = true } }
 }
 -- }}}
 
@@ -570,7 +570,7 @@ function run_once(prg)
 	if not prg then
 		do return nil end
 	end
-	awful.util.spawn_with_shell("pgrep -u $USER -x " .. prg .. " || (" .. prg .. ")")
+	awful.util.spawn_with_shell("pgrep -x -u $USER " .. prg .. " || (" .. prg .. ")")
 end
 
 run_once("chromium")
