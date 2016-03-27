@@ -70,6 +70,10 @@ PROMPT='%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n@)%m %{$fg_bold[cyan]%}%(!.%1
 # For a full list of active aliases, run `alias`.
 alias D='cd ~/Downloads'
 alias W='cd /srv/http'
+alias ac='cd /srv/http/atechcomp.sk'
+alias lpc='cd /srv/http/lacne-pc.sk'
+alias fpc='cd /srv/http/felujitottpc.hu'
+alias cen='cd /srv/http/centralis'
 alias mike='autossh -M 0 mike'
 alias zeus='autossh -M 0 zeus'
 alias jarvis='autossh -M 0 jarvis'
@@ -79,6 +83,7 @@ alias eA="vi ~/.config/awesome/rc.lua"
 alias eB="vi ~/.bashrc"
 alias rB="source ~/.bashrc; echo '[ done ] source ~/.bashrc'"
 alias eZ="vi ~/.zshrc"
+alias eH="vi ~/.zsh_history"
 alias rZ="source ~/.zshrc; echo '[ done ] source ~/.zshrc'"
 alias eV="vi ~/.vimrc"
 
@@ -94,6 +99,7 @@ alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 alias ss='DISPLAY=:0 import -window root'
 alias gs='git status .'
+alias gd='git diff .'
 alias yt="youtube-viewer"
 alias yd="youtube-dl"
 alias scp='scp -r'
@@ -128,7 +134,7 @@ if [[ "$(uname)" == "Linux" ]]; then
 fi
 
 if [[ "$(uname)" == "Darwin" ]]; then
-    export PATH="/usr/local/php5-5.6.17-20160108-105408/bin:/usr/local/mysql-5.6.24-osx10.8-x86_64/bin:$PATH"
+    export PATH="/usr/local/php5-5.6.17-20160108-105408/bin:/usr/local/mysql-5.6.24-osx10.8-x86_64/bin:/usr/local/bin/:$PATH"
 fi
 
 if [ -f $HOME/.dircolors ]
