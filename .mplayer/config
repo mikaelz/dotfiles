@@ -4,8 +4,11 @@ ao=alsa
 vo=vdpau,xv,
 vc=ffh264vdpau,ffmpeg12vdpau,ffodivxvdpau,ffwmv3vdpau,ffvc1vdpau,
 heartbeat-cmd="xscreensaver-command -deactivate >&- 2>&- &"
-double=yes #double buffering(recommended for subtitles)
 xineramascreen=1
+
+nolirc=1
+nosub=1
+noautosub=1
 
 # mixer-channel="Master"
 # srate=48000
