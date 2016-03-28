@@ -1,0 +1,31 @@
+[user]
+	name = Michal Zuber
+	email = info@nevilleweb.sk
+[core]
+    # excludesfile = /home/mike/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+# [mergetool "sourcetree"]
+# 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+# 	trustExitCode = true
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+[color]
+	ui = auto
+[diff]
+    tool = vimdiff
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
+[color "status"]
+    added = green bold
+    changed = yellow bold
+    untracked = red bold
+[push]
+	default = simple
