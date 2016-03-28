@@ -487,7 +487,7 @@ awful.rules.rules = {
       properties = { tag = tags[2][2] } },
     { rule = { class = "Pidgin", role="buddy_list" },
       properties = { tag = tags[2][2] } },
-    { rule_any = { class = { "MPlayer", "feh", "mupdf" } },
+    { rule_any = { class = { "MPlayer", "mpv", "feh", "mupdf" } },
       properties = { floating = true } }
 }
 -- }}}
