@@ -40,7 +40,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -59,6 +59,7 @@ export VISUAL=$EDITOR
 export PAGER=less
 export LS_COLORS=auto
 export VDPAU_DRIVER=nvidia
+export LIBVA_DRIVER_NAME=vdpau
 
 source $ZSH/oh-my-zsh.sh
 
@@ -98,8 +99,6 @@ alias rm='rm -iv'
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 alias ss='DISPLAY=:0 import -window root'
-alias gs='git status .'
-alias gd='git diff .'
 alias yt="youtube-viewer"
 alias yd="youtube-dl"
 alias scp='scp -r'
@@ -110,18 +109,26 @@ alias pidstat='pidstat -dlu'
 alias vi='vim'
 alias Syu='sudo pacman -Syu'
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
-alias svn_edit_log="svn propedit svn:log --revprop -r "
-alias svn_ignore_dir="svn propedit svn:ignore "
-alias svn_diff_prev="svn diff -r COMMITTED:PREV "
-alias svn_cleanup="svn status --no-ignore | grep '^\?' | sed 's/^\?     //'  | xargs rm -rf"
-alias httpwritable="sudo chown -R http:http .; sudo chmod -R g+w ."
-alias _wwwwritable="sudo chown -R _www:_www .; sudo chmod -R g+w ."
-alias git-graph="git log --graph --abbrev-commit --decorate --date=relative --all"
-alias git-last-commited-files="git diff-tree -r HEAD@{0}"
+alias httpwritable="sudo chown -R http:http .; sudo chmod -R g+rw ."
+alias _wwwwritable="sudo chown -R _www:_www .; sudo chmod -R g+rw ."
 alias grep='grep --colour=auto --exclude-dir={.git,.svn,CVS} --exclude=tags'
 alias nethogs='sudo nethogs eno1'
 alias xlock='xlock -mode blank'
 alias httpserve='python3 -m http.server'
+
+# SVN aliases
+alias svn_edit_log="svn propedit svn:log --revprop -r "
+alias svn_ignore_dir="svn propedit svn:ignore "
+alias svn_diff_prev="svn diff -r COMMITTED:PREV "
+alias svn_cleanup="svn status --no-ignore | grep '^\?' | sed 's/^\?     //'  | xargs rm -rf"
+
+# GIT aliases
+alias gs='git status .'
+alias gd='git diff .'
+alias gp='git pull'
+alias git-graph="git log --graph --abbrev-commit --decorate --date=relative --all"
+alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+alias git-last-commited-files="git diff-tree -r HEAD@{0}"
 
 alias RS='sudo systemctl restart synergys@mike'
 
