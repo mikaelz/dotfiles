@@ -11,6 +11,7 @@ set incsearch                 " show match for partly typed search command
 set hlsearch     		      " highlight all matches for the last used search pattern
 
 " tags
+set tags=./tags;,tags;
 
 " displaying text
 set scrolloff=8               " number of screen lines to show around the cursor
@@ -283,7 +284,12 @@ nnoremap <F11> :setlocal number!<CR>
 nnoremap j gj
 nnoremap k gk
 
-vnoremap <C-c> "+y
+let os = substitute(system('uname'), "\n", "", "")
+if os == "Darwin"
+    vnoremap <C-c> "+y
+elseif os == "Linux"
+    vnoremap <C-c> :w !xsel -i -b<CR>
+endif
 
 " visual shifting (does not exit Visual mode)
 vnoremap < <gv
@@ -305,7 +311,7 @@ nnoremap <leader>q :q<CR>
 inoremap <leader>q <Esc>:q<CR>
 vnoremap <leader>q <Esc>:q<CR>
 
-nmap <silent> <UP>    :prev<CR>
-nmap <silent> <DOWN>  :next<CR>
+nmap <silent> <UP>    :lprev<CR>
+nmap <silent> <DOWN>  :lnext<CR>
 nmap <silent> <LEFT>  :cprev<CR>
 nmap <silent> <RIGHT> :cnext<CR>
