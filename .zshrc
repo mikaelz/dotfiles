@@ -98,7 +98,6 @@ alias mv='mv -v'
 alias rm='rm -iv'
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
-alias ss='DISPLAY=:0 import -window root'
 alias yt="youtube-viewer"
 alias yd="youtube-dl"
 alias scp='scp -r'
@@ -127,7 +126,8 @@ alias gs='git status .'
 alias gd='git diff .'
 alias gp='git pull'
 alias git-graph="git log --graph --abbrev-commit --decorate --date=relative --all"
-alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+alias gg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+alias gl="git log --name-status"
 alias git-last-commited-files="git diff-tree -r HEAD@{0}"
 
 alias RS='sudo systemctl restart synergys@mike'
