@@ -23,10 +23,11 @@ set number		              " show the line number for each line
 
 " syntax, highlighting and spelling
 set background=dark           " the background color brightness
-set synmaxcol=800             " maximum column to look for syntax items
-set cursorline                " highlight the screen line of the cursor
+set synmaxcol=200             " maximum column to look for syntax items
+syntax sync minlines=256
+set nocursorline              " highlight the screen line of the cursor
+set nocursorcolumn
 " set colorcolumn=80          " columns to highlight, match to 'textwidth'
- set showmatch                " hight matching [{()}]
 
 " multiple windows
 set laststatus=2	          " always show status line
@@ -237,7 +238,7 @@ if !exists('g:neocomplete#keyword_patterns')
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-let g:php_cs_fixer_path = "/bin/php-cs-fixer" " define the path to the php-cs-fixer.phar
+let g:php_cs_fixer_path = "php-cs-fixer" " define the path to the php-cs-fixer.phar
 let g:php_cs_fixer_level = "symfony"              " which level ?
 let g:php_cs_fixer_config = "default"             " configuration
 let g:php_cs_fixer_php_path = "php"               " Path to PHP
@@ -284,12 +285,8 @@ nnoremap <F11> :setlocal number!<CR>
 nnoremap j gj
 nnoremap k gk
 
-let os = substitute(system('uname'), "\n", "", "")
-if os == "Darwin"
-    vnoremap <C-c> "+y
-elseif os == "Linux"
-    vnoremap <C-c> :w !xsel -i -b<CR>
-endif
+" needs +xterm_clipboard
+vnoremap <C-c> "+y
 
 " visual shifting (does not exit Visual mode)
 vnoremap < <gv
