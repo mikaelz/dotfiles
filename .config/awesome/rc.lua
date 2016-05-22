@@ -362,23 +362,27 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "F2", function() awful.screen.focus(2) end),
     awful.key({ modkey, "Control" }, "l", function () awful.util.spawn("xscreensaver-command -lock") end),
     -- Media keys controlling volume
+    awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer set Master toggle", false) end),
     awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 5%+", false) end),
     awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 5%-", false) end),
     -- Mediakeys directly control Tomahawk
 --[[
+    -- Media keys controlling MPD
     awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.tomahawk /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")  end),
     awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.tomahawk /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")  end),
     awful.key({ }, "XF86AudioStop", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.tomahawk /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop")  end),
     awful.key({ }, "XF86AudioNext", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.tomahawk /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")  end),
- --]]
+--]]
+--[[
     -- Media keys controlling MPD
-    awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer set Master toggle", false) end),
     awful.key({ }, "XF86AudioPlay", function () mpc:toggle_play() mpc:update() end),
     awful.key({ }, "XF86AudioNext", function () mpc:next()        mpc:update() end),
     awful.key({ }, "XF86AudioPrev", function () mpc:previous()    mpc:update() end),
-    -- awful.key({ }, "XF86AudioPlay", function () awful.util.spawn_with_shell("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause") end),
-    -- awful.key({ }, "XF86AudioNext", function () awful.util.spawn_with_shell("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next") end),
-    -- awful.key({ }, "XF86AudioPrev", function () awful.util.spawn_with_shell("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous") end),
+--]]
+    -- Media keys controlling Spotify
+    awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")  end),
+    awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")  end),
+    awful.key({ }, "XF86AudioNext", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")  end),
     -- PrintScrn
     -- awful.key({ }, "Print", function() awful.util.spawn(os.getenv("HOME") .. "/bin/screenshot",false) end),
     -- Alternate for PrintScreen, only one hand needed as on OSX
@@ -479,6 +483,8 @@ awful.rules.rules = {
       properties = { tag = tags[1][3], floating = true } },
     { rule = { class = "Tor Browser" },
       properties = { tag = tags[1][3] } },
+    { rule = { class = "spotify" },
+      properties = { tag = tags[1][5] } },
     { rule = { instance = "work" },
       properties = { tag = tags[2][1] } },
     { rule = { instance = "logs" },
@@ -574,9 +580,10 @@ function run_once(prg)
 end
 
 run_once("chromium")
+run_once("filezilla")
+run_once("spotify")
 run_once("urxvt -name work -e screen")
 run_once("urxvt -name logs -e logs.sh")
-run_once("filezilla")
 -- run_once("thunderbird")
 -- run_once("spotify")
 -- run_once("firefox")
