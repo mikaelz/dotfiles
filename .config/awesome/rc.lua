@@ -14,8 +14,8 @@ local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
 local vicious = require("vicious")
-local wimpd = require("wimpd")
-local mpc = wimpd.new()
+-- local wimpd = require("wimpd")
+-- local mpc = wimpd.new()
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
@@ -122,6 +122,7 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
+--[[
 -- MPD
 -- http://awesome.naquadah.org/wiki/Awesompd#How_to_start
 local awesompd = require("awesompd/awesompd")
@@ -145,6 +146,7 @@ musicwidget.servers = {
 })
 musicwidget:run()
 -- }}}
+--]]
 
 -- {{{ Wibox
 cpuwidget = awful.widget.graph()
@@ -273,7 +275,7 @@ for s = 1, screen.count() do
     right_layout:add(fswidget)
     right_layout:add(netwidget)
     right_layout:add(volume_widget)
-	right_layout:add(musicwidget.widget)
+	-- right_layout:add(musicwidget.widget)
     -- right_layout:add(yawn.widget)
     right_layout:add(kbdcfg.widget)
     right_layout:add(mytextclock)
@@ -483,7 +485,7 @@ awful.rules.rules = {
       properties = { tag = tags[1][3], floating = true } },
     { rule = { class = "Tor Browser" },
       properties = { tag = tags[1][3] } },
-    { rule = { class = "spotify" },
+    { rule = { name = "Spotify" },
       properties = { tag = tags[1][5] } },
     { rule = { instance = "work" },
       properties = { tag = tags[2][1] } },
