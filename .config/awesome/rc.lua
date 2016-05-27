@@ -165,9 +165,39 @@ fswidget = wibox.widget.textbox()
 vicious.register(fswidget, vicious.widgets.fs, "<b>sda</b> ${/ used_gb}/${/ size_gb} <b>sdb</b> ${/data used_gb}/${/data size_gb} ", 2)
 fswidget:buttons( awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e sudo iotop") end) )
 
-netwidget = wibox.widget.textbox()
-vicious.register(netwidget, vicious.widgets.net, "<b>net</b> ${eno1 down_kb}/${eno1 up_kb} ", 2)
-netwidget:buttons( awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e nethogs") end) )
+vicious.cache(vicious.widgets.net)
+
+myethdownwidget = wibox.widget.textbox()
+vicious.register(myethdownwidget, vicious.widgets.net, '<b>down</b> ${eno1 down_kb}kbps', 1)
+
+myethdowngraph = awful.widget.graph()
+myethdowngraph:set_width(50)
+myethdowngraph:set_background_color("#494B4F")
+myethdowngraph:set_color({
+	type = "linear",
+	from = { 0, beautiful.graph_height },
+	to = { 0, 0 },
+	stops = {
+		{ 0, "#FF5656" },
+	}
+})
+vicious.register(myethdowngraph, vicious.widgets.net, "${eno1 down_kb}", 1)
+
+myethupwidget = wibox.widget.textbox()
+vicious.register(myethupwidget, vicious.widgets.net, '<b>up</b> ${eno1 up_kb}kbps', 1)
+
+myethupgraph = awful.widget.graph()
+myethupgraph:set_width(50)
+myethupgraph:set_background_color("#494B4F")
+myethupgraph:set_color({
+	type = "linear",
+	from = { 0, beautiful.graph_height },
+	to = { 0, 0 },
+	stops = {
+		{ 0, "#AECF96" },
+	}
+})
+vicious.register(myethupgraph, vicious.widgets.net, "${eno1 up_kb}", 1)
 
 -- Keyboard map indicator and changer
 kbdcfg = {}
@@ -273,7 +303,10 @@ for s = 1, screen.count() do
     right_layout:add(cpuwidget)
     right_layout:add(memwidget)
     right_layout:add(fswidget)
-    right_layout:add(netwidget)
+    right_layout:add(myethdownwidget)
+    right_layout:add(myethdowngraph)
+    right_layout:add(myethupwidget)
+    right_layout:add(myethupgraph)
     right_layout:add(volume_widget)
 	-- right_layout:add(musicwidget.widget)
     -- right_layout:add(yawn.widget)
@@ -485,7 +518,7 @@ awful.rules.rules = {
       properties = { tag = tags[1][3], floating = true } },
     { rule = { class = "Tor Browser" },
       properties = { tag = tags[1][3] } },
-    { rule = { name = "Spotify" },
+    { rule = { class = "Spotify" },
       properties = { tag = tags[1][5] } },
     { rule = { instance = "work" },
       properties = { tag = tags[2][1] } },
@@ -581,13 +614,12 @@ function run_once(prg)
 	awful.util.spawn_with_shell("pgrep -x -u $USER " .. prg .. " || (" .. prg .. ")")
 end
 
+run_once("spotify")
 run_once("chromium")
 run_once("filezilla")
-run_once("spotify")
 run_once("urxvt -name work -e screen")
 run_once("urxvt -name logs -e logs.sh")
 -- run_once("thunderbird")
--- run_once("spotify")
 -- run_once("firefox")
 -- run_once("tor-browser-en")
 -- run_once("pidgin")
