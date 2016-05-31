@@ -313,11 +313,11 @@ snippet style
 snippet link
 	<link rel="stylesheet" href="${1:filename.css}" media="${2:media|print}">${3}
 snippet debug
-	echo "<pre class="debug">"; print_r(${1:'test'}); echo "</pre>";exit; // @TODO remove this debug line
+	echo '<pre class="debug">'; print_r(${1:'test'}); echo "</pre>";exit; // @TODO remove this debug line
 snippet rdebug
-	if ($_SERVER['REMOTE_ADDR'] == '217.145.199.74') { echo "<pre class="debug">"; print_r(${1:'test'}); echo "</pre>";exit; } // @TODO remove this debug line
+	if ($_SERVER['REMOTE_ADDR'] == '217.145.199.74') { echo '<pre class="debug">'; print_r(${1:'test'}); echo "</pre>";exit; } // @TODO remove this debug line
 snippet debugd
-	echo "<pre class="debug">"; print_r(\Doctrine\Common\Util\Debug::dump(${1:'$var'}, 2)); echo "</pre>";exit; // @TODO remove this debug line
+	echo '<pre class="debug">'; print_r(\Doctrine\Common\Util\Debug::dump(${1:'$var'}, 2)); echo "</pre>";exit; // @TODO remove this debug line
 snippet vard
 	var_dump(${1:variable});exit;
 snippet redir
