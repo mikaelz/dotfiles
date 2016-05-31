@@ -145,6 +145,11 @@ snippet class
 			${6:// code...}
 		}
 	}
+snippet	con
+	public function __construct(${1:argument})
+	{
+		${2:// code...}
+	}
 # define(...)
 snippet def
 	define('${1}'${2});${3}
@@ -152,7 +157,7 @@ snippet def
 snippet def?
 	${1}defined('${2}')${3}
 snippet wh
-	while ($row = ${1:$q->fetchRow()}) {
+	while ($row = ${1:$query->fetchRow()}) {
 		${2:// code...}
 	}
 # do ... while
@@ -187,7 +192,6 @@ snippet switch
 		case '${2:value}':
 			${3:// code...}
 			break;
-
 		default:
 			${4:// code...}
 	}
@@ -203,9 +207,15 @@ snippet foreach
 	foreach ($${1:variable} as $${2:key}) {
 		${3:// code...}
 	}
-snippet fun
-	${1:public }function ${2:FunctionName}(${3}) {
-		${4:// code...}
+snippet pf
+	public function ${1:FunctionName}(${2})
+	{
+		${3:// code...}
+	}
+snippet prf
+	private function ${1:FunctionName}(${2})
+	{
+		${3:// code...}
 	}
 
 # HTML
@@ -218,7 +228,7 @@ snippet html
 		${1:html_code}
 	<?php${2}
 snippet input
-	<input type="${1:text/submit/radio/checkbox/hidden/button}" name="${2:inputname}" id="${3:$2}" maxlength="${4}" value="${5}"/>${6}
+	<input type="${1:text/submit/radio/checkbox/hidden/button}" name="${2:inputname}" id="${3:$2}" maxlength="${4}" value="${5}">${6}
 snippet label
 	<label for="${1:label}">${2:name}</label>${3}
 snippet br
@@ -286,16 +296,13 @@ snippet b
 	<b>${1:text}</b>$2
 snippet em
 	<em>${1:text}</em>$2
-# HTML comment
-snippet comm
+snippet com
 	<!-- ${1:comment} -->
 snippet img
-	<img src="${1:filepath}" alt="${2:name}" width="${3:100}" height="${4:100}"/>${5}
+	<img src="${1:filepath}" alt="${2:name}" width="${3:100}" height="${4:100}">${5}
 snippet script
 	<script>
-	//<![CDATA[
 		${1}
-	//]]>
 	</script>
 snippet scriptsrc
 	<script src="${1:/js/main}.js"></script>${2}
@@ -304,11 +311,13 @@ snippet style
 		${2}
 	</style>${3}
 snippet link
-	<link rel="stylesheet" href="${1:filename.css}" media="${2:media|print}"/>${3}
+	<link rel="stylesheet" href="${1:filename.css}" media="${2:media|print}">${3}
 snippet debug
-	echo "DEBUG: <pre>"; print_r(${1:'test'}); echo "</pre>";exit; // @TODO remove this debug line
+	echo "<pre class="debug">"; print_r(${1:'test'}); echo "</pre>";exit; // @TODO remove this debug line
+snippet rdebug
+	if ($_SERVER['REMOTE_ADDR'] == '217.145.199.74') { echo "<pre class="debug">"; print_r(${1:'test'}); echo "</pre>";exit; } // @TODO remove this debug line
 snippet debugd
-	echo "DEBUG: <pre>"; print_r(\Doctrine\Common\Util\Debug::dump(${1:'$var'}, 3)); echo "</pre>";exit; // @TODO remove this debug line
+	echo "<pre class="debug">"; print_r(\Doctrine\Common\Util\Debug::dump(${1:'$var'}, 2)); echo "</pre>";exit; // @TODO remove this debug line
 snippet vard
 	var_dump(${1:variable});exit;
 snippet redir
@@ -325,11 +334,11 @@ snippet wpq
 # SQL
 snippet dber
 	if ($database->is_error()) {
-		echo '<p class="notice">${1:error}</p>';
+		echo $database->get_error();
 		return;
 	}
 snippet q
-	${1:$q} = "${2:sql}";
+	${1:$query} = "${2:sql}";
 	${3:$1} = $database->query(${4:$1});
 snippet qs
 	SELECT ${1:*} FROM ".TABLE_PREFIX."${2:table} WHERE ${3:column} = '${4:value}' ${5:LIMIT 1}
@@ -341,3 +350,5 @@ snippet qd
 	DELETE FROM ".TABLE_PREFIX."${1:table} WHERE ${2:column} = '${3:value}' ${4:LIMIT 1}
 snippet ut
 	UNIX_TIMESTAMP(${1:NOW()})
+snippet lorem
+	Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
