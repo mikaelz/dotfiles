@@ -158,6 +158,7 @@ colorscheme wombat256
 
 
 " correct some spelling mistakes Insert mode
+iabbrev PSOT POST
 iabbrev htis this
 iabbrev funciton function
 iabbrev funtion function
@@ -270,9 +271,6 @@ nnoremap <F5> :set paste!<CR>
 
 nnoremap <F6> :Gstatus<CR>
 
-nnoremap <leader>n :tabnew<CR>
-inoremap <leader>n <Esc>:tabnew<CR>
-
 " strips whitespace
 nnoremap <F8> :%s/\s\+$//<cr>:let @/=''<CR>
 
@@ -303,10 +301,6 @@ autocmd BufWinLeave * call clearmatches()
 nnoremap <leader>w :w<CR>
 inoremap <leader>w <Esc>:w<CR>
 vnoremap <leader>w <Esc>:w<CR>
-
-nnoremap <leader>q :q<CR>
-inoremap <leader>q <Esc>:q<CR>
-vnoremap <leader>q <Esc>:q<CR>
 
 nmap <silent> <UP>    :lprev<CR>
 nmap <silent> <DOWN>  :lnext<CR>
