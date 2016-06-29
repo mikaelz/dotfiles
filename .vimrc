@@ -302,6 +302,12 @@ nnoremap <leader>w :w<CR>
 inoremap <leader>w <Esc>:w<CR>
 vnoremap <leader>w <Esc>:w<CR>
 
+nnoremap <leader>q :q<CR>
+inoremap <leader>q <Esc>:q<CR>
+vnoremap <leader>q <Esc>:q<CR>
+
+nnoremap <leader>n :tabnew<CR>
+
 nmap <silent> <UP>    :lprev<CR>
 nmap <silent> <DOWN>  :lnext<CR>
 nmap <silent> <LEFT>  :cprev<CR>
