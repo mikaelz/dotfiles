@@ -52,16 +52,16 @@ HIST_STAMPS="yyyy-mm-dd"
 # plugins=(colored-man composer cp git screen svn-fast-info)
 plugins=(colored-man composer cp screen svn-fast-info symfony2)
 
-# User configuration
-export PATH="$HOME/Dropbox/home/bin:/opt/subversion/bin:/opt/local/bin:$PATH"
+source $ZSH/oh-my-zsh.sh
+
+export HISTSIZE=1000000
+export SAVEHIST=1000000
+export PATH="$HOME/Dropbox/home/bin:/opt/subversion/bin:/opt/local/bin:/usr/local/bin:$PATH"
 export EDITOR=vim
 export VISUAL=$EDITOR
 export PAGER=less
-export LS_COLORS=auto
-export VDPAU_DRIVER=nvidia
-export LIBVA_DRIVER_NAME=vdpau
-
-source $ZSH/oh-my-zsh.sh
+# export VDPAU_DRIVER=nvidia
+# export LIBVA_DRIVER_NAME=vdpau
 
 PROMPT='%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n@)%m %{$fg_bold[cyan]%}%(!.%1~.%~) $(git_prompt_info)%_$(prompt_char)%{$reset_color%} '
 
@@ -106,7 +106,7 @@ alias lsize='ls -FShla'
 alias mkdir='mkdir -p'
 alias pidstat='pidstat -dlu'
 alias vi='vim'
-alias Syu='sudo pacman -Syu'
+alias update='sudo pacman -Syu'
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias httpwritable="sudo chown -R http:http .; sudo chmod -R g+rw ."
 alias _wwwwritable="sudo chown -R _www:_www .; sudo chmod -R g+rw ."
@@ -114,6 +114,7 @@ alias grep='grep --colour=auto --exclude-dir={.git,.svn,CVS} --exclude=tags'
 alias nethogs='sudo nethogs eno1'
 alias xlock='xlock -mode blank'
 alias httpserve='python3 -m http.server'
+alias p='ping google-public-dns-a.google.com'
 
 # SVN aliases
 alias svn_edit_log="svn propedit svn:log --revprop -r "
@@ -130,7 +131,8 @@ alias gg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %
 alias gl="git log --name-status"
 alias git-last-commited-files="git diff-tree -r HEAD@{0}"
 
-alias RS='sudo systemctl restart synergys@mike'
+alias RS='systemctl --user restart synergys.service'
+alias restart-samba='sudo systemctl restart smbd.service;sudo systemctl restart nmbd.service'
 
 if [[ "$(uname)" == "Linux" ]]; then
     vim() STTY=-ixon command vim "$@"
@@ -141,7 +143,9 @@ if [[ "$(uname)" == "Linux" ]]; then
 fi
 
 if [[ "$(uname)" == "Darwin" ]]; then
-    export PATH="/usr/local/php5-5.6.17-20160108-105408/bin:/usr/local/mysql-5.6.24-osx10.8-x86_64/bin:/usr/local/bin/:$PATH"
+    export PATH="/usr/local/bin/:/usr/local/mysql/bin:$PATH"
+
+    alias updatedb='sudo /usr/libexec/locate.updatedb'
 fi
 
 if [ -f $HOME/.dircolors ]
