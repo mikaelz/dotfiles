@@ -1,7 +1,5 @@
 snippet php
 	<?php${1}?>
-snippet ec
-	echo '${1:string}'${2};
 snippet inc
 	include '${1:file}';${2}
 snippet inc1
@@ -24,131 +22,72 @@ snippet serv
 	$_SERVER['${1:variable}']
 snippet sess
 	$_SESSION['${1:variable}']
-snippet isn
-	is_numeric(${1:variable})
 snippet is
 	isset(${1:variable})
-# Start Docblock
+snippet testc
+	<?php
+
+	namespace ${1:namespacePath};
+
+	use ${2:use};
+
+	class ${3:className}Test extends \PHPUnit_Framework_TestCase
+	{
+		protected ${4:object};
+
+		public function setUp()
+		{
+			$this->${5:$4} = new ${6:$3}();
+		}
+
+
+	}
+snippet test
+	/** @test */
+	public function ${1:testName}()
+	{
+		${2:// code..}
+	}
+snippet sett
+	public function set${1:propertyName}(${2:argument})
+	{
+		$this->${3:$1} = ${4:$2};
+	}
+snippet gett
+	public function get${1:propertyName}()
+	{
+		return $this->${2:$1};
+	}
 snippet /*
 	/**
 	 * ${1}
 	 **/
-# Class - post doc
-snippet doc_cp
-	/**
-	 * ${1:undocumented class}
-	 *
-	 * @package ${2:default}
-	 * @author ${3:`g:snips_author`}
-	**/${4}
-# Class Variable - post doc
-snippet doc_vp
-	/**
-	 * ${1:undocumented class variable}
-	 *
-	 * @var ${2:string}
-	 **/${3}
-# Class Variable
-snippet docv
-	/**
-	 * ${3:undocumented class variable}
-	 *
-	 * @var ${4:string}
-	 **/
-	${1:var} $${2};${5}
-# Class
-snippet docc
-	/**
-	 * ${3:undocumented class}
-	 *
-	 * @packaged ${4:default}
-	 * @author ${5:`g:snips_author`}
-	 **/
-	${1:}class ${2:}
-	{${6}
-	} // END $1class $2
-# Constant Definition - post doc
-snippet doc_dp
-	/**
-	 * ${1:undocumented constant}
-	 **/${2}
-# Constant Definition
-snippet doc_d
-	/**
-	 * ${3:undocumented constant}
-	 **/
-	define(${1}, ${2});${4}
-# Function - post doc
-snippet doc_fp
-	/**
-	 * ${1:undocumented function}
-	 *
-	 * @return ${2:void}
-	 * @author ${3:`g:snips_author`}
-	 **/${4}
-# Function signature
-snippet doc_s
-	/**
-	 * ${4:undocumented function}
-	 *
-	 * @return ${5:void}
-	 * @author ${6:`g:snips_author`}
-	 **/
-	${1}function ${2}(${3});${7}
-# Function
-snippet docf
-	/**
-	 * ${4:undocumented function}
-	 *
-	 * @param ${5:$3}
-	 * @return ${6:void}
-	 **/
-	${1}function ${2}(${3})
-	{
-		${7}
-	}
-# Header
-snippet doch
-	/**
-	 * ${1}
-	 *
-	 * @author ${2:`g:snips_author`}
-	 * @version ${3:$Id$}
-	 * @copyright ${4:$2}, `strftime('%d %B, %Y')`
-	 * @package ${5:default}
-	 **/
-
-	/**
-	 * Define DocBlock
-	 *//
-# Interface
-snippet doci
-	/**
-	 * ${2:undocumented class}
-	 *
-	 * @package ${3:default}
-	 * @author ${4:`g:snips_author`}
-	 **/
-	interface ${1:}
-	{${5}
-	} // END interface $1
-# class ...
 snippet class
-	/**
-	 * ${1}
-	 **/
-	class ${2:ClassName}
+	class ${1:ClassName}
 	{
-		${3}
-		function ${4:__construct}(${5:argument})
+		public function ${2:__construct}(${3:argument})
 		{
-			${6:// code...}
+			${4:// code...}
 		}
 	}
 snippet	con
 	public function __construct(${1:argument})
 	{
 		${2:// code...}
+	}
+snippet	fun
+	function ${1:functionName}(${2:argument}) {
+		${3:// code...}
+	}
+snippet pf
+	public function ${1:FunctionName}(${2})
+	{
+		${3:// code...}
+	}
+snippet prf
+	private function ${1:FunctionName}(${2})
+	{
+		${3:// code...}
 	}
 # define(...)
 snippet def
@@ -176,14 +115,6 @@ snippet ife
 		${3:// code...}
 	}
 	${4}
-snippet else
-	else {
-		${1:// code...}
-	}
-snippet elseif
-	elseif (${1:/* condition */}) {
-		${2:// code...}
-	}
 # ternary operator
 snippet t
 	 ${1:condition} ? ${2:a} : ${3:b};${4}
@@ -207,17 +138,6 @@ snippet foreach
 	foreach ($${1:variable} as $${2:key}) {
 		${3:// code...}
 	}
-snippet pf
-	public function ${1:FunctionName}(${2})
-	{
-		${3:// code...}
-	}
-snippet prf
-	private function ${1:FunctionName}(${2})
-	{
-		${3:// code...}
-	}
-
 # HTML
 snippet nbs
 	&nbsp;$1
