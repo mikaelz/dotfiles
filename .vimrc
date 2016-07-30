@@ -103,7 +103,7 @@ set directory^=/tmp//         " list of directories for the swap file
 
 " command line editing
 set history=200               " how many command lines are remembered
-set wildmode=full             " specifies how command line completion works
+set wildmode=list:longest,full             " specifies how command line completion works
 set wildignore+=*.o,*.obj,*.pyc,*.db " list of patterns to ignore files for file name completion
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
 set wildignore+=*~,*.swp,*.tmp,*.zip
@@ -151,8 +151,8 @@ endif
 
 " http://vimcolorschemetest.googlecode.com/svn/html/index-html.html
 " colorscheme molokai
-" colorscheme xoria256
-colorscheme wombat256
+colorscheme xoria256
+" colorscheme wombat256
 " colorscheme gardener
 " colorscheme greenvision
 
@@ -190,9 +190,9 @@ au BufRead,BufNewFile *.tpl set filetype=html
 
 " this will make it impossible to save in any other format than unix
 " http://www.reddit.com/r/vim/comments/ozr5h/convert_every_text_file_to_unix_format_if_not/c3lhgpe
-autocmd BufWritePre * set ff=unix
+" autocmd BufWritePre * set ff=unix
 " autocmd BufWritePre * :make
-autocmd BufEnter * let &titlestring = ' ' . expand("%:f")
+" autocmd BufEnter * let &titlestring = ' ' . expand("%:f")
 
 " let php_folding = 1
 let php_noShortTags = 1
@@ -208,6 +208,7 @@ let g:phpcomplete_parse_docblock_comments = 1
 
 " let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
 let g:syntastic_php_checkers = ['php', 'phpmd']
+let g:syntastic_php_phpmd_post_args = '~/.vim/phpmd_rules.xml'
 let g:syntastic_csslint_args = "--ignore=outline-none"
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_error_symbol = '●'
@@ -293,10 +294,10 @@ vnoremap > >gv
 " Whitespace fixes
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
+" autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+" autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+" autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+" autocmd BufWinLeave * call clearmatches()
 
 nnoremap <leader>w :w<CR>
 inoremap <leader>w <Esc>:w<CR>
