@@ -1,8 +1,16 @@
--R
---tag-relative=yes
+--recurse
+--languages=php
+--langmap=php:.inc.php
+--fields=+aimS
+--PHP-kinds=+cfd
 --exclude=.svn
 --exclude=.git
+--exclude=cache
+--exclude=tags
+--exclude=min
+--exclude=\*.min.\*
 --exclude=node_modules
---langmap=php:.engine.inc.module.theme.install.php
---PHP-kinds=+cf-v
---languages=php
+--regex-PHP=/abstract class ([^ ]*)/\1/c/
+--regex-PHP=/interface ([^ ]*)/\1/c/
+--regex-PHP=/trait ([^ ]*)/\1/c/
+--regex-PHP=/(public |static |abstract |protected |private )+ function +([^ \(]*)/\2/f/
