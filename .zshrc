@@ -49,8 +49,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# plugins=(colored-man composer cp git screen svn-fast-info)
-plugins=(colored-man composer cp screen svn-fast-info symfony2)
+plugins=()
 
 source $ZSH/oh-my-zsh.sh
 
@@ -78,6 +77,8 @@ alias cen='cd /srv/http/centralis'
 alias mike='autossh -M 0 mike'
 alias zeus='autossh -M 0 zeus'
 alias jarvis='autossh -M 0 jarvis'
+alias gutanet-srv='TERM=xterm-256color autossh -M 0 gutanet-srv'
+alias atechnet-forpsi='autossh -M 0 atechnet-forpsi'
 
 # configs
 alias eA="vi ~/.config/awesome/rc.lua"
@@ -123,11 +124,12 @@ alias svn_diff_prev="svn diff -r COMMITTED:PREV "
 alias svn_cleanup="svn status --no-ignore | grep '^\?' | sed 's/^\?     //'  | xargs rm -rf"
 
 # GIT aliases
-alias gs='git status .'
-alias gd='git diff .'
+alias gs='git status'
+alias gd='git diff'
 alias gp='git pull'
-alias git-graph="git log --graph --abbrev-commit --decorate --date=relative --all"
-alias gg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+alias gc='git commit'
+alias gco='git checkout'
+alias gg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all --decorate --abbrev-commit --date=relative"
 alias gl="git log --name-status"
 alias git-last-commited-files="git diff-tree -r HEAD@{0}"
 
@@ -143,7 +145,7 @@ if [[ "$(uname)" == "Linux" ]]; then
 fi
 
 if [[ "$(uname)" == "Darwin" ]]; then
-    export PATH="/usr/local/bin/:/usr/local/mysql/bin:$PATH"
+    export PATH="/usr/local/bin/:/usr/local/mysql/bin:/usr/local/php5/bin:$PATH"
 
     alias updatedb='sudo /usr/libexec/locate.updatedb'
 fi
