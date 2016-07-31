@@ -185,8 +185,8 @@ autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType sql set omnifunc=sqlcomplete#CompleteSQL
 autocmd FileType javascript let b:syntastic_checkers = findfile('.eslintrc', '.;') != '' ? ['eslint'] : ['standard']
 
-au BufNewFile,BufRead *.less set filetype=css
-au BufRead,BufNewFile *.tpl set filetype=html
+autocmd BufNewFile,BufRead *.less set filetype=css
+autocmd BufRead,BufNewFile *.tpl set filetype=smarty
 
 " this will make it impossible to save in any other format than unix
 " http://www.reddit.com/r/vim/comments/ozr5h/convert_every_text_file_to_unix_format_if_not/c3lhgpe
