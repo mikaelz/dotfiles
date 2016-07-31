@@ -106,7 +106,7 @@ set history=200               " how many command lines are remembered
 set wildmode=list:longest,full             " specifies how command line completion works
 set wildignore+=*.o,*.obj,*.pyc,*.db " list of patterns to ignore files for file name completion
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
-set wildignore+=*~,*.swp,*.tmp,*.zip
+set wildignore+=*~,*.swp,*.tmp,*.zip,*cache,tags
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/.DS_Store,*/vendor
 set wildmenu                  " command-line completion shows a list of matches
 
@@ -121,6 +121,8 @@ set fileencoding=utf-8        " character encoding for the current file
 set virtualedit=block         " when to use virtual editing
 set gdefault                  " use the 'g' flag for ':substitute'
 set autoread
+
+set grepprg=grep\ -rn\ --binary-files=without-match\ --exclude-dir={.git,.svn,CVS,cache,__cache,vendor}\ --exclude=tags
 
 syntax on
 filetype plugin indent on
