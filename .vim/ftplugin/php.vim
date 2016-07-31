@@ -1,2 +1,1 @@
-set makeprg=php\ -l\ %
-set errorformat=%m\ in\ %f\ on\ line\ %l
+setlocal makeprg=php-cs-fixer\ -q\ fix\ %
