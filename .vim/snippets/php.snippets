@@ -1,5 +1,9 @@
+snippet <?
+	<?php
+
+	${0}
 snippet php
-	<?php${1}?>
+	<?php ${1} ?>
 snippet inc
 	include '${1:file}';${2}
 snippet inc1
@@ -25,21 +29,23 @@ snippet sess
 snippet is
 	isset(${1:variable})
 snippet testc
-	<?php
-
 	namespace ${1:namespacePath};
 
 	use ${2:use};
 
 	class ${3:className}Test extends \PHPUnit_Framework_TestCase
 	{
-		protected ${4:object};
+		protected $${4:object};
 
 		public function setUp()
 		{
 			$this->${5:$4} = new ${6:$3}();
 		}
 
+		public function tearDown()
+		{
+			unset($this->${6:$4});
+		}
 
 	}
 snippet test
@@ -58,6 +64,9 @@ snippet gett
 	{
 		return $this->${2:$1};
 	}
+snippet	var
+	/** @var ${1:int|array|string|ClassName} ${2:name} */
+	${3:public|protected|private} ${4:$2};
 snippet /*
 	/**
 	 * ${1}
