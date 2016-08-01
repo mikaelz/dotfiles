@@ -208,8 +208,8 @@ command E :q
 
 let g:phpcomplete_parse_docblock_comments = 1
 
-" let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
-let g:syntastic_php_checkers = ['php', 'phpmd']
+let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+let g:syntastic_php_phpcs_args='--standard=PSR2'
 let g:syntastic_php_phpmd_post_args = '~/.vim/phpmd_rules.xml'
 let g:syntastic_csslint_args = "--ignore=outline-none"
 let g:syntastic_always_populate_loc_list = 1
@@ -315,17 +315,3 @@ nmap <silent> <UP>    :lprev<CR>
 nmap <silent> <DOWN>  :lnext<CR>
 nmap <silent> <LEFT>  :cprev<CR>
 nmap <silent> <RIGHT> :cnext<CR>
-
-function! IPhpInsertUse()
-    call PhpInsertUse()
-    call feedkeys('a',  'n')
-endfunction
-autocmd FileType php inoremap <Leader>u <Esc>:call IPhpInsertUse()<CR>
-autocmd FileType php noremap <Leader>u :call PhpInsertUse()<CR>
-
-function! IPhpExpandClass()
-    call PhpExpandClass()
-    call feedkeys('a', 'n')
-endfunction
-autocmd FileType php inoremap <Leader>e <Esc>:call IPhpExpandClass()<CR>
-autocmd FileType php noremap <Leader>e :call PhpExpandClass()<CR>
