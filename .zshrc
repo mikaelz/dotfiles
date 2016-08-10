@@ -116,6 +116,8 @@ alias nethogs='sudo nethogs eno1'
 alias xlock='xlock -mode blank'
 alias httpserve='python3 -m http.server'
 alias p='ping google-public-dns-a.google.com'
+alias phpunit="phpunit --colors=always"
+alias cdu="composer dumpautoload -o"
 
 # SVN aliases
 alias svn_edit_log="svn propedit svn:log --revprop -r "
