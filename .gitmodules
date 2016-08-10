@@ -31,3 +31,6 @@
 [submodule ".vim/bundle/vim-php-namespace"]
 	path = .vim/bundle/vim-php-namespace
 	url = https://github.com/arnaud-lb/vim-php-namespace.git
+[submodule ".vim/bundle/taglist.vim"]
+	path = .vim/bundle/taglist.vim
+	url = https://github.com/vim-scripts/taglist.vim.git
