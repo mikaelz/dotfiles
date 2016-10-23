@@ -49,7 +49,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=()
+plugins=(symfony2)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -100,7 +100,7 @@ alias rm='rm -iv'
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 alias yt="youtube-viewer"
-alias yd="youtube-dl"
+alias yd="youtube-dl --recode-video mp4"
 alias scp='scp -r'
 alias lla='ls -Fhla'
 alias lsize='ls -FShla'
