@@ -151,13 +151,12 @@ else
 	endf
 endif
 
-" http://vimcolorschemetest.googlecode.com/svn/html/index-html.html
-" colorscheme molokai
-colorscheme xoria256
+colorscheme lucius
 " colorscheme wombat256
+" colorscheme molokai
+" colorscheme xoria256
 " colorscheme gardener
 " colorscheme greenvision
-
 
 " correct some spelling mistakes Insert mode
 iabbrev PSOT POST
