@@ -206,12 +206,13 @@ command Q :q
 command E :q
 
 let g:phpcomplete_parse_docblock_comments = 1
-
+let g:syntastic_check_on_open = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_check_on_wq = 0
 let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
 let g:syntastic_php_phpcs_args='--standard=PSR2'
 let g:syntastic_php_phpmd_post_args = '~/.vim/phpmd_rules.xml'
 let g:syntastic_csslint_args = "--ignore=outline-none"
-let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_error_symbol = '●'
 let g:syntastic_style_error_symbol = '‣'
 let g:syntastic_warning_symbol = '○'
@@ -229,23 +230,20 @@ let g:ctrlp_extensions = ['tag','dir','line','mixed']
 let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_user_command = 'find %s -type f -not \( -iname tags -o -path "*/.svn/*" -o -path "*/.git/*" -o -path "*/vendor/*" -o -path "*/.idea/*" -o -path "*/cache/*" \)'
 
-" https://github.com/Shougo/neocomplete.vim
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 " let g:neocomplete#enable_auto_select = 1
 
-" Define keyword
 if !exists('g:neocomplete#keyword_patterns')
     let g:neocomplete#keyword_patterns = {}
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-let g:php_cs_fixer_path = "php-cs-fixer" " define the path to the php-cs-fixer.phar
-let g:php_cs_fixer_level = "symfony"              " which level ?
-let g:php_cs_fixer_config = "default"             " configuration
-let g:php_cs_fixer_php_path = "php"               " Path to PHP
-" If you want to define specific fixers:
+let g:php_cs_fixer_path = "php-cs-fixer"
+let g:php_cs_fixer_level = "symfony"
+let g:php_cs_fixer_config = "default"
+let g:php_cs_fixer_php_path = "php"
 "let g:php_cs_fixer_fixers_list = "linefeed,short_tag,indentation"
 let g:php_cs_fixer_enable_default_mapping = 0     " Enable the mapping by default (<leader>pcd)
 let g:php_cs_fixer_dry_run = 0
