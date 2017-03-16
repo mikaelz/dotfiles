@@ -206,7 +206,7 @@ command Q :q
 command E :q
 
 let g:phpcomplete_parse_docblock_comments = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
