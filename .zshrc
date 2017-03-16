@@ -76,6 +76,7 @@ alias fpc='cd /srv/http/felujitottpc.hu'
 alias centralis='cd /srv/http/centralis'
 alias kovoinox='cd /srv/http/kovoinox'
 alias moda='cd /srv/http/moda.sk'
+alias ssh='TERM=xterm-256color ssh'
 alias mike='autossh -M 0 mike'
 alias zeus='autossh -M 0 zeus'
 alias jarvis='autossh -M 0 jarvis'
@@ -136,9 +137,11 @@ alias gco='git checkout'
 alias gg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all --decorate --abbrev-commit --date=relative"
 alias gl="git log --name-status"
 alias git-last-commited-files="git diff-tree -r HEAD@{0}"
+alias gdamb='git branch --merged | egrep -v "(^\*|master)" | xargs git branch -d'
 
 alias RS='systemctl --user restart synergys.service'
 alias restart-samba='sudo systemctl restart smbd.service;sudo systemctl restart nmbd.service'
+alias record='ffmpeg -video_size 1920x1080 -framerate 25 -f x11grab -i :0.0 ~/Downloads/output.mp4'
 
 if [[ "$(uname)" == "Linux" ]]; then
     vim() STTY=-ixon command vim "$@"
