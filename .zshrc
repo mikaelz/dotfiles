@@ -77,20 +77,20 @@ alias centralis='cd /srv/http/centralis'
 alias kovoinox='cd /srv/http/kovoinox'
 alias moda='cd /srv/http/moda.sk'
 alias ssh='TERM=xterm-256color ssh'
-alias mike='autossh -M 0 mike'
-alias zeus='autossh -M 0 zeus'
-alias jarvis='autossh -M 0 jarvis'
+alias mike='TERM=xterm-256color autossh -M 0 mike'
+alias zeus='TERM=xterm-256color autossh -M 0 zeus'
+alias jarvis='TERM=xterm-256color autossh -M 0 jarvis'
 alias gutanet-srv='TERM=xterm-256color autossh -M 0 gutanet-srv'
-alias atechnet-forpsi='autossh -M 0 atechnet-forpsi'
+alias atechnet-forpsi='TERM=xterm-256color autossh -M 0 atechnet-forpsi'
 
 # configs
-alias eA="vi ~/.config/awesome/rc.lua"
-alias eB="vi ~/.bashrc"
-alias rB="source ~/.bashrc; echo '[ done ] source ~/.bashrc'"
-alias eZ="vi ~/.zshrc"
-alias eH="vi ~/.zsh_history"
-alias rZ="source ~/.zshrc; echo '[ done ] source ~/.zshrc'"
-alias eV="vi ~/.vimrc"
+alias eA='vi ~/.config/awesome/rc.lua'
+alias eB='vi ~/.bashrc'
+alias rB='source ~/.bashrc; echo '[ done ] source ~/.bashrc''
+alias eZ='vi ~/.zshrc'
+alias eH='vi ~/.zsh_history'
+alias rZ='source ~/.zshrc; echo '[ done ] source ~/.zshrc''
+alias eV='vi ~/.vimrc'
 
 # commands
 alias k='exit'
@@ -102,8 +102,8 @@ alias mv='mv -v'
 alias rm='rm -iv'
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
-alias yt="youtube-viewer"
-alias yd="youtube-dl --recode-video mp4"
+alias yt='youtube-viewer'
+alias yd='youtube-dl --recode-video mp4'
 alias scp='scp -r'
 alias lla='ls -Fhla'
 alias lsize='ls -FShla'
@@ -112,21 +112,21 @@ alias pidstat='pidstat -dlu'
 alias vi='vim'
 alias update='sudo pacman -Syu'
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
-alias httpwritable="sudo chown -R http:http .; sudo chmod -R g+rw ."
-alias _wwwwritable="sudo chown -R _www:_www .; sudo chmod -R g+rw ."
+alias httpwritable='sudo chown -R http:http .; sudo chmod -R g+rw .'
+alias _wwwwritable='sudo chown -R _www:_www .; sudo chmod -R g+rw .'
 alias grep='grep --colour=auto --exclude-dir={.git,.svn,CVS} --exclude=tags'
 alias nethogs='sudo nethogs eno1'
 alias xlock='xlock -mode blank'
 alias httpserve='python3 -m http.server'
 alias p='ping google-public-dns-a.google.com'
-alias phpunit="phpunit --colors=always"
-alias cdu="composer dumpautoload -o"
+alias phpunit='phpunit --colors=always'
+alias cdu='composer dumpautoload -o'
 
 # SVN aliases
-alias svn_edit_log="svn propedit svn:log --revprop -r "
-alias svn_ignore_dir="svn propedit svn:ignore "
-alias svn_diff_prev="svn diff -r COMMITTED:PREV "
-alias svn_cleanup="svn status --no-ignore | grep '^\?' | sed 's/^\?     //'  | xargs rm -rf"
+alias svn_edit_log='svn propedit svn:log --revprop -r '
+alias svn_ignore_dir='svn propedit svn:ignore '
+alias svn_diff_prev='svn diff -r COMMITTED:PREV '
+alias svn_cleanup='svn status --no-ignore | grep '^\?' | sed 's/^\?     //'  | xargs rm -rf'
 
 # GIT aliases
 alias gs='git status'
@@ -134,14 +134,14 @@ alias gd='git diff'
 alias gp='git pull'
 alias gc='git commit -v'
 alias gco='git checkout'
-alias gg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all --decorate --abbrev-commit --date=relative"
-alias gl="git log --name-status"
+alias gg='git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all --decorate --abbrev-commit --date=relative'
+alias gl='git log --name-status'
 alias git-last-commited-files="git diff-tree -r HEAD@{0}"
 alias gdamb='git branch --merged | egrep -v "(^\*|master)" | xargs git branch -d'
 
 alias RS='systemctl --user restart synergys.service'
 alias restart-samba='sudo systemctl restart smbd.service;sudo systemctl restart nmbd.service'
-alias record='ffmpeg -video_size 1920x1080 -framerate 25 -f x11grab -i :0.0 ~/Downloads/output.mp4'
+alias record='ffmpeg -video_size 1920x1080 -framerate 25 -f x11grab -i :0.0 ~/Downloads/screen_record.mp4'
 
 if [[ "$(uname)" == "Linux" ]]; then
     vim() STTY=-ixon command vim "$@"
@@ -182,11 +182,11 @@ if is-at-least 4.2.0; then
   alias -s pdf=mupdf
 
   #list whats inside packed file
-  alias -s zip="unzip -l"
-  alias -s rar="unrar l"
-  alias -s tar="tar tf"
-  alias -s tar.gz="echo "
-  alias -s ace="unace l"
+  alias -s zip='unzip -l'
+  alias -s rar='unrar l'
+  alias -s tar='tar tf'
+  alias -s tar.gz='echo '
+  alias -s ace='unace l'
 fi
 
 zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/config,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
