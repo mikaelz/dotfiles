@@ -151,10 +151,10 @@ else
 	endf
 endif
 
-colorscheme lucius
-" colorscheme wombat256
-" colorscheme molokai
 " colorscheme xoria256
+" colorscheme lucius
+colorscheme wombat256
+" colorscheme molokai
 " colorscheme gardener
 " colorscheme greenvision
 
