@@ -82,6 +82,8 @@ alias zeus='TERM=xterm-256color autossh -M 0 zeus'
 alias jarvis='TERM=xterm-256color autossh -M 0 jarvis'
 alias gutanet-srv='TERM=xterm-256color autossh -M 0 gutanet-srv'
 alias atechnet-forpsi='TERM=xterm-256color autossh -M 0 atechnet-forpsi'
+alias vps='TERM=xterm-256color autossh -M 0 mike@vps'
+alias vps_tunnel='autossh -f -M 0 -T -N -R 10022:localhost:22 mike@vps'
 
 # configs
 alias eA='vi ~/.config/awesome/rc.lua'
@@ -141,7 +143,7 @@ alias gdamb='git branch --merged | egrep -v "(^\*|master)" | xargs git branch -d
 
 alias RS='systemctl --user restart synergys.service'
 alias restart-samba='sudo systemctl restart smbd.service;sudo systemctl restart nmbd.service'
-alias record='ffmpeg -video_size 1920x1080 -framerate 25 -f x11grab -i :0.0 ~/Downloads/screen_record.mp4'
+alias record='ffmpeg -f alsa -ac 2 -i plughw:0,0 -f x11grab -r 30 -s 1920x1080 -i :0.0 -vcodec libx264 -preset ultrafast -threads 5 ~/Downloads/screen_record.mkv'
 
 if [[ "$(uname)" == "Linux" ]]; then
     vim() STTY=-ixon command vim "$@"
