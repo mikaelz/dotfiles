@@ -86,10 +86,10 @@ alias atechnet-forpsi='TERM=xterm-256color autossh -M 0 atechnet-forpsi'
 # configs
 alias eA='vi ~/.config/awesome/rc.lua'
 alias eB='vi ~/.bashrc'
-alias rB='source ~/.bashrc; echo '[ done ] source ~/.bashrc''
+alias rB='source ~/.bashrc; echo "[ done ] source ~/.bashrc"'
 alias eZ='vi ~/.zshrc'
 alias eH='vi ~/.zsh_history'
-alias rZ='source ~/.zshrc; echo '[ done ] source ~/.zshrc''
+alias rZ='source ~/.zshrc; echo "[ done ] source ~/.zshrc"'
 alias eV='vi ~/.vimrc'
 
 # commands
@@ -134,7 +134,7 @@ alias gd='git diff'
 alias gp='git pull'
 alias gc='git commit -v'
 alias gco='git checkout'
-alias gg='git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all --decorate --abbrev-commit --date=relative'
+alias gg='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --all --decorate --abbrev-commit --date=relative'
 alias gl='git log --name-status'
 alias git-last-commited-files="git diff-tree -r HEAD@{0}"
 alias gdamb='git branch --merged | egrep -v "(^\*|master)" | xargs git branch -d'
