@@ -143,7 +143,7 @@ alias gdamb='git branch --merged | egrep -v "(^\*|master)" | xargs git branch -d
 
 alias RS='systemctl --user restart synergys.service'
 alias restart-samba='sudo systemctl restart smbd.service;sudo systemctl restart nmbd.service'
-alias record='ffmpeg -f alsa -ac 2 -i plughw:0,0 -f x11grab -r 30 -s 1920x1080 -i :0.0 -vcodec libx264 -preset ultrafast -threads 5 ~/Downloads/screen_record.mkv'
+alias record='ffmpeg -f alsa -ac 2 -i plughw:0,0 -f x11grab -r 30 -s 1920x1080 -i :0.0 -vcodec libx264 -preset ultrafast -threads 5 ~/Downloads/record_screencast.mkv'
 
 if [[ "$(uname)" == "Linux" ]]; then
     vim() STTY=-ixon command vim "$@"
@@ -192,3 +192,16 @@ if is-at-least 4.2.0; then
 fi
 
 zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/config,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
+
+# https://www.ostechnix.com/easy-fast-way-share-files-internet-command-line/
+transfer() {
+    if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi
+    tmpfile=$( mktemp -t transferXXX );
+    if tty -s;
+    then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile;
+    else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ;
+    fi;
+    cat $tmpfile;
+    echo -e "\n";
+    rm -f $tmpfile;
+}
