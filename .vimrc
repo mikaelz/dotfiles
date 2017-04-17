@@ -37,6 +37,9 @@ set statusline+=\ %y/%{&ff}
 set statusline+=\/%{''.(&fenc!=''?&fenc:&enc).''} " encoding
 set statusline+=\ %{(&bomb?\",BOM\":\"\")}        " encoding2
 set statusline+=\CWD:%{getcwd()}
+if &runtimepath =~ 'ale'
+    set statusline+=\ %{ALEGetStatusLine()}
+endif
 set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " right aligned file nav info
 
 set hidden                    " don't unload a buffer when no longer shown in a window
@@ -184,7 +187,6 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType sql set omnifunc=sqlcomplete#CompleteSQL
-autocmd FileType javascript let b:syntastic_checkers = findfile('.eslintrc', '.;') != '' ? ['eslint'] : ['standard']
 
 autocmd BufNewFile,BufRead *.less set filetype=css
 autocmd BufRead,BufNewFile *.tpl set filetype=smarty
@@ -206,24 +208,6 @@ command Q :q
 command E :q
 
 let g:phpcomplete_parse_docblock_comments = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
-let g:syntastic_php_phpcs_args='--standard=PSR2'
-let g:syntastic_php_phpmd_post_args = '~/.vim/phpmd_rules.xml'
-let g:syntastic_csslint_args = "--ignore=outline-none"
-let g:syntastic_error_symbol = '●'
-let g:syntastic_style_error_symbol = '‣'
-let g:syntastic_warning_symbol = '○'
-let g:syntastic_style_warning_symbol = '▹'
-autocmd ColorScheme * highlight SyntasticError ctermbg=red  guibg=#960000
-autocmd ColorScheme * highlight SyntasticWarning ctermbg=red guibg=#AEA100
-autocmd ColorScheme * highlight SyntasticStyleError ctermbg=yellow guibg=#960000
-autocmd ColorScheme * highlight SyntasticStyleWarning ctermbg=yellow guibg=#960000
-
-highlight SyntasticErrorLine guibg=#2f0000
-
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_extensions = ['tag','dir','line','mixed']
@@ -248,6 +232,17 @@ let g:php_cs_fixer_php_path = "php"
 let g:php_cs_fixer_enable_default_mapping = 0     " Enable the mapping by default (<leader>pcd)
 let g:php_cs_fixer_dry_run = 0
 let g:php_cs_fixer_verbose = 0
+
+if &runtimepath =~ 'ale'
+    let g:ale_statusline_format = ['Errors: %d', 'Warnings: %d', '⬥ ok']
+    let g:ale_echo_msg_error_str = 'E'
+    let g:ale_echo_msg_warning_str = 'W'
+    let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+    let g:ale_sign_error = 'E'
+    let g:ale_sign_warning = 'W'
+    nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+    nmap <silent> <C-j> <Plug>(ale_next_wrap)
+endif
 
 " clear search results
 nnoremap <leader><space> :noh<CR>
