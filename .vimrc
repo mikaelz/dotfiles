@@ -31,7 +31,7 @@ set nocursorcolumn
 
 " multiple windows
 set laststatus=2	          " always show status line
-set statusline=%<%F
+set statusline=%<%f
 set statusline+=%w%h%m%r      " options
 set statusline+=\ %y/%{&ff}
 set statusline+=\/%{''.(&fenc!=''?&fenc:&enc).''} " encoding
@@ -40,6 +40,7 @@ set statusline+=\CWD:%{getcwd()}
 if &runtimepath =~ 'ale'
     set statusline+=\ %{ALEGetStatusLine()}
 endif
+set statusline+=\ %-15(%{exists('g:loaded_fugitive')?fugitive#statusline():''}\%)
 set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " right aligned file nav info
 
 set hidden                    " don't unload a buffer when no longer shown in a window
@@ -307,3 +308,12 @@ nmap <silent> <UP>    :lprev<CR>
 nmap <silent> <DOWN>  :lnext<CR>
 nmap <silent> <LEFT>  :cprev<CR>
 nmap <silent> <RIGHT> :cnext<CR>
+
+" Keep undo history across sessions by storing it in a file
+if has('persistent_undo')
+    call system('mkdir /tmp/.vim_undo')
+    set undodir=/tmp/.vim_undo//
+    set undofile
+    set undolevels=1000
+    set undoreload=10000
+endif
