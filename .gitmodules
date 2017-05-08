@@ -21,7 +21,7 @@
 	url = https://github.com/tpope/vim-surround.git
 [submodule ".vim/bundle/vim-twig"]
 	path = .vim/bundle/vim-twig
-	url = https://github.com/evidens/vim-twig.git
+	url = https://github.com/mikaelz/vim-twig.git
 [submodule ".vim/bundle/vim-unimpaired"]
 	path = .vim/bundle/vim-unimpaired
 	url = https://github.com/tpope/vim-unimpaired.git
