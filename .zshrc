@@ -74,7 +74,7 @@ alias ac='cd /srv/http/atechcomp.sk'
 alias lpc='cd /srv/http/lacne-pc.sk'
 alias fpc='cd /srv/http/felujitottpc.hu'
 alias centralis='cd /srv/http/centralis'
-alias kovoinox='cd /srv/http/kovoinox'
+alias kovoinox='cd /srv/http/kovoinox.cz'
 alias moda='cd /srv/http/moda.sk'
 alias ssh='TERM=xterm-256color ssh'
 alias mike='TERM=xterm-256color autossh -M 0 mike'
@@ -123,6 +123,7 @@ alias httpserve='python3 -m http.server'
 alias p='ping google-public-dns-a.google.com'
 alias phpunit='phpunit --colors=always'
 alias cdu='composer dumpautoload -o'
+alias d='phploy' # d as deploy
 
 # SVN aliases
 alias svn_edit_log='svn propedit svn:log --revprop -r '
@@ -130,10 +131,14 @@ alias svn_ignore_dir='svn propedit svn:ignore '
 alias svn_diff_prev='svn diff -r COMMITTED:PREV '
 alias svn_cleanup='svn status --no-ignore | grep '^\?' | sed 's/^\?     //'  | xargs rm -rf'
 
+# Docker aliases
+alias dco="docker-compose"
+
 # GIT aliases
 alias gs='git status'
 alias gd='git diff'
 alias gp='git pull'
+alias gpu='git push'
 alias gc='git commit -v'
 alias gco='git checkout'
 alias gg='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --all --decorate --abbrev-commit --date=relative'
