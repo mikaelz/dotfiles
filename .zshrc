@@ -156,12 +156,16 @@ if [[ "$(uname)" == "Linux" ]]; then
     alias ls='ls --group-directories-first --color=auto'
     alias pbcopy='xsel --clipboard --input'
     alias pbpaste='xsel --clipboard --output'
+    alias rH='echo -e "Restarting Apache" && sudo systemctl restart httpd.service && systemctl status httpd.service'
+    alias rM='echo -e "Restarting MySQL" && sudo systemctl restart mariadb.service && systemctl status mariadb.service'
 fi
 
 if [[ "$(uname)" == "Darwin" ]]; then
     export PATH="/usr/local/bin/:/usr/local/mysql/bin:/usr/local/php5/bin:$PATH"
 
     alias updatedb='sudo /usr/libexec/locate.updatedb'
+    alias rH='echo -e "Restarting Apache" && sudo apachectl restart'
+    alias rM='echo -e "Restarting MySQL" && sudo launchctl unload -F /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist && sudo launchctl load -F /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist'
 fi
 
 if [ -f $HOME/.dircolors ]
