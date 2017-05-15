@@ -122,6 +122,7 @@ alias xlock='xlock -mode blank'
 alias httpserve='python3 -m http.server'
 alias p='ping google-public-dns-a.google.com'
 alias phpunit='phpunit --colors=always'
+alias composer="php -d memory_limit=-1 $(which composer)"
 alias cdu='composer dumpautoload -o'
 alias d='phploy' # d as deploy
 
