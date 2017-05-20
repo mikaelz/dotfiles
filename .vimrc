@@ -273,6 +273,9 @@ nnoremap <F8> :%s/\s\+$//<cr>:let @/=''<CR>
 nnoremap <F9> :update<bar>make<CR>
 inoremap <F9> <Esc>:update<bar>make<CR>
 
+" toggle ALE
+nnoremap <F10> :ALEToggle<CR>
+
 " toggle line number
 nnoremap <F11> :setlocal number!<CR>
 
