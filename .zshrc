@@ -49,7 +49,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(symfony2)
+plugins=(symfony2 git-open)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -93,6 +93,7 @@ alias eZ='vi ~/.zshrc'
 alias eH='vi ~/.zsh_history'
 alias rZ='source ~/.zshrc; echo "[ done ] source ~/.zshrc"'
 alias eV='vi ~/.vimrc'
+alias eG='vi ~/.gitconfig'
 
 # commands
 alias k='exit'
