@@ -1,8 +1,13 @@
 [alias]
 	co = checkout
+	cm = checkout master
 	ci = commit
 	st = status
+    stats = shortlog -sne
+    recent = for-each-ref --count=10 --sort=-committerdate refs/heads/ --format="%(refname:short)"
+    overview = log --all --since='2 weeks' --oneline --no-merges
     popular = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort | awk 'BEGIN {print "count,file"} {print $1 "," $2}'
+    today = !git log --all --since=00:00:00 --oneline --no-merges --author=${1-$(git config user.email)}
 [core]
     editor = vim
     excludesfile = ~/.gitignore_global
@@ -23,3 +28,5 @@
 [user]
 	name = Michal Zuber
 	email = info@nevilleweb.sk
+[commit]
+    template = ~/.gitmessage
