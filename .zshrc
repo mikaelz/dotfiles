@@ -137,6 +137,7 @@ alias svn_cleanup='svn status --no-ignore | grep '^\?' | sed 's/^\?     //'  | x
 alias dco="docker-compose"
 
 # GIT aliases
+alias ga='git add'
 alias gs='git status'
 alias gd='git diff'
 alias gp='git pull'
