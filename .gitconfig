@@ -1,18 +1,19 @@
 [alias]
-	co = checkout
-	cm = checkout master
-	ci = commit
-	st = status
-    stats = shortlog -sne
+    co = checkout
+    cm = checkout master
+    ci = commit
+    st = status
+    leaderboard = shortlog -sne
     recent = for-each-ref --count=10 --sort=-committerdate refs/heads/ --format="%(refname:short)"
     overview = log --all --since='2 weeks' --oneline --no-merges
     popular = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort | awk 'BEGIN {print "count,file"} {print $1 "," $2}'
     today = !git log --all --since=00:00:00 --oneline --no-merges --author=${1-$(git config user.email)}
+    this-month = !git log --reverse --pretty=format:'%cd  %h  %s' --date=short --no-merges --since=$(date +\"%Y-%m-01\") --author=$(git config user.email)
 [core]
     editor = vim
     excludesfile = ~/.gitignore_global
 [color]
-	ui = auto
+    ui = auto
 [color "diff"]
     meta = yellow bold
     frag = magenta bold
@@ -24,9 +25,9 @@
     changed = yellow bold
     untracked = red bold
 [push]
-	default = simple
+    default = simple
 [user]
-	name = Michal Zuber
-	email = info@nevilleweb.sk
+    name = Michal Zuber
+    email = info@nevilleweb.sk
 [commit]
     template = ~/.gitmessage
