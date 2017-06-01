@@ -9,6 +9,7 @@
     popular = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort | awk 'BEGIN {print "count,file"} {print $1 "," $2}'
     today = !git log --all --since=00:00:00 --oneline --no-merges --author=${1-$(git config user.email)}
     this-month = !git log --reverse --pretty=format:'%cd  %h  %s' --date=short --no-merges --since=$(date +\"%Y-%m-01\") --author=$(git config user.email)
+    last-month = !git log --reverse --pretty=format:'%cd  %h  %s' --date=short --no-merges --since=$(date -d \"$(date +%Y-%m)-01 last month\" \"+%Y-%m-01\") --author=$(git config user.email)
 [core]
     editor = vim
     excludesfile = ~/.gitignore_global
