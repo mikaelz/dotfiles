@@ -293,6 +293,8 @@ snippet wpq
 		);
 		$wpq = new WP_Query( $args );
 
+snippet log
+	error_log(${1:$variable});
 # SQL
 snippet dber
 	if ($database->is_error()) {
