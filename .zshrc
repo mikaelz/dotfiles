@@ -113,7 +113,7 @@ alias lsize='ls -FShla'
 alias mkdir='mkdir -p'
 alias pidstat='pidstat -dlu'
 alias vi='vim'
-alias update='sudo pacman -Syu'
+alias U='sudo pacman -Syu'
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias httpwritable='sudo chown -R http:http .; sudo chmod -R g+rw .'
 alias _wwwwritable='sudo chown -R _www:_www .; sudo chmod -R g+rw .'
@@ -123,7 +123,7 @@ alias xlock='xlock -mode blank'
 alias httpserve='python3 -m http.server'
 alias p='ping google-public-dns-a.google.com'
 alias phpunit='phpunit --colors=always'
-alias composer="php -d memory_limit=-1 $(which composer)"
+alias composer="php -d memory_limit=-1 $(which -p composer)"
 alias cdu='composer dumpautoload -o'
 alias d='phploy' # d as deploy
 
