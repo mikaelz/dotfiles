@@ -55,7 +55,7 @@ source $ZSH/oh-my-zsh.sh
 
 export HISTSIZE=1000000
 export SAVEHIST=1000000
-export PATH="$HOME/Dropbox/home/bin:/opt/subversion/bin:/opt/local/bin:/usr/local/bin:$PATH"
+export PATH="$HOME/Dropbox/home/bin:./node_modules/.bin:/opt/subversion/bin:/opt/local/bin:/usr/local/bin:$PATH"
 export EDITOR=vim
 export VISUAL=$EDITOR
 export PAGER=less
@@ -217,3 +217,6 @@ transfer() {
     echo -e "\n";
     rm -f $tmpfile;
 }
+
+accept-line() {: "${BUFFER:="ls -lah"}"; zle ".$WIDGET"}
+zle -N accept-line
