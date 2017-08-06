@@ -69,11 +69,8 @@ PROMPT='%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n@)%m %{$fg_bold[cyan]%}%(!.%1
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 alias D='cd ~/Downloads'
-alias W='cd /srv/http'
-alias ac='cd /srv/http/atechcomp.sk'
-alias lpc='cd /srv/http/lacne-pc.sk'
-alias fpc='cd /srv/http/felujitottpc.hu'
-alias centralis='cd /srv/http/centralis'
+alias H='cd /srv/http'
+alias N='cd /srv/nodejs'
 alias kovoinox='cd /srv/http/kovoinox.cz'
 alias moda='cd /srv/http/moda.sk'
 alias ssh='TERM=xterm-256color ssh'
@@ -138,6 +135,7 @@ alias dco="docker-compose"
 
 # GIT aliases
 alias ga='git add'
+alias gb='git branch'
 alias gs='git status'
 alias gd='git diff'
 alias gp='git pull'
