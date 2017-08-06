@@ -225,15 +225,6 @@ if !exists('g:neocomplete#keyword_patterns')
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-let g:php_cs_fixer_path = "php-cs-fixer"
-let g:php_cs_fixer_level = "symfony"
-let g:php_cs_fixer_config = "default"
-let g:php_cs_fixer_php_path = "php"
-"let g:php_cs_fixer_fixers_list = "linefeed,short_tag,indentation"
-let g:php_cs_fixer_enable_default_mapping = 0     " Enable the mapping by default (<leader>pcd)
-let g:php_cs_fixer_dry_run = 0
-let g:php_cs_fixer_verbose = 0
-
 if &runtimepath =~ 'ale'
     let g:ale_statusline_format = ['Errors: %d', 'Warnings: %d', '⬥ ok']
     let g:ale_echo_msg_error_str = 'E'
