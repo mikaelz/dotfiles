@@ -198,11 +198,11 @@ autocmd BufRead,BufNewFile *.tpl set filetype=smarty
 " autocmd BufWritePre * :make
 " autocmd BufEnter * let &titlestring = ' ' . expand("%:f")
 
-" let php_folding = 1
+" php.vim syntax
 let php_noShortTags = 1
-let php_sql_query = 1
 let php_htmlInStrings = 1
 let php_baselib = 1
+let php_sql_query = 1
 
 command W :w
 command Q :q
@@ -311,3 +311,9 @@ if has('persistent_undo')
     set undolevels=1000
     set undoreload=10000
 endif
+
+" https://github.com/pangloss/vim-javascript settings
+let g:javascript_plugin_jsdoc = 1
+
+" https://github.com/mxw/vim-jsx settings
+let g:jsx_ext_required = 0
