@@ -294,7 +294,7 @@ snippet wpq
 		$wpq = new WP_Query( $args );
 
 snippet log
-	error_log(${1:$variable});
+	error_log(print_r(${1:$variable}, true)); // TODO remove this debug line
 # SQL
 snippet dber
 	if ($database->is_error()) {
