@@ -49,13 +49,13 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(symfony2 git-open)
+plugins=(symfony2 git-open wp-cli)
 
 source $ZSH/oh-my-zsh.sh
 
 export HISTSIZE=1000000
 export SAVEHIST=1000000
-export PATH="$HOME/Dropbox/home/bin:./node_modules/.bin:/opt/subversion/bin:/opt/local/bin:/usr/local/bin:$PATH"
+export PATH="$HOME/Dropbox/home/bin:./node_modules/.bin:$HOME/.composer/vendor/bin:/opt/subversion/bin:/opt/local/bin:/usr/local/bin:/usr/local/opt/node@6/bin:$PATH"
 export EDITOR=vim
 export VISUAL=$EDITOR
 export PAGER=less
@@ -71,6 +71,9 @@ PROMPT='%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n@)%m %{$fg_bold[cyan]%}%(!.%1
 alias D='cd ~/Downloads'
 alias H='cd /srv/http'
 alias N='cd /srv/nodejs'
+alias goled.cz='cd /srv/http/goled.cz'
+alias goled.sk='cd /srv/http/goled.sk'
+alias goled.hu='cd /srv/http/goled.hu'
 alias kovoinox='cd /srv/http/kovoinox.cz'
 alias moda='cd /srv/http/moda.sk'
 alias ssh='TERM=xterm-256color ssh'
