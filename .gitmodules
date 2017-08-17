@@ -37,3 +37,18 @@
 [submodule ".vim/bundle/editorconfig-vim"]
 	path = .vim/bundle/editorconfig-vim
 	url = https://github.com/editorconfig/editorconfig-vim.git
+[submodule ".vim/bundle/vim-javascript"]
+	path = .vim/bundle/vim-javascript
+	url = https://github.com/pangloss/vim-javascript
+[submodule ".vim/bundle/vim-jsx"]
+	path = .vim/bundle/vim-jsx
+	url = https://github.com/mxw/vim-jsx
+[submodule ".vim/bundle/vim-node"]
+	path = .vim/bundle/vim-node
+	url = https://github.com/moll/vim-node
+[submodule ".vim/bundle/php.vim"]
+	path = .vim/bundle/php.vim
+	url = https://github.com/StanAngeloff/php.vim.git
+[submodule ".vim/bundle/vim-json"]
+	path = .vim/bundle/vim-json
+	url = https://github.com/elzr/vim-json
