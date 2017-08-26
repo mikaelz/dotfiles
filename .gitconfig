@@ -3,6 +3,8 @@
     cm = checkout master
     ci = commit
     st = status
+    sm = submodule
+    smu = submodule foreach git pull origin master
     leaderboard = shortlog -sne
     recent = for-each-ref --count=10 --sort=-committerdate refs/heads/ --format="%(refname:short)"
     overview = log --all --since='2 weeks' --oneline --no-merges
@@ -10,9 +12,8 @@
     today = !git log --all --since=00:00:00 --oneline --no-merges --author=${1-$(git config user.email)}
     this-month = !git log --reverse --pretty=format:'%cd  %h  %s' --date=short --no-merges --since=$(date +\"%Y-%m-01\") --author=$(git config user.email)
     last-month = !git log --reverse --pretty=format:'%cd  %h  %s' --date=short --no-merges --since=$(date -d \"$(date +%Y-%m)-01 last month\" \"+%Y-%m-01\") --author=$(git config user.email)
-[core]
-    editor = vim
-    excludesfile = ~/.gitignore_global
+[commit]
+    template = ~/.gitmessage
 [color]
     ui = auto
 [color "diff"]
@@ -25,10 +26,11 @@
     added = green bold
     changed = yellow bold
     untracked = red bold
+[core]
+    editor = vim
+    excludesfile = ~/.gitignore_global
 [push]
     default = simple
 [user]
     name = Michal Zuber
     email = info@nevilleweb.sk
-[commit]
-    template = ~/.gitmessage
