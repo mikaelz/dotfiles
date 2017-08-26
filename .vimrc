@@ -27,7 +27,6 @@ set synmaxcol=200             " maximum column to look for syntax items
 syntax sync minlines=256
 set nocursorline              " highlight the screen line of the cursor
 set nocursorcolumn
-" set colorcolumn=80          " columns to highlight, match to 'textwidth'
 
 " multiple windows
 set laststatus=2	          " always show status line
@@ -218,7 +217,7 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s --skip-vcs-ignores -l --nocolor -g ""'
   let g:ctrlp_use_caching = 0
 endif
-let g:ctrlp_match_window = 'min:4,max:20,results=100'
+let g:ctrlp_max_height = 30
 
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
@@ -289,13 +288,9 @@ vnoremap > >gv
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
-" Whitespace fixes
+" highlight trailing spaces in annoying red
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
-" autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-" autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-" autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-" autocmd BufWinLeave * call clearmatches()
 
 nnoremap <leader>w :w<CR>
 inoremap <leader>w <Esc>:w<CR>
@@ -326,3 +321,8 @@ let g:javascript_plugin_jsdoc = 1
 
 " https://github.com/mxw/vim-jsx settings
 let g:jsx_ext_required = 0
+
+" hint to keep lines short
+if exists('+colorcolumn')
+    set colorcolumn=120
+endif
