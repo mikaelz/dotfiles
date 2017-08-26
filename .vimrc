@@ -213,7 +213,12 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_extensions = ['tag','dir','line','mixed']
 let g:ctrlp_follow_symlinks = 1
-let g:ctrlp_user_command = 'find %s -type f -not \( -iname tags -o -path "*/.svn/*" -o -path "*/.git/*" -o -path "*/vendor/*" -o -path "*/.idea/*" -o -path "*/cache/*" \)'
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s --skip-vcs-ignores -l --nocolor -g ""'
+  let g:ctrlp_use_caching = 0
+endif
+let g:ctrlp_match_window = 'min:4,max:20,results=100'
 
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
@@ -232,6 +237,7 @@ if &runtimepath =~ 'ale'
     let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
     let g:ale_sign_error = 'E'
     let g:ale_sign_warning = 'W'
+    let g:ale_php_phpmd_ruleset = './phpmd.xml'
     nmap <silent> <C-k> <Plug>(ale_previous_wrap)
     nmap <silent> <C-j> <Plug>(ale_next_wrap)
 endif
@@ -279,6 +285,9 @@ vnoremap <C-c> "+y
 " visual shifting (does not exit Visual mode)
 vnoremap < <gv
 vnoremap > >gv
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " Whitespace fixes
 highlight ExtraWhitespace ctermbg=red guibg=red
