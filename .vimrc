@@ -125,7 +125,7 @@ set virtualedit=block         " when to use virtual editing
 set gdefault                  " use the 'g' flag for ':substitute'
 set autoread
 
-set grepprg=grep\ -rn\ --binary-files=without-match\ --exclude-dir={.git,.svn,CVS,cache,__cache,vendor}\ --exclude=tags
+set grepprg=grep\ -rn\ --binary-files=without-match\ --exclude-dir={.git,.svn,CVS,cache}\ --exclude=tags
 
 syntax on
 filetype plugin indent on
@@ -213,7 +213,7 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_extensions = ['tag','dir','line','mixed']
 let g:ctrlp_follow_symlinks = 1
 if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
+  set grepprg=ag\ --nogroup\ --nocolor\ --skip-vcs-ignores
   let g:ctrlp_user_command = 'ag %s --skip-vcs-ignores -l --nocolor -g ""'
   let g:ctrlp_use_caching = 0
 endif
@@ -286,7 +286,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 " bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap K :grep! "<C-R><C-W>"<CR>:cw<CR>
 
 " highlight trailing spaces in annoying red
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -324,5 +324,5 @@ let g:jsx_ext_required = 0
 
 " hint to keep lines short
 if exists('+colorcolumn')
-    set colorcolumn=120
+    set colorcolumn=80
 endif
