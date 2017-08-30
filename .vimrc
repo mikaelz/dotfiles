@@ -237,6 +237,7 @@ if &runtimepath =~ 'ale'
     let g:ale_sign_error = 'E'
     let g:ale_sign_warning = 'W'
     let g:ale_php_phpmd_ruleset = './phpmd.xml'
+    let g:ale_lint_on_text_changed = 'normal'
     nmap <silent> <C-k> <Plug>(ale_previous_wrap)
     nmap <silent> <C-j> <Plug>(ale_next_wrap)
 endif
