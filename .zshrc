@@ -49,13 +49,15 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(symfony2 git-open wp-cli)
+plugins=(git-open wp-cli)
 
 source $ZSH/oh-my-zsh.sh
+[ -f .zshrc_priv ] && source .zshrc_priv
+[ -f .zshrc_host ] && source .zshrc_host
 
 export HISTSIZE=1000000
 export SAVEHIST=1000000
-export PATH="$HOME/Dropbox/home/bin:./node_modules/.bin:$HOME/.composer/vendor/bin:/opt/subversion/bin:/opt/local/bin:/usr/local/bin:/usr/local/opt/node@6/bin:$PATH"
+export PATH="$HOME/Dropbox/home/bin:./node_modules/.bin:$HOME/.composer/vendor/bin:/opt/local/bin:/usr/local/bin:$PATH"
 export EDITOR=vim
 export VISUAL=$EDITOR
 export PAGER=less
@@ -71,19 +73,6 @@ PROMPT='%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n@)%m %{$fg_bold[cyan]%}%(!.%1
 alias D='cd ~/Downloads'
 alias H='cd /srv/http'
 alias N='cd /srv/nodejs'
-alias goled.cz='cd /srv/http/goled.cz'
-alias goled.sk='cd /srv/http/goled.sk'
-alias goled.hu='cd /srv/http/goled.hu'
-alias kovoinox='cd /srv/http/kovoinox.cz'
-alias moda='cd /srv/http/moda.sk'
-alias ssh='TERM=xterm-256color ssh'
-alias mike='TERM=xterm-256color autossh -M 0 mike'
-alias zeus='TERM=xterm-256color autossh -M 0 zeus'
-alias jarvis='TERM=xterm-256color autossh -M 0 jarvis'
-alias gutanet-srv='TERM=xterm-256color autossh -M 0 gutanet-srv'
-alias atechnet-forpsi='TERM=xterm-256color autossh -M 0 atechnet-forpsi'
-alias vps='TERM=xterm-256color autossh -M 0 mike@vps'
-alias vps_tunnel='autossh -f -M 0 -T -N -R 10022:localhost:22 mike@vps'
 
 # configs
 alias eA='vi ~/.config/awesome/rc.lua'
