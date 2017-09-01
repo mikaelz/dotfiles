@@ -114,7 +114,6 @@ alias p='ping google-public-dns-a.google.com'
 alias phpunit='phpunit --colors=always'
 alias composer="php -d memory_limit=-1 $(which -p composer)"
 alias cdu='composer dumpautoload -o'
-alias d='phploy' # d as deploy
 
 # SVN aliases
 alias svn_edit_log='svn propedit svn:log --revprop -r '
@@ -123,6 +122,7 @@ alias svn_diff_prev='svn diff -r COMMITTED:PREV '
 alias svn_cleanup='svn status --no-ignore | grep '^\?' | sed 's/^\?     //'  | xargs rm -rf'
 
 # Docker aliases
+alias d='docker'
 alias dco="docker-compose"
 
 # GIT aliases
