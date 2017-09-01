@@ -280,6 +280,8 @@ snippet rdebug
 	if ($_SERVER['REMOTE_ADDR'] == '217.145.199.74') { echo '<pre class="debug">'; var_dump(${1:'test'}); echo "</pre>";exit; } // @TODO remove this debug line
 snippet debugd
 	echo '<pre class="debug">'; var_dump(\Doctrine\Common\Util\Debug::dump(${1:'$var'}, 2)); echo "</pre>";exit; // @TODO remove this debug line
+snippet debugt
+	echo '<pre class="debug">'; debug_print_backtrace(); echo "</pre>";exit; // @TODO remove this debug line
 snippet vard
 	var_dump(${1:variable});exit;
 snippet redir
@@ -294,7 +296,7 @@ snippet wpq
 		$wpq = new WP_Query( $args );
 
 snippet log
-	error_log(print_r(${1:$variable}, true)); // TODO remove this debug line
+	error_log(var_export(${1:$variable}, true)); // TODO remove this debug line
 # SQL
 snippet dber
 	if ($database->is_error()) {
