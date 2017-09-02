@@ -49,7 +49,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git-open wp-cli)
+plugins=(git-open screen wp-cli)
 
 source $ZSH/oh-my-zsh.sh
 [ -f .zshrc_priv ] && source .zshrc_priv
@@ -114,6 +114,7 @@ alias p='ping google-public-dns-a.google.com'
 alias phpunit='phpunit --colors=always'
 alias composer="php -d memory_limit=-1 $(which -p composer)"
 alias cdu='composer dumpautoload -o'
+alias mc='TERM=xterm-256color mc'
 
 # SVN aliases
 alias svn_edit_log='svn propedit svn:log --revprop -r '
