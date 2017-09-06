@@ -240,8 +240,18 @@ if &runtimepath =~ 'ale'
     let g:ale_sign_warning = 'W'
     let g:ale_php_phpmd_ruleset = './phpmd.xml'
     let g:ale_lint_on_text_changed = 'normal'
+    let g:ale_php_phpcbf_standard = './phpcs.xml'
+    let g:ale_linters = {
+    \  'php': ['./vendor/bin/phpcs', 'phpcs', 'phpmd']
+    \}
+    let g:ale_fixers = {
+    \  'php': ['phpcbf']
+    \}
+
     nmap <silent> <C-k> <Plug>(ale_previous_wrap)
     nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+    nnoremap <F10> :ALEToggle<CR>
 endif
 
 " clear search results
@@ -271,9 +281,6 @@ nnoremap <F8> :%s/\s\+$//<cr>:let @/=''<CR>
 
 nnoremap <F9> :update<bar>make<CR>
 inoremap <F9> <Esc>:update<bar>make<CR>
-
-" toggle ALE
-nnoremap <F10> :ALEToggle<CR>
 
 " toggle line number
 nnoremap <F11> :setlocal number!<CR>
