@@ -49,7 +49,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git-open screen wp-cli)
+plugins=(docker docker-compose git-open screen wp-cli)
 
 source $ZSH/oh-my-zsh.sh
 [ -f .zshrc_priv ] && source .zshrc_priv
@@ -102,6 +102,7 @@ alias lsize='ls -FShla'
 alias mkdir='mkdir -p'
 alias pidstat='pidstat -dlu'
 alias vi='vim'
+alias pgrep='pgrep -a'
 alias U='sudo pacman -Syu'
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias httpwritable='sudo chown -R http:http .; sudo chmod -R g+rw .'
@@ -124,7 +125,9 @@ alias svn_cleanup='svn status --no-ignore | grep '^\?' | sed 's/^\?     //'  | x
 
 # Docker aliases
 alias d='docker'
-alias dco="docker-compose"
+alias dps='docker ps -a'
+alias di='docker inspect'
+alias dit='docker exec -i -t'
 
 # GIT aliases
 alias ga='git add'
@@ -151,6 +154,8 @@ if [[ "$(uname)" == "Linux" ]]; then
     alias pbcopy='xsel --clipboard --input'
     alias pbpaste='xsel --clipboard --output'
     alias rH='echo -e "Restarting Apache" && sudo systemctl restart httpd.service && systemctl status httpd.service'
+    alias kH='echo -e "Killing Apache" && sudo systemctl stop httpd.service && systemctl status httpd.service'
+    alias sH='echo -e "Starting Apache" && sudo systemctl start httpd.service && systemctl status httpd.service'
     alias rM='echo -e "Restarting MySQL" && sudo systemctl restart mariadb.service && systemctl status mariadb.service'
 fi
 
