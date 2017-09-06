@@ -9,6 +9,7 @@ set ignorecase                " ignore case when using a search pattern
 set smartcase                 " override 'ignorecase' when pattern has upper case characters
 set incsearch                 " show match for partly typed search command
 set hlsearch     		      " highlight all matches for the last used search pattern
+set keywordprg=:help
 
 " tags
 set tags=./tags;,tags;
@@ -20,6 +21,7 @@ set nolinebreak               " wrap long lines at a character in 'breakat'
 set lazyredraw                " don't redraw while executing macros
 set nolist                    " show <Tab> as ^I and end-of-line as $
 set number		              " show the line number for each line
+set path+=**
 
 " syntax, highlighting and spelling
 set background=dark           " the background color brightness
@@ -286,8 +288,8 @@ vnoremap <C-c> "+y
 vnoremap < <gv
 vnoremap > >gv
 
-" bind K to grep word under cursor
-nnoremap K :grep! "<C-R><C-W>"<CR>:cw<CR>
+" bind Q(query) to grep word under cursor
+nnoremap Q :grep! "<C-R><C-W>"<CR>:cw<CR>
 
 " highlight trailing spaces in annoying red
 highlight ExtraWhitespace ctermbg=red guibg=red
