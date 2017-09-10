@@ -111,6 +111,7 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+                                    { "VNC jarvis", "vncviewer -passwd " .. os.getenv("HOME") .. "/.vnc/jarvis_passwd jarvis:1" },
                                     { "open terminal", terminal }
                                   }
                         })
