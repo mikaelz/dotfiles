@@ -272,18 +272,6 @@ snippet style
 	</style>${3}
 snippet link
 	<link rel="stylesheet" href="${1:filename.css}" media="${2:media|print}">${3}
-snippet debug
-	echo '<pre class="debug">'; print_r(${1:'test'}); echo "</pre>";exit; // @TODO remove this debug line
-snippet debugv
-	echo '<pre class="debug">'; var_dump(${1:'test'}); echo "</pre>";exit; // @TODO remove this debug line
-snippet rdebug
-	if ($_SERVER['REMOTE_ADDR'] == '217.145.199.74') { echo '<pre class="debug">'; var_dump(${1:'test'}); echo "</pre>";exit; } // @TODO remove this debug line
-snippet debugd
-	echo '<pre class="debug">'; var_dump(\Doctrine\Common\Util\Debug::dump(${1:'$var'}, 2)); echo "</pre>";exit; // @TODO remove this debug line
-snippet debugt
-	echo '<pre class="debug">'; debug_print_backtrace(); echo "</pre>";exit; // @TODO remove this debug line
-snippet vard
-	var_dump(${1:variable});exit;
 snippet redir
 	header('HTTP/1.1 301 Moved Permanently');
 	header('Location: ${1:URL}');
@@ -295,6 +283,18 @@ snippet wpq
 		);
 		$wpq = new WP_Query( $args );
 
+snippet d
+	echo '<pre class="debug">'; print_r(${1:'test'}); echo "</pre>";exit; // @TODO remove this debug line
+snippet dv
+	echo '<pre class="debug">'; var_dump(${1:'test'}); echo "</pre>";exit; // @TODO remove this debug line
+snippet dr
+	if ($_SERVER['REMOTE_ADDR'] == '217.145.199.74') { echo '<pre class="debug">'; var_dump(${1:'test'}); echo "</pre>";exit; } // @TODO remove this debug line
+snippet dd
+	echo '<pre class="debug">'; var_dump(\Doctrine\Common\Util\Debug::dump(${1:'$var'}, 2)); echo "</pre>";exit; // @TODO remove this debug line
+snippet dt
+	echo '<pre class="debug">'; debug_print_backtrace(); echo "</pre>";exit; // @TODO remove this debug line
+snippet vd
+	var_dump(${1:variable});exit;
 snippet log
 	error_log(var_export(${1:$variable}, true)); // TODO remove this debug line
 # SQL
