@@ -14,8 +14,8 @@ local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
 local vicious = require("vicious")
--- local wimpd = require("wimpd")
--- local mpc = wimpd.new()
+local wimpd = require("wimpd")
+local mpc = wimpd.new()
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
@@ -122,7 +122,6 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
---[[
 -- MPD
 -- http://awesome.naquadah.org/wiki/Awesompd#How_to_start
 local awesompd = require("awesompd/awesompd")
@@ -146,7 +145,6 @@ musicwidget.servers = {
 })
 musicwidget:run()
 -- }}}
---]]
 
 -- {{{ Wibox
 cpuwidget = awful.widget.graph()
@@ -401,23 +399,17 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 5%+", false) end),
     awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 5%-", false) end),
     -- Mediakeys directly control Tomahawk
---[[
+
     -- Media keys controlling MPD
-    awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.tomahawk /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")  end),
-    awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.tomahawk /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")  end),
-    awful.key({ }, "XF86AudioStop", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.tomahawk /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop")  end),
-    awful.key({ }, "XF86AudioNext", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.tomahawk /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")  end),
---]]
---[[
-    -- Media keys controlling MPD
-    awful.key({ }, "XF86AudioPlay", function () mpc:toggle_play() mpc:update() end),
-    awful.key({ }, "XF86AudioNext", function () mpc:next()        mpc:update() end),
-    awful.key({ }, "XF86AudioPrev", function () mpc:previous()    mpc:update() end),
---]]
+    -- awful.key({ }, "XF86AudioPlay", function () mpc:toggle_play() mpc:update() end),
+    -- awful.key({ }, "XF86AudioNext", function () mpc:next()        mpc:update() end),
+    -- awful.key({ }, "XF86AudioPrev", function () mpc:previous()    mpc:update() end),
+
     -- Media keys controlling Spotify
     awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")  end),
     awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")  end),
     awful.key({ }, "XF86AudioNext", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")  end),
+
     -- PrintScrn
     -- awful.key({ }, "Print", function() awful.util.spawn(os.getenv("HOME") .. "/bin/screenshot",false) end),
     -- Alternate for PrintScreen, only one hand needed as on OSX
