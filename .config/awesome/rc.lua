@@ -510,16 +510,18 @@ awful.rules.rules = {
       properties = { tag = tags[1][3], floating = true } },
     { rule = { class = "Tor Browser" },
       properties = { tag = tags[1][3] } },
-    { rule = { class = "Spotify" },
-      properties = { tag = tags[1][5] } },
     { rule = { instance = "work" },
       properties = { tag = tags[2][1] } },
     { rule = { instance = "logs" },
-      properties = { tag = tags[2][6] } },
+      properties = { tag = tags[1][5] } },
     { rule = { class = "Thunderbird" },
       properties = { tag = tags[2][2] } },
     { rule = { class = "Pidgin", role="buddy_list" },
-      properties = { tag = tags[2][2] } },
+      properties = { tag = tags[2][3] } },
+    { rule = { name = "Skype for Linux Beta" },
+      properties = { tag = tags[2][3] } },
+    { rule = { class = "Spotify" },
+      properties = { tag = tags[2][6] } },
     { rule_any = { class = { "MPlayer", "mpv", "feh", "mupdf" } },
       properties = { floating = true } }
 }
@@ -606,12 +608,13 @@ function run_once(prg)
 	awful.util.spawn_with_shell("pgrep -x -u $USER " .. prg .. " || (" .. prg .. ")")
 end
 
-run_once("spotify")
 run_once("chromium")
 run_once("filezilla")
 run_once("urxvt -name work -e screen")
 run_once("urxvt -name logs -e logs.sh")
--- run_once("thunderbird")
+run_once("thunderbird")
+run_once("spotify")
+-- run_once("skypeforlinux")
 -- run_once("firefox")
 -- run_once("tor-browser-en")
 -- run_once("pidgin")
