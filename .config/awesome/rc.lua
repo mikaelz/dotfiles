@@ -176,7 +176,7 @@ myethdowngraph:set_color({
 	from = { 0, beautiful.graph_height },
 	to = { 0, 0 },
 	stops = {
-		{ 0, "#FF5656" },
+		{ 0, "#AECF96" },
 	}
 })
 vicious.register(myethdowngraph, vicious.widgets.net, "${eno1 down_kb}", 1)
@@ -192,7 +192,7 @@ myethupgraph:set_color({
 	from = { 0, beautiful.graph_height },
 	to = { 0, 0 },
 	stops = {
-		{ 0, "#AECF96" },
+		{ 0, "#FF5656" },
 	}
 })
 vicious.register(myethupgraph, vicious.widgets.net, "${eno1 up_kb}", 1)
