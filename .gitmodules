@@ -58,3 +58,6 @@
 [submodule ".vim/bundle/vim-php-manual"]
 	path = .vim/bundle/vim-php-manual
 	url = https://github.com/alvan/vim-php-manual.git
+[submodule ".vim/bundle/vim-fat-finger"]
+	path = .vim/bundle/vim-fat-finger
+	url = https://github.com/chip/vim-fat-finger.git
