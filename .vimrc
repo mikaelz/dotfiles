@@ -336,3 +336,8 @@ let g:jsx_ext_required = 0
 if exists('+colorcolumn')
     set colorcolumn=80
 endif
+
+" https://coderwall.com/p/faceag/format-json-in-vim#comment_11021
+autocmd FileType json nnoremap <leader>f :%!python -m json.tool<CR>
+
+autocmd FileType php nnoremap <leader>l :!php -l %<CR>
