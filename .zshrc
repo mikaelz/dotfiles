@@ -71,6 +71,7 @@ PROMPT='%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n@)%m %{$fg_bold[cyan]%}%(!.%1
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 alias D='cd ~/Downloads'
+alias Dr='cd ~/Dropbox'
 alias H='cd /srv/http'
 alias N='cd /srv/nodejs'
 
@@ -125,6 +126,7 @@ alias svn_cleanup='svn status --no-ignore | grep '^\?' | sed 's/^\?     //'  | x
 
 # Docker aliases
 alias d='docker'
+alias ds='./docker/start.sh'
 alias dps='docker ps -a'
 alias di='docker inspect'
 alias dit='docker exec -i -t'
