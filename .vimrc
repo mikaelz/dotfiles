@@ -39,7 +39,7 @@ set statusline+=\/%{''.(&fenc!=''?&fenc:&enc).''} " encoding
 set statusline+=\ %{(&bomb?\",BOM\":\"\")}        " encoding2
 set statusline+=\CWD:%{getcwd()}
 if &runtimepath =~ 'ale'
-    set statusline+=\ %{ALEGetStatusLine()}
+    set statusline+=\ %{ale#statusline#Status()}
 endif
 set statusline+=\ %-15(%{exists('g:loaded_fugitive')?fugitive#statusline():''}\%)
 set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " right aligned file nav info
