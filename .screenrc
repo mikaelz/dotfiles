@@ -29,15 +29,12 @@ activity "%"  # tell me when stuff happens!
 # allow bold colors - necessary for some reason
 attrcolor b ".I"
 
-# http://www4.cs.fau.de/~jnweiger/screen-faq.html
-# https://stackoverflow.com/a/4833946
-# http://pjkh.com/articles/osx-iterm-screen-vim-256-colors/
-term screen-256color
-# term xterm-256color
+term screen-256color-bce
 termcapinfo screen* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 termcapinfo screen* ti@:te@ # make scrollbar work
 
-defbce on # erase background with current bg color
+# erase background with current bg color
+defbce on
 
 bind R eval "source $HOME/.screenrc" "echo '.screenrc reloaded!'"
 bind % screen -t htop htop
@@ -46,8 +43,8 @@ bind % screen -t htop htop
 bind > eval writebuf "exec sh -c 'xsel -bi </tmp/screen-exchange'"
 bind < eval "exec sh -c 'xsel -bo >/tmp/screen-exchange'" readbuf
 
-screen -t 0
-screen -t 1
+screen 0
+screen 1
 
 select 0
 
