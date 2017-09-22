@@ -334,7 +334,8 @@ let g:jsx_ext_required = 0
 
 " hint to keep lines short
 if exists('+colorcolumn')
-    set colorcolumn=80
+    set textwidth=120
+    set colorcolumn=120
 endif
 
 " https://coderwall.com/p/faceag/format-json-in-vim#comment_11021
