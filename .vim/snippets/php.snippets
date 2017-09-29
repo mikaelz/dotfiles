@@ -283,28 +283,21 @@ snippet link
 snippet redir
 	header('HTTP/1.1 301 Moved Permanently');
 	header('Location: ${1:URL}');
-snippet wpq
-		$args = array(
-			'post_type'   => '${1:post}',
-			'post_status' => 'publish',
-			'fields'      => array( 'post_ID', 'post_title' ),
-		);
-		$wpq = new WP_Query( $args );
 
 snippet d
-	echo '<pre class="debug">'; print_r(${1:'test'}); echo "</pre>";exit; // @TODO remove this debug line
+	echo '<pre class="debug">'; print_r(${1}); echo "</pre>";exit; // @TODO remove this debug line
 snippet dv
-	echo '<pre class="debug">'; var_dump(${1:'test'}); echo "</pre>";exit; // @TODO remove this debug line
+	echo '<pre class="debug">'; var_dump(${1}); echo "</pre>";exit; // @TODO remove this debug line
 snippet dr
-	if ($_SERVER['REMOTE_ADDR'] == '217.145.199.74') { echo '<pre class="debug">'; var_dump(${1:'test'}); echo "</pre>";exit; } // @TODO remove this debug line
+	if ($_SERVER['REMOTE_ADDR'] == '217.145.199.74') { echo '<pre class="debug">'; var_dump(${1}); echo "</pre>";exit; } // @TODO remove this debug line
 snippet dd
-	echo '<pre class="debug">'; var_dump(\Doctrine\Common\Util\Debug::dump(${1:'$var'}, 2)); echo "</pre>";exit; // @TODO remove this debug line
+	echo '<pre class="debug">'; var_dump(\Doctrine\Common\Util\Debug::dump(${1}, 2)); echo "</pre>";exit; // @TODO remove this debug line
 snippet dt
 	echo '<pre class="debug">'; debug_print_backtrace(); echo "</pre>";exit; // @TODO remove this debug line
 snippet vd
-	var_dump(${1:variable});exit;
+	var_dump(${1});exit; // TODO remove this debug line
 snippet log
-	error_log(var_export(${1:$variable}, true)); // TODO remove this debug line
+	error_log(var_export(${1}, true)); // TODO remove this debug line
 # SQL
 snippet dber
 	if ($database->is_error()) {
