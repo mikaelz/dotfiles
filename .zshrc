@@ -88,6 +88,7 @@ alias eG='vi ~/.gitconfig'
 # commands
 alias k='exit'
 alias h='history'
+alias bc='bc -q'
 alias la='ls -Fa'
 alias ll='ls -Fhl'
 alias cp='cp -rv'
@@ -95,6 +96,7 @@ alias mv='mv -v'
 alias rm='rm -iv'
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
+alias sx='startx'
 alias yt='youtube-viewer'
 alias yd='youtube-dl --recode-video mp4'
 alias scp='scp -r'
@@ -111,7 +113,8 @@ alias _wwwwritable='sudo chown -R _www:_www .; sudo chmod -R g+rw .'
 alias grep='grep --colour=auto --exclude-dir={.git,.svn,CVS} --exclude=tags'
 alias nethogs='sudo nethogs eno1'
 alias xlock='xlock -mode blank'
-alias httpserve='python3 -m http.server'
+alias pythonserve='python3 -m http.server'
+alias phpserve='php -S localhost:8080 -t .'
 alias p='ping google-public-dns-a.google.com'
 alias phpunit='phpunit --colors=always'
 alias composer="php -d memory_limit=-1 $(which -p composer)"
@@ -155,6 +158,7 @@ if [[ "$(uname)" == "Linux" ]]; then
     alias ls='ls --group-directories-first --color=auto'
     alias pbcopy='xsel --clipboard --input'
     alias pbpaste='xsel --clipboard --output'
+    alias rD='echo -e "Restarting Docker" && sudo systemctl restart docker.service && systemctl status docker.service'
     alias rH='echo -e "Restarting Apache" && sudo systemctl restart httpd.service && systemctl status httpd.service'
     alias kH='echo -e "Killing Apache" && sudo systemctl stop httpd.service && systemctl status httpd.service'
     alias sH='echo -e "Starting Apache" && sudo systemctl start httpd.service && systemctl status httpd.service'
@@ -166,7 +170,9 @@ if [[ "$(uname)" == "Darwin" ]]; then
 
     alias updatedb='sudo /usr/libexec/locate.updatedb'
     alias rH='echo -e "Restarting Apache" && sudo apachectl restart'
-    alias rM='echo -e "Restarting MySQL" && sudo launchctl unload -F /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist && sudo launchctl load -F /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist'
+    alias rM='echo -e "Restarting MySQL" \
+        && sudo launchctl unload -F /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist \
+        && sudo launchctl load -F /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist'
 fi
 
 if [ -f $HOME/.dircolors ]
