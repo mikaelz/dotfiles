@@ -9,6 +9,7 @@
 --exclude=log
 --exclude=*.min.*
 --exclude=node_modules
+--exclude=vendor
 
 --langmap=php:.inc.php
 --PHP-kinds=+cfd
