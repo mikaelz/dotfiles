@@ -25,7 +25,7 @@ set path+=**
 
 " syntax, highlighting and spelling
 set background=dark           " the background color brightness
-set synmaxcol=200             " maximum column to look for syntax items
+set synmaxcol=120             " maximum column to look for syntax items
 syntax sync minlines=256
 set nocursorline              " highlight the screen line of the cursor
 set nocursorcolumn
