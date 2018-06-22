@@ -507,7 +507,7 @@ awful.rules.rules = {
       properties = { tag = tags[1][1] } },
     { rule = { class = "Filezilla" },
       properties = { tag = tags[1][2] } },
-    { rule = { class = "Gimp-2.8" },
+    { rule = { class = "Gimp-2.10" },
       properties = { tag = tags[1][3], floating = true } },
     { rule = { class = "Tor Browser" },
       properties = { tag = tags[1][3] } },
@@ -521,6 +521,8 @@ awful.rules.rules = {
       properties = { tag = tags[2][3] } },
     { rule = { name = "Skype for Linux Beta" },
       properties = { tag = tags[2][3] } },
+    { rule = { class = "Transmission" },
+      properties = { tag = tags[2][5] } },
     { rule = { class = "Spotify" },
       properties = { tag = tags[2][6] } },
     { rule_any = { class = { "MPlayer", "mpv", "feh", "mupdf" } },
@@ -621,6 +623,7 @@ run_once("urxvt -name work -e screen")
 run_once("urxvt -name logs -e logs.sh")
 run_once("thunderbird")
 run_once("spotify")
+run_once("transmission-gtk")
 -- run_once("skypeforlinux")
 -- run_once("firefox")
 -- run_once("tor-browser-en")
