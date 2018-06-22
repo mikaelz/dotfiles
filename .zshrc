@@ -117,7 +117,7 @@ alias pythonserve='python3 -m http.server'
 alias phpserve='php -S localhost:8080 -t .'
 alias p='ping google-public-dns-a.google.com'
 alias phpunit='phpunit --colors=always'
-alias composer="php -d memory_limit=-1 $(which -p composer)"
+# alias composer="php -d memory_limit=-1 $(which -p composer)"
 alias cdu='composer dumpautoload -o'
 alias mc='TERM=xterm-256color mc'
 
