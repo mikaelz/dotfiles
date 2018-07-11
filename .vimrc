@@ -303,8 +303,8 @@ nmap <silent> <RIGHT> :cnext<CR>
 
 " Keep undo history across sessions by storing it in a file
 if has('persistent_undo')
-    call system('mkdir /tmp/.vim_undo')
-    set undodir=/tmp/.vim_undo//
+    call system('mkdir $HOME/.vim_undo')
+    set undodir=$HOME/.vim_undo/
     set undofile
     set undolevels=1000
     set undoreload=10000
