@@ -51,6 +51,8 @@ HIST_STAMPS="yyyy-mm-dd"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(docker docker-compose git-open screen wp-cli)
 
+eval $( dircolors -b $HOME/LS_COLORS )
+
 source $ZSH/oh-my-zsh.sh
 [ -f .zshrc_priv ] && source .zshrc_priv
 [ -f .zshrc_host ] && source .zshrc_host
@@ -61,6 +63,7 @@ export PATH="$HOME/Dropbox/home/bin:./node_modules/.bin:$HOME/.composer/vendor/b
 export EDITOR=vim
 export VISUAL=$EDITOR
 export PAGER=less
+export BROWSER=/usr/bin/chromium
 # export VDPAU_DRIVER=nvidia
 # export LIBVA_DRIVER_NAME=vdpau
 
@@ -119,7 +122,8 @@ alias p='ping google-public-dns-a.google.com'
 alias phpunit='phpunit --colors=always'
 # alias composer="php -d memory_limit=-1 $(which -p composer)"
 alias cdu='composer dumpautoload -o'
-alias mc='TERM=xterm-256color mc'
+alias mc='LANG="en_EN.UTF-8" TERM=xterm-256color mc'
+alias scr='screen'
 
 # SVN aliases
 alias svn_edit_log='svn propedit svn:log --revprop -r '
