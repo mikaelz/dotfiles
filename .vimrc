@@ -254,12 +254,6 @@ if &runtimepath =~ 'ale'
     nnoremap <F10> :ALEToggle<CR>
 endif
 
-" clear search results
-nnoremap <leader><space> :noh<CR>
-
-" list opened buffers
-nnoremap <leader>b :ls<cr>:b<space>
-
 " open taglist
 nnoremap <F2> :TlistOpen<CR>
 inoremap <F2> <Esc>:TlistOpen<CR>
@@ -295,22 +289,12 @@ vnoremap <C-c> "+y
 vnoremap < <gv
 vnoremap > >gv
 
-" bind Q(query) to grep word under cursor
+" grep word under cursor
 nnoremap Q :grep! "<C-R><C-W>"<CR>:cw<CR>
 
 " highlight trailing spaces in annoying red
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
-
-nnoremap <leader>w :w<CR>
-inoremap <leader>w <Esc>:w<CR>
-vnoremap <leader>w <Esc>:w<CR>
-
-nnoremap <leader>q :q<CR>
-inoremap <leader>q <Esc>:q<CR>
-vnoremap <leader>q <Esc>:q<CR>
-
-nnoremap <leader>n :tabnew<CR>
 
 nmap <silent> <UP>    :lprev<CR>
 nmap <silent> <DOWN>  :lnext<CR>
@@ -341,5 +325,4 @@ endif
 " https://coderwall.com/p/faceag/format-json-in-vim#comment_11021
 autocmd FileType json nnoremap <leader>f :%!python -m json.tool<CR>
 autocmd FileType php nnoremap <leader>f :ALEFix<CR>
-
 autocmd FileType php nnoremap <leader>l :!php -l %<CR>
