@@ -54,8 +54,8 @@ plugins=(docker docker-compose git-open screen wp-cli)
 eval $( dircolors -b $HOME/LS_COLORS )
 
 source $ZSH/oh-my-zsh.sh
-[ -f .zshrc_priv ] && source .zshrc_priv
-[ -f .zshrc_host ] && source .zshrc_host
+[[ -f .zshrc_priv ]] && source .zshrc_priv
+[[ -f .zshrc_host ]] && source .zshrc_host
 
 export HISTSIZE=1000000
 export SAVEHIST=1000000
@@ -123,7 +123,7 @@ alias phpunit='phpunit --colors=always'
 # alias composer="php -d memory_limit=-1 $(which -p composer)"
 alias cdu='composer dumpautoload -o'
 alias mc='LANG="en_EN.UTF-8" TERM=xterm-256color mc'
-alias scr='screen'
+alias sc='screen'
 
 # SVN aliases
 alias svn_edit_log='svn propedit svn:log --revprop -r '
@@ -155,6 +155,7 @@ alias gdamb='git branch --merged | egrep -v "(^\*|master)" | xargs git branch -d
 alias RS='systemctl --user restart synergys.service'
 alias restart-samba='sudo systemctl restart smbd.service;sudo systemctl restart nmbd.service'
 alias record='ffmpeg -f alsa -ac 2 -i plughw:0,0 -f x11grab -r 30 -s 1920x1080 -i :0.0 -vcodec libx264 -preset ultrafast -threads 5 ~/Downloads/record_screencast.mkv'
+alias record-muted='ffmpeg -f x11grab -r 30 -s 1920x1080 -i :0.0 -vcodec libx264 -preset ultrafast -threads 5 ~/Downloads/record_screencast.mkv'
 
 if [[ "$(uname)" == "Linux" ]]; then
     vim() STTY=-ixon command vim "$@"
