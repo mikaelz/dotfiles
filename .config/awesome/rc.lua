@@ -523,6 +523,8 @@ awful.rules.rules = {
       properties = { tag = tags[2][3] } },
     { rule = { class = "Transmission" },
       properties = { tag = tags[2][5] } },
+    { rule = { class = "Slack" },
+      properties = { tag = tags[1][4] } },
     { rule = { class = "Spotify" },
       properties = { tag = tags[2][6] } },
     { rule_any = { class = { "MPlayer", "mpv", "feh", "mupdf" } },
@@ -622,6 +624,7 @@ run_once("filezilla")
 run_once("urxvt -name work -e screen")
 run_once("urxvt -name logs -e logs.sh")
 run_once("thunderbird")
+run_once("slack")
 run_once("spotify")
 run_once("transmission-gtk")
 -- run_once("skypeforlinux")
