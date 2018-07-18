@@ -51,11 +51,9 @@ HIST_STAMPS="yyyy-mm-dd"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(docker docker-compose git-open screen wp-cli)
 
-eval $( dircolors -b $HOME/LS_COLORS )
-
 source $ZSH/oh-my-zsh.sh
-[[ -f .zshrc_priv ]] && source .zshrc_priv
-[[ -f .zshrc_host ]] && source .zshrc_host
+[[ -f $HOME/.zshrc_priv ]] && source $HOME/.zshrc_priv
+[[ -f $HOME/.zshrc_host ]] && source $HOME/.zshrc_host
 
 export HISTSIZE=1000000
 export SAVEHIST=1000000
@@ -180,9 +178,8 @@ if [[ "$(uname)" == "Darwin" ]]; then
         && sudo launchctl load -F /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist'
 fi
 
-if [ -f $HOME/.dircolors ]
-then
-    eval `dircolors -b $HOME/.dircolors`
+if [ -f $HOME/LS_COLORS ]; then
+    eval $( dircolors -b $HOME/LS_COLORS )
 fi
 
 # zsh is able to auto-do some kungfoo
