@@ -381,7 +381,7 @@ globalkeys = awful.util.table.join(
     -- Alt + Right Shift switches the current keyboard layout
     awful.key({ "Mod1" }, "Shift_L", function () kbdcfg.switch() end),
     -- Prompt
-    awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen.index]:run() end),
 
     awful.key({ modkey }, "x",
               function ()
