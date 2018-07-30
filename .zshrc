@@ -49,7 +49,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(docker docker-compose git-open screen wp-cli)
+plugins=(composer docker docker-compose git-open screen wp-cli)
 
 source $ZSH/oh-my-zsh.sh
 [[ -f $HOME/.zshrc_priv ]] && source $HOME/.zshrc_priv
@@ -120,7 +120,7 @@ alias p='ping google-public-dns-a.google.com'
 alias phpunit='phpunit --colors=always'
 # alias composer="php -d memory_limit=-1 $(which -p composer)"
 alias cdu='composer dumpautoload -o'
-alias mc='LANG="en_EN.UTF-8" TERM=xterm-256color mc'
+alias mc='TERM=xterm-256color mc'
 alias sc='screen'
 
 # SVN aliases
