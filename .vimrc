@@ -322,6 +322,11 @@ if exists('+colorcolumn')
     set colorcolumn=120
 endif
 
+let g:auto_save = 1  " enable AutoSave on Vim startup
+let g:auto_save_silent = 0  " display the auto-save notification
+let g:auto_save_write_all_buffers = 0  " do not write to all open buffers as if you would use :wa
+let g:auto_save_events = ["InsertLeave", "TextChanged"]
+
 " https://coderwall.com/p/faceag/format-json-in-vim#comment_11021
 autocmd FileType json nnoremap <leader>f :%!python -m json.tool<CR>
 autocmd FileType php nnoremap <leader>f :ALEFix<CR>

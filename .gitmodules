@@ -61,3 +61,6 @@
 [submodule ".vim/bundle/vim-fat-finger"]
 	path = .vim/bundle/vim-fat-finger
 	url = https://github.com/chip/vim-fat-finger.git
+[submodule ".vim/bundle/vim-auto-save"]
+	path = .vim/bundle/vim-auto-save
+	url = https://github.com/907th/vim-auto-save.git
