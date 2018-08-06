@@ -466,7 +466,7 @@ awful.rules.rules = {
       properties = { tag = tags[1][3], floating = true } },
     { rule = { class = "Tor Browser" },
       properties = { tag = tags[1][3] } },
-    { rule = { instance = "Slack - websupport" },
+    { rule = { instance = "slack" },
       properties = { tag = tags[1][5] } },
     { rule = { class = "spotify" },
       properties = { tag = tags[1][5] } },
