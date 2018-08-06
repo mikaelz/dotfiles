@@ -4,26 +4,18 @@
 -- Ideas:
 -- https://github.com/jcmuller/my-awesome-wm-config/blob/master/rc.lua
 --
--- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
 awful.rules = require("awful.rules")
 require("awful.autofocus")
--- Widget and layout library
 local wibox = require("wibox")
--- Theme handling library
 local beautiful = require("beautiful")
 local vicious = require("vicious")
-local wimpd = require("wimpd")
-local mpc = wimpd.new()
--- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
 
+local weather_widget = require('weather')
 require('textvolume')
--- require('yawn')
--- yawn.register(820252) -- Guta WOEID
-
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -111,7 +103,6 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "VNC jarvis", "vncviewer -passwd " .. os.getenv("HOME") .. "/.vnc/jarvis_passwd jarvis:1" },
                                     { "open terminal", terminal }
                                   }
                         })
@@ -123,31 +114,20 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
--- MPD
--- http://awesome.naquadah.org/wiki/Awesompd#How_to_start
-local awesompd = require("awesompd/awesompd")
-musicwidget = awesompd:create()
-musicwidget.font = "Sans"
-musicwidget.scrolling = false
-musicwidget.output_size = 30
-musicwidget.update_interval = 10
-musicwidget.path_to_icons = "/home/mike/.config/awesome/awesompd/icons"
-musicwidget.show_album_cover = false
-musicwidget.album_cover_size = 50
-musicwidget.ldecorator = "| "
-musicwidget.rdecorator = " |"
-musicwidget.servers = {
-	{ server = "localhost",
-	port = 6600 } }
-	musicwidget:register_buttons({
-	{ "Control", awesompd.MOUSE_SCROLL_UP, musicwidget:command_prev_track() },
-	{ "Control", awesompd.MOUSE_SCROLL_DOWN, musicwidget:command_next_track() },
-	{ "", awesompd.MOUSE_RIGHT, musicwidget:command_show_menu() }
-})
-musicwidget:run()
--- }}}
-
 -- {{{ Wibox
+wifi = wibox.widget.textbox()
+vicious.register(wifi, vicious.widgets.wifi, "${ssid}:${link}", 60, "wlan0")
+
+function ip_line()
+    local f = io.popen("ip addr show eth0 | grep 'inet ' | cut -d' ' -f6")
+    local l = f:lines()
+    local v = ''
+    for line in l do
+        v = line
+    end
+    return {v}
+end
+
 cpuwidget = awful.widget.graph()
 cpuwidget:set_width(50)
 cpuwidget:set_background_color("#494B4F")
@@ -161,42 +141,18 @@ memwidget = wibox.widget.textbox()
 vicious.register(memwidget, vicious.widgets.mem, "<b>mem</b> $1% <b>swp</b> $5% ", 2)
 
 fswidget = wibox.widget.textbox()
-vicious.register(fswidget, vicious.widgets.fs, "<b>sda</b> ${/ used_gb}/${/ size_gb} <b>sdb</b> ${/data used_gb}/${/data size_gb} ", 2)
+vicious.register(fswidget, vicious.widgets.fs, "<b>sda</b> ${/ used_gb}/${/ size_gb} ", 2)
 fswidget:buttons( awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e sudo iotop") end) )
 
-vicious.cache(vicious.widgets.net)
+ipwidget = wibox.widget.textbox()
+vicious.register(ipwidget, ip_line, "<b>$1</b>: ", 60)
 
-myethdownwidget = wibox.widget.textbox()
-vicious.register(myethdownwidget, vicious.widgets.net, '<b>down</b> ${eno1 down_kb}kbps', 1)
+netwidget = wibox.widget.textbox()
+vicious.register(netwidget, vicious.widgets.net, "${eth0 down_kb}kB/${eth0 up_kb}kB ", 2)
+netwidget:buttons( awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e nethogs") end) )
 
-myethdowngraph = awful.widget.graph()
-myethdowngraph:set_width(50)
-myethdowngraph:set_background_color("#494B4F")
-myethdowngraph:set_color({
-	type = "linear",
-	from = { 0, beautiful.graph_height },
-	to = { 0, 0 },
-	stops = {
-		{ 0, "#AECF96" },
-	}
-})
-vicious.register(myethdowngraph, vicious.widgets.net, "${eno1 down_kb}", 1)
-
-myethupwidget = wibox.widget.textbox()
-vicious.register(myethupwidget, vicious.widgets.net, '<b>up</b> ${eno1 up_kb}kbps', 1)
-
-myethupgraph = awful.widget.graph()
-myethupgraph:set_width(50)
-myethupgraph:set_background_color("#494B4F")
-myethupgraph:set_color({
-	type = "linear",
-	from = { 0, beautiful.graph_height },
-	to = { 0, 0 },
-	stops = {
-		{ 0, "#FF5656" },
-	}
-})
-vicious.register(myethupgraph, vicious.widgets.net, "${eno1 up_kb}", 1)
+wifiwidget = wibox.widget.textbox()
+vicious.register(wifiwidget, vicious.widgets.wifi, "${wlan0 ssid} ${wlan0 sign} ", 2)
 
 -- Keyboard map indicator and changer
 kbdcfg = {}
@@ -302,14 +258,12 @@ for s = 1, screen.count() do
     right_layout:add(cpuwidget)
     right_layout:add(memwidget)
     right_layout:add(fswidget)
-    right_layout:add(myethdownwidget)
-    right_layout:add(myethdowngraph)
-    right_layout:add(myethupwidget)
-    right_layout:add(myethupgraph)
+    right_layout:add(ipwidget)
+    right_layout:add(netwidget)
+    right_layout:add(wifiwidget)
     right_layout:add(volume_widget)
-	-- right_layout:add(musicwidget.widget)
-    -- right_layout:add(yawn.widget)
     right_layout:add(kbdcfg.widget)
+    right_layout:add(weather_widget)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
@@ -401,16 +355,10 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 5%-", false) end),
     -- Mediakeys directly control Tomahawk
 
-    -- Media keys controlling MPD
-    -- awful.key({ }, "XF86AudioPlay", function () mpc:toggle_play() mpc:update() end),
-    -- awful.key({ }, "XF86AudioNext", function () mpc:next()        mpc:update() end),
-    -- awful.key({ }, "XF86AudioPrev", function () mpc:previous()    mpc:update() end),
-
     -- Media keys controlling Spotify
     awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")  end),
     awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")  end),
     awful.key({ }, "XF86AudioNext", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")  end),
-
     -- PrintScrn
     -- awful.key({ }, "Print", function() awful.util.spawn(os.getenv("HOME") .. "/bin/screenshot",false) end),
     -- Alternate for PrintScreen, only one hand needed as on OSX
@@ -507,26 +455,16 @@ awful.rules.rules = {
       properties = { tag = tags[1][1] } },
     { rule = { class = "Filezilla" },
       properties = { tag = tags[1][2] } },
-    { rule = { class = "Gimp-2.10" },
+    { rule = { class = "Gimp-2.8" },
       properties = { tag = tags[1][3], floating = true } },
     { rule = { class = "Tor Browser" },
       properties = { tag = tags[1][3] } },
-    { rule = { instance = "work" },
-      properties = { tag = tags[2][1] } },
-    { rule = { instance = "logs" },
+    { rule = { instance = "Slack - websupport" },
+      properties = { tag = tags[1][5] } },
+    { rule = { class = "spotify" },
       properties = { tag = tags[1][5] } },
     { rule = { class = "Thunderbird" },
-      properties = { tag = tags[2][2] } },
-    { rule = { class = "Pidgin", role="buddy_list" },
-      properties = { tag = tags[2][3] } },
-    { rule = { name = "Skype for Linux Beta" },
-      properties = { tag = tags[2][3] } },
-    { rule = { class = "Transmission" },
-      properties = { tag = tags[2][5] } },
-    { rule = { class = "Slack" },
-      properties = { tag = tags[1][4] } },
-    { rule = { class = "Spotify" },
-      properties = { tag = tags[2][6] } },
+      properties = { tag = tags[1][6] } },
     { rule_any = { class = { "MPlayer", "mpv", "feh", "mupdf" } },
       properties = { floating = true } }
 }
@@ -601,14 +539,8 @@ client.connect_signal("manage", function (c, startup)
     end
 end)
 
-client.connect_signal("focus", function(c)
-    c.border_color = beautiful.border_focus
-    c.opacity = 1
-end)
-client.connect_signal("unfocus", function(c)
-    c.border_color = beautiful.border_normal
-    c.opacity = 0.7
-end)
+client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
 -- {{{ Autostart
@@ -619,16 +551,12 @@ function run_once(prg)
 	awful.util.spawn_with_shell("pgrep -x -u $USER " .. prg .. " || (" .. prg .. ")")
 end
 
-run_once("chromium")
-run_once("filezilla")
-run_once("urxvt -name work -e screen")
-run_once("urxvt -name logs -e logs.sh")
-run_once("thunderbird")
-run_once("slack")
-run_once("spotify")
--- run_once("transmission-gtk")
--- run_once("skypeforlinux")
--- run_once("firefox")
+-- run_once("chromium")
+-- run_once("urxvt -name work -e screen")
+-- run_once("slack")
+-- run_once("spotify")
+-- run_once("thunderbird")
+-- run_once("filezilla")
 -- run_once("tor-browser-en")
 -- run_once("pidgin")
 -- }}}
