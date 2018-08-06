@@ -115,17 +115,24 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- }}}
 
 -- {{{ Wibox
-wifi = wibox.widget.textbox()
-vicious.register(wifi, vicious.widgets.wifi, "${ssid}:${link}", 60, "wlan0")
-
-function ip_line()
-    local f = io.popen("ip addr show eth0 | grep 'inet ' | cut -d' ' -f6")
-    local l = f:lines()
-    local v = ''
-    for line in l do
-        v = line
+netwidget_str = "${eth0 down_kb}kB/${eth0 up_kb}kB "
+function get_ip()
+    local cmd = io.popen("ip addr show eth0 | grep 'inet ' | cut -d' ' -f6")
+    local lines = cmd:lines()
+    local ip = ''
+    for line in lines do
+        ip = "<b>eth0</b> " .. line
     end
-    return {v}
+
+    if ip == '' then
+        cmd = io.popen("ip addr show wlan0 | grep 'inet ' | cut -d' ' -f6")
+        lines = cmd:lines()
+        for line in lines do
+            ip = "<b>wlan0</b> " .. line
+            netwidget_str = "${wlan0 down_kb}kB/${wlan0 up_kb}kB "
+        end
+    end
+    return {ip}
 end
 
 cpuwidget = awful.widget.graph()
@@ -145,14 +152,14 @@ vicious.register(fswidget, vicious.widgets.fs, "<b>sda</b> ${/ used_gb}/${/ size
 fswidget:buttons( awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e sudo iotop") end) )
 
 ipwidget = wibox.widget.textbox()
-vicious.register(ipwidget, ip_line, "<b>$1</b>: ", 60)
+vicious.register(ipwidget, get_ip, "$1 ", 2)
 
 netwidget = wibox.widget.textbox()
-vicious.register(netwidget, vicious.widgets.net, "${eth0 down_kb}kB/${eth0 up_kb}kB ", 2)
+vicious.register(netwidget, vicious.widgets.net, netwidget_str, 2)
 netwidget:buttons( awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e nethogs") end) )
 
 wifiwidget = wibox.widget.textbox()
-vicious.register(wifiwidget, vicious.widgets.wifi, "${wlan0 ssid} ${wlan0 sign} ", 2)
+vicious.register(wifiwidget, vicious.widgets.wifi, "${ssid} ${linp} | ", 2, 'wlan0')
 
 -- Keyboard map indicator and changer
 kbdcfg = {}
