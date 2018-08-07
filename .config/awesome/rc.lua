@@ -116,6 +116,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 -- {{{ Wibox
 netwidget_str = " | ${eth0 down_kb}kB/${eth0 up_kb}kB | "
+wifiwidget_str = ''
 function get_ip()
     local cmd = io.popen("ip addr show eth0 | grep 'inet ' | cut -d' ' -f6")
     local lines = cmd:lines()
@@ -130,6 +131,7 @@ function get_ip()
         for line in lines do
             ip = "<b>wlan0</b> " .. line
             netwidget_str = " | ${wlan0 down_kb}kB/${wlan0 up_kb}kB | "
+            wifiwidget_str = "${ssid} ${linp} | "
         end
     end
     return {ip}
@@ -159,7 +161,7 @@ vicious.register(netwidget, vicious.widgets.net, netwidget_str, 2)
 netwidget:buttons( awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e nethogs") end) )
 
 wifiwidget = wibox.widget.textbox()
-vicious.register(wifiwidget, vicious.widgets.wifi, "${ssid} ${linp} | ", 2, 'wlan0')
+vicious.register(wifiwidget, vicious.widgets.wifi, wifiwidget_str, 2, 'wlan0')
 
 -- Keyboard map indicator and changer
 kbdcfg = {}
