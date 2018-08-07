@@ -115,7 +115,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- }}}
 
 -- {{{ Wibox
-netwidget_str = "${eth0 down_kb}kB/${eth0 up_kb}kB "
+netwidget_str = " | ${eth0 down_kb}kB/${eth0 up_kb}kB | "
 function get_ip()
     local cmd = io.popen("ip addr show eth0 | grep 'inet ' | cut -d' ' -f6")
     local lines = cmd:lines()
@@ -129,7 +129,7 @@ function get_ip()
         lines = cmd:lines()
         for line in lines do
             ip = "<b>wlan0</b> " .. line
-            netwidget_str = "${wlan0 down_kb}kB/${wlan0 up_kb}kB "
+            netwidget_str = " | ${wlan0 down_kb}kB/${wlan0 up_kb}kB | "
         end
     end
     return {ip}
@@ -148,7 +148,7 @@ memwidget = wibox.widget.textbox()
 vicious.register(memwidget, vicious.widgets.mem, "<b>mem</b> $1% <b>swp</b> $5% ", 2)
 
 fswidget = wibox.widget.textbox()
-vicious.register(fswidget, vicious.widgets.fs, "<b>sda</b> ${/ used_gb}/${/ size_gb} ", 2)
+vicious.register(fswidget, vicious.widgets.fs, "<b>sda</b> ${/ used_gb}/${/ size_gb} | ", 2)
 fswidget:buttons( awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e sudo iotop") end) )
 
 ipwidget = wibox.widget.textbox()
