@@ -57,7 +57,7 @@ source $ZSH/oh-my-zsh.sh
 
 export HISTSIZE=1000000
 export SAVEHIST=1000000
-export PATH="$HOME/Dropbox/home/bin:./node_modules/.bin:$HOME/.composer/vendor/bin:/opt/local/bin:/usr/local/bin:$PATH"
+export PATH="$HOME/Dropbox/home/bin:./node_modules/.bin:$HOME/.composer/vendor/bin:/opt/bin:/usr/local/bin:$PATH"
 export EDITOR=vim
 export VISUAL=$EDITOR
 export PAGER=less
