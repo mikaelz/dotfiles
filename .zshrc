@@ -107,7 +107,6 @@ alias mkdir='mkdir -p'
 alias pidstat='pidstat -dlu'
 alias vi='vim'
 alias pgrep='pgrep -a'
-alias U='sudo pacman -Syu'
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias httpwritable='sudo chown -R http:http .; sudo chmod -R g+rw .'
 alias _wwwwritable='sudo chown -R _www:_www .; sudo chmod -R g+rw .'
@@ -132,6 +131,7 @@ alias svn_cleanup='svn status --no-ignore | grep '^\?' | sed 's/^\?     //'  | x
 
 # Docker aliases
 alias d='docker'
+alias dcor='docker-compose down && docker-compose up'
 alias ds='./docker/start.sh'
 alias dps='docker ps -a'
 alias di='docker inspect'
