@@ -133,6 +133,7 @@ alias cdu='composer dumpautoload -o'
 alias mc='TERM=xterm-256color mc'
 alias sc='screen'
 alias eth='sudo netctl stop-all && sudo netctl start eth0-dhcp'
+alias sss='systemctl status'
 
 # SVN aliases
 alias svn_edit_log='svn propedit svn:log --revprop -r '
