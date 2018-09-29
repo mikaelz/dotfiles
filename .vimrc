@@ -277,7 +277,7 @@ inoremap <F9> <Esc>:update<bar>make<CR>
 nnoremap <F11> :setlocal number!<CR>
 
 " list opened buffers
-nnoremap <C-E> :ls<cr>:b<space>
+nnoremap <leader>b :ls<cr>:b<space>
 
 nnoremap j gj
 nnoremap k gk
