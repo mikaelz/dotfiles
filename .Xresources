@@ -1,23 +1,44 @@
 xscreensaver.mode: blank
-xscreensaver.timeout: 0:05:00
-xscreensaver.cycle: 0:05:00
-xscreensaver.lockTimeout: 0:05:00
-xscreensaver.passwdTimeout: 0:00:10
+xscreensaver.timeout: 0:03:00
+xscreensaver.cycle: 0:03:00
+xscreensaver.lockTimeout: 0:03:00
+xscreensaver.passwdTimeout: 0:00:20
 xscreensaver.dpmsEnabled: true
 xscreensaver.dpmsQuickoffEnabled: false
-xscreensaver.dpmsStandby: 0:06:00
-xscreensaver.dpmsSuspend: 0:06:00
-xscreensaver.dpmsOff: 0:06:00
+xscreensaver.dpmsStandby: 0:03:10
+xscreensaver.dpmsSuspend: 0:03:10
+xscreensaver.dpmsOff: 0:05:10
 xscreensaver.lock: true
 xscreensaver.splash: false
 xscreensaver.logFile: /home/mike/xscreensaver.log
+xscreensaver.Dialog.headingFont: -*-*-bold-r-*--12-*-*-*-*-*-*-*
+xscreensaver.Dialog.bodyFont:    -*-*-medium-r-*-*-12-*-*-*-*-*-*-*
+xscreensaver.Dialog.labelFont:   -*-*-medium-r-*-*-12-*-*-*-*-*-*-*
+xscreensaver.Dialog.unameFont:   -*-*-medium-r-*-*-12-*-*-*-*-*-*-*
+xscreensaver.Dialog.buttonFont:  -*-*-bold-r-*-*-12-*-*-*-*-*-*-*
+xscreensaver.Dialog.dateFont:    -*-*-medium-r-*-*-12-*-*-*-*-*-*-*
+xscreensaver.passwd.passwdFont:  -*-*-bold-r-*-*-12-*-*-*-*-*-*-*
 
-URxvt.background: black
-URxvt.foreground: gray
-URxvt.scrollBar_right: true
-URxvt.scrollWithBuffer: true
-URxvt.saveLines: 5000
-URxvt.cursorBlink: true
+!Disables the insanely annoying Ctrl+Shift shortcut that enters ISO14755 mode
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+! Disable Ctrl-Alt-c & Ctrl-Alt-v bindings (optional)
+URxvt.keysym.C-M-c: builtin-string:
+URxvt.keysym.C-M-v: builtin-string:
+! Bind Ctrl-Shift-c & Ctrl-Shift-v to copy and paste
+! I dont know why, but I needed to use hex keysym values to get it to work
+URxvt.keysym.C-S-0x43: eval:selection_to_clipboard
+URxvt.keysym.C-S-0x56: eval:paste_clipboard
+
+URxvt*background: black
+URxvt*foreground: gray
+URxvt*highlightTextColor: #f0f0f0
+URxvt*scrollBar: false
+URxvt*scrollBar_right: true
+URxvt*scrollWithBuffer: true
+URxvt*saveLines: 1000
+URxvt*cursorBlink: true
 ! https://wiki.archlinux.org/index.php/Rxvt-unicode#Yankable_URLs_.28no_mouse.29
 URxvt.perl-lib: /usr/lib/urxvt/perl/
 URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
