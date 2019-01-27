@@ -14,7 +14,7 @@ local vicious = require("vicious")
 local naughty = require("naughty")
 local menubar = require("menubar")
 
-local weather_widget = require('weather')
+-- local weather_widget = require('weather')
 require('textvolume')
 
 -- {{{ Error handling
@@ -89,7 +89,8 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6 }, s, layouts[3])
+    -- tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8 }, s, layouts[2])
+    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8 }, s, layouts[6])
 end
 -- }}}
 
@@ -272,7 +273,7 @@ for s = 1, screen.count() do
     right_layout:add(wifiwidget)
     right_layout:add(volume_widget)
     right_layout:add(kbdcfg.widget)
-    right_layout:add(weather_widget)
+    -- right_layout:add(weather_widget)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
@@ -357,17 +358,22 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "p", function() menubar.show() end),
     awful.key({ modkey }, "F1", function() awful.screen.focus(1) end),
     awful.key({ modkey }, "F2", function() awful.screen.focus(2) end),
-    awful.key({ modkey, "Control" }, "l", function () awful.util.spawn("xscreensaver-command -lock") end),
+    awful.key({ modkey }, "l", function () awful.util.spawn("xscreensaver-command -lock") end),
     -- Media keys controlling volume
     awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer set Master toggle", false) end),
     awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 5%+", false) end),
     awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 5%-", false) end),
-    -- Mediakeys directly control Tomahawk
 
     -- Media keys controlling Spotify
-    awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")  end),
-    awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")  end),
-    awful.key({ }, "XF86AudioNext", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")  end),
+    -- awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")  end),
+    -- awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")  end),
+    -- awful.key({ }, "XF86AudioNext", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")  end),
+
+    -- Media keys controlling Google Play Music Desktop Player (gpmdp)
+    awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.google-play-music-desktop-player /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")  end),
+    awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.google-play-music-desktop-player /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")  end),
+    awful.key({ }, "XF86AudioNext", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.google-play-music-desktop-player /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")  end),
+
     -- PrintScrn
     -- awful.key({ }, "Print", function() awful.util.spawn(os.getenv("HOME") .. "/bin/screenshot",false) end),
     -- Alternate for PrintScreen, only one hand needed as on OSX
@@ -398,7 +404,7 @@ clientkeys = awful.util.table.join(
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 6.
-for i = 1, 6 do
+for i = 1, 8 do
     globalkeys = awful.util.table.join(globalkeys,
         -- View tag only.
         awful.key({ modkey }, "#" .. i + 9,
@@ -464,16 +470,16 @@ awful.rules.rules = {
       properties = { tag = tags[1][1] } },
     { rule = { class = "Filezilla" },
       properties = { tag = tags[1][2] } },
-    { rule = { class = "Gimp-2.8" },
+    { rule = { class = "Gimp-2.10" },
       properties = { tag = tags[1][3], floating = true } },
     { rule = { class = "Tor Browser" },
       properties = { tag = tags[1][3] } },
     { rule = { instance = "slack" },
-      properties = { tag = tags[1][5] } },
-    { rule = { class = "spotify" },
-      properties = { tag = tags[1][5] } },
-    { rule = { class = "Thunderbird" },
       properties = { tag = tags[1][6] } },
+    { rule = { instance = "[Ss]potify" },
+      properties = { tag = tags[1][7] } },
+    { rule = { class = "Thunderbird" },
+      properties = { tag = tags[1][8] } },
     { rule_any = { class = { "MPlayer", "mpv", "feh", "mupdf" } },
       properties = { floating = true } }
 }
@@ -560,11 +566,11 @@ function run_once(prg)
 	awful.util.spawn_with_shell("pgrep -x -u $USER " .. prg .. " || (" .. prg .. ")")
 end
 
--- run_once("chromium")
--- run_once("urxvt -name work -e screen")
+run_once("chromium")
+run_once("thunderbird")
+run_once("gpmdp")
 -- run_once("slack")
 -- run_once("spotify")
--- run_once("thunderbird")
 -- run_once("filezilla")
 -- run_once("tor-browser-en")
 -- run_once("pidgin")
