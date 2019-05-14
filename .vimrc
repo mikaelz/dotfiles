@@ -155,7 +155,7 @@ endif
 
 " colorscheme xoria256
 " colorscheme lucius
-colorscheme wombat256
+:silent! colorscheme wombat256
 " colorscheme molokai
 " colorscheme gardener
 " colorscheme greenvision
