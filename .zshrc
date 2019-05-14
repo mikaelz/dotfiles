@@ -1,3 +1,6 @@
+autoload -Uz compinit
+compinit
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -49,7 +52,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(composer docker docker-compose history git-open screen wp-cli)
+plugins=(composer docker docker-compose history screen wp-cli)
 
 source $ZSH/oh-my-zsh.sh
 [[ -f $HOME/.zshrc_priv ]] && source $HOME/.zshrc_priv
@@ -137,6 +140,7 @@ alias sc='screen'
 alias scdr='screen -d -r'
 alias eth='sudo netctl stop-all && sudo netctl start eth0-dhcp'
 alias sss='systemctl status'
+alias hosts='cat /etc/hosts'
 
 # SVN aliases
 alias svn_edit_log='svn propedit svn:log --revprop -r '
@@ -159,7 +163,6 @@ alias gs='git status'
 alias gst='git stash'
 alias gstl='git stash list'
 alias gd='git diff'
-alias go='git open'
 alias gp='git pull'
 alias gpp='git pull --prune'
 alias gpu='git push'
