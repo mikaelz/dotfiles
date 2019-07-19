@@ -1,5 +1,4 @@
-autoload -Uz compinit
-compinit
+autoload -Uz compinit && compinit
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -8,7 +7,8 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="gentoo"
+# ZSH_THEME="gentoo"
+ZSH_THEME="tonotdo"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -65,6 +65,7 @@ export EDITOR=vim
 export VISUAL=$EDITOR
 export PAGER=less
 export BROWSER=/usr/bin/chromium
+export TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S'
 # export VDPAU_DRIVER=nvidia
 # export LIBVA_DRIVER_NAME=vdpau
 
@@ -176,7 +177,7 @@ alias gdamb='git branch --merged | egrep -v "(^\*|master)" | xargs git branch -d
 
 alias RS='systemctl --user restart synergys.service'
 alias restart-samba='sudo systemctl restart smbd.service;sudo systemctl restart nmbd.service'
-alias record='ffmpeg -f alsa -ac 2 -i plughw:0,0 -f x11grab -r 30 -s 1920x1080 -i :0.0 -vcodec libx264 -preset ultrafast -threads 5 ~/Downloads/record_screencast.mkv'
+alias record='ffmpeg -f alsa -ac 2 -i plughw:0,1 -f x11grab -r 30 -s 1920x1080 -i :0.0 -vcodec libx264 -preset ultrafast -threads 5 ~/Downloads/record_screencast.mkv'
 alias record-muted='ffmpeg -f x11grab -r 30 -s 1920x1080 -i :0.0 -vcodec libx264 -preset ultrafast -threads 5 ~/Downloads/record_screencast.mkv'
 
 if [[ "$(uname)" == "Linux" ]]; then
@@ -250,3 +251,9 @@ transfer() {
 
 accept-line() {: "${BUFFER:="ls -lah"}"; zle ".$WIDGET"}
 zle -N accept-line
+
+function prompt_char {
+    git branch >/dev/null 2>/dev/null && echo '±' && return
+    hg root >/dev/null 2>/dev/null && echo '☿' && return
+    echo '$'
+}
