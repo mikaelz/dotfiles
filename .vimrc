@@ -132,13 +132,14 @@ filetype plugin indent on
 " Enable extended % matching
 ru macros/matchit.vim
 
-if $TERM == 'xterm-256color' || $TERM == 'screen-256color'
-    set t_Co=256
-endif
+" if $TERM == 'xterm-256color' || $TERM == 'screen-256color'
+    " set t_Co=256
+" endif
+set t_Co=16
 
 if has('gui_running')
-	set guicursor=a:blinkon0 " Disable blinking cursor
-	set guifont=Monaco:h12
+    set guicursor=a:blinkon0 " Disable blinking cursor
+    set guifont=Monaco:h12
 	set guioptions=ac " Disable GUI menu and toolbar
 	set lines=45 columns=180 " Maximize gvim window
 else
@@ -154,11 +155,10 @@ else
 endif
 
 " colorscheme xoria256
-" colorscheme lucius
-:silent! colorscheme wombat256
+" :silent! colorscheme wombat256
 " colorscheme molokai
-" colorscheme gardener
 " colorscheme greenvision
+:silent colorscheme desert
 
 " correct some spelling mistakes Insert mode
 iabbrev PSOT POST
@@ -229,6 +229,7 @@ endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 if &runtimepath =~ 'ale'
+    let g:ale_enabled = 0
     let g:ale_statusline_format = ['Errors: %d', 'Warnings: %d', '⬥ ok']
     let g:ale_echo_msg_error_str = 'E'
     let g:ale_echo_msg_warning_str = 'W'
@@ -331,3 +332,6 @@ let g:auto_save_events = ["InsertLeave"]
 autocmd FileType json nnoremap <leader>f :%!python -m json.tool<CR>
 autocmd FileType php nnoremap <leader>f :ALEFix<CR>
 autocmd FileType php nnoremap <leader>l :!php -l %<CR>
+
+" kitty-term workaround due background
+let &t_ut=''
