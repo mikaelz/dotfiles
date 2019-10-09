@@ -167,6 +167,7 @@ alias gd='git diff'
 alias gp='git pull'
 alias gpp='git pull --prune'
 alias gpu='git push'
+alias gpub="git push --set-upstream $(git config branch.`git name-rev --name-only HEAD`.remote) $(git rev-parse --abbrev-ref HEAD)"
 alias gc='git commit -v'
 alias gco='git checkout'
 alias gg='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --all --decorate --abbrev-commit --date=relative'
