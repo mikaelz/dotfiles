@@ -1,4 +1,3 @@
-#
 # ~/.screenrc
 #
 # Thanks to:
@@ -29,9 +28,10 @@ activity "%"  # tell me when stuff happens!
 # allow bold colors - necessary for some reason
 attrcolor b ".I"
 
-term screen-256color-bce
-termcapinfo screen* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
-termcapinfo screen* ti@:te@ # make scrollbar work
+# term screen-256color-bce
+term xterm-256color
+termcapinfo xterm* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+termcapinfo xterm* ti@:te@ # make scrollbar work
 
 # erase background with current bg color
 defbce on
@@ -48,6 +48,7 @@ screen 1
 
 select 0
 
-backtick 0 0 0 whoami # set "%0`" to equal the output of `whoami`
+backtick 0 0 0 whoami # use "%0`" to equal the output
+backtick 1 0 5 $HOME/bin/screen_disk_usage # use "%1`" to equal the output
 
-hardstatus alwayslastline "%{.bW} %-w%{.rW}%n %t%{-}%+w %=%{..} %l | %0`@%H | %D %c:%s %d.%m.%Y"
+hardstatus alwayslastline "%{.bW} %-w%{.rW}%n %t%{-}%+w %=%{..} %l | %1` %0`@%H | %D %c:%s %d.%m.%Y"
