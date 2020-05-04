@@ -47,7 +47,8 @@ end
 beautiful.init(os.getenv("HOME") .. "/.config/awesome/theme/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvt"
+-- terminal = "urxvtc"
+terminal = "kitty"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -115,29 +116,6 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
--- {{{ Wibox
-netwidget_str = " | ${eth0 down_kb}kB/${eth0 up_kb}kB | "
-wifiwidget_str = ''
-function get_ip()
-    local cmd = io.popen("ip addr show eth0 | grep 'inet ' | cut -d' ' -f6")
-    local lines = cmd:lines()
-    local ip = ''
-    for line in lines do
-        ip = "<b>eth0</b> " .. line
-    end
-
-    if ip == '' then
-        cmd = io.popen("ip addr show wlan0 | grep 'inet ' | cut -d' ' -f6")
-        lines = cmd:lines()
-        for line in lines do
-            ip = "<b>wlan0</b> " .. line
-            netwidget_str = " | ${wlan0 down_kb}kB/${wlan0 up_kb}kB | "
-            wifiwidget_str = "${ssid} ${linp} | "
-        end
-    end
-    return {ip}
-end
-
 cpuwidget = awful.widget.graph()
 cpuwidget:set_width(50)
 cpuwidget:set_background_color("#494B4F")
@@ -154,15 +132,28 @@ fswidget = wibox.widget.textbox()
 vicious.register(fswidget, vicious.widgets.fs, "<b>sda</b> ${/ used_gb}/${/ size_gb} | ", 2)
 fswidget:buttons( awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e sudo iotop") end) )
 
-ipwidget = wibox.widget.textbox()
-vicious.register(ipwidget, get_ip, "$1 ", 2)
-
+ifaces = { 'eth0', 'wlan0' }
 netwidget = wibox.widget.textbox()
-vicious.register(netwidget, vicious.widgets.net, netwidget_str, 2)
+vicious.register(netwidget, vicious.widgets.net,
+function(widget, args)
+    t=''  
+    for i = 1, #ifaces do
+        e = ifaces[i]       
+        if args["{"..e.." carrier}"] == 1 then
+            if e == 'wlan0' then
+                t=t..' | '..'<b>wlan0</b> '..args['{'..e..' down_kb}']..'kB/' ..args['{'..e..' up_kb}']..'kB '
+            else          
+                t=t..'|'..'<b>eth0</b> '..args['{'..e..' down_kb}']..'kB/' ..args['{'..e..' up_kb}']..'kB'
+            end
+        end
+    end               
+    if string.len(t)>0 then -- remove leading '|'
+        return string.sub(t,2,-1)
+    end               
+    return 'No network'
+end
+, 2)
 netwidget:buttons( awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e nethogs") end) )
-
-wifiwidget = wibox.widget.textbox()
-vicious.register(wifiwidget, vicious.widgets.wifi, wifiwidget_str, 2, 'wlan0')
 
 -- Keyboard map indicator and changer
 kbdcfg = {}
@@ -236,6 +227,9 @@ mytasklist.buttons = awful.util.table.join(
                                               if client.focus then client.focus:raise() end
                                           end))
 
+local systray = wibox.widget.systray()
+systray:set_screen(screen[2]);
+
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
     mypromptbox[s] = awful.widget.prompt()
@@ -264,15 +258,13 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
-    if s == 1 then right_layout:add(wibox.widget.systray()) end
+    right_layout:add(kbdcfg.widget)
+    right_layout:add(systray)
     right_layout:add(cpuwidget)
     right_layout:add(memwidget)
     right_layout:add(fswidget)
-    right_layout:add(ipwidget)
     right_layout:add(netwidget)
-    right_layout:add(wifiwidget)
     right_layout:add(volume_widget)
-    right_layout:add(kbdcfg.widget)
     -- right_layout:add(weather_widget)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
@@ -358,6 +350,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "p", function() menubar.show() end),
     awful.key({ modkey }, "F1", function() awful.screen.focus(1) end),
     awful.key({ modkey }, "F2", function() awful.screen.focus(2) end),
+    awful.key({ modkey }, "F3", function() awful.screen.focus(3) end),
     awful.key({ modkey }, "l", function () awful.util.spawn("xscreensaver-command -lock") end),
     -- Media keys controlling volume
     awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer set Master toggle", false) end),
@@ -365,17 +358,17 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 5%-", false) end),
 
     -- Media keys controlling Spotify
-    -- awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")  end),
-    -- awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")  end),
-    -- awful.key({ }, "XF86AudioNext", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")  end),
+    awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")  end),
+    awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")  end),
+    awful.key({ }, "XF86AudioNext", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")  end),
 
     -- Media keys controlling Google Play Music Desktop Player (gpmdp)
-    awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.google-play-music-desktop-player /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")  end),
-    awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.google-play-music-desktop-player /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")  end),
-    awful.key({ }, "XF86AudioNext", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.google-play-music-desktop-player /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")  end),
+    -- awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.google-play-music-desktop-player /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")  end),
+    -- awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.google-play-music-desktop-player /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")  end),
+    -- awful.key({ }, "XF86AudioNext", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.google-play-music-desktop-player /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")  end),
 
     -- PrintScrn
-    -- awful.key({ }, "Print", function() awful.util.spawn(os.getenv("HOME") .. "/bin/screenshot",false) end),
+    awful.key({ }, "Print", function() awful.util.spawn_with_shell(os.getenv("HOME") .. "/bin/screenshot",false) end),
     -- Alternate for PrintScreen, only one hand needed as on OSX
     awful.key({ modkey, "Control" }, 3, function() awful.util.spawn_with_shell(os.getenv("HOME") .. "/bin/screenshot",false) end),
     awful.key({ modkey, "Control" }, 4, function() awful.util.spawn_with_shell("sleep 0.5 &&" .. os.getenv("HOME") .. "/bin/screenshot-select",false) end)
@@ -467,19 +460,21 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons } },
     { rule = { class = "chromium" },
-      properties = { tag = tags[1][1] } },
+      properties = { tag = tags[2][1] } },
     { rule = { class = "Filezilla" },
-      properties = { tag = tags[1][2] } },
+      properties = { tag = tags[2][2] } },
     { rule = { class = "Gimp-2.10" },
-      properties = { tag = tags[1][3], floating = true } },
+      properties = { tag = tags[2][3], floating = true } },
     { rule = { class = "Tor Browser" },
-      properties = { tag = tags[1][3] } },
+      properties = { tag = tags[2][3] } },
     { rule = { instance = "slack" },
-      properties = { tag = tags[1][6] } },
+      properties = { tag = tags[2][6] } },
     { rule = { instance = "[Ss]potify" },
+      properties = { tag = tags[2][7] } },
+    { rule = { class = "google play music desktop player" },
       properties = { tag = tags[1][7] } },
     { rule = { class = "Thunderbird" },
-      properties = { tag = tags[1][8] } },
+      properties = { tag = tags[2][8] } },
     { rule_any = { class = { "MPlayer", "mpv", "feh", "mupdf" } },
       properties = { floating = true } }
 }
@@ -567,10 +562,10 @@ function run_once(prg)
 end
 
 run_once("chromium")
+run_once("slack")
+-- run_once("gpmdp")
+run_once("spotify")
 run_once("thunderbird")
-run_once("gpmdp")
--- run_once("slack")
--- run_once("spotify")
 -- run_once("filezilla")
 -- run_once("tor-browser-en")
 -- run_once("pidgin")
