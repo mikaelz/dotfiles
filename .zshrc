@@ -153,7 +153,7 @@ alias svn_cleanup='svn status --no-ignore | grep '^\?' | sed 's/^\?     //'  | x
 # Docker aliases
 alias d='docker'
 alias dcor='docker-compose down && docker-compose up'
-alias ds='./docker/start.sh'
+alias ds='[[ -f ./docker/start.sh ]] && ./docker/start.sh; [[ -f ./.docker/start.sh ]] && ./.docker/start.sh'
 alias dps='docker ps -a'
 alias di='docker inspect'
 alias dit='docker exec -i -t'
