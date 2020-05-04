@@ -34,7 +34,7 @@ end
 function to_direction(degrees)
     -- Ref: https://www.campbellsci.eu/blog/convert-wind-directions
     if degrees == nil then
-        return "Unknown dir"
+        return "Unknown direction"
     end
     local directions = {
         "N",
@@ -82,8 +82,8 @@ weather_widget:connect_signal("mouse::enter", function()
             '<b>Pressure: </b>' .. resp.main.pressure .. 'hPa<br>' ..
             '<b>Clouds: </b>' .. resp.clouds.all .. '%<br>' ..
             '<b>Wind: </b>' .. resp.wind.speed .. 'm/s (' .. to_direction(resp.wind.deg) .. ')',
-        timeout = 5, hover_timeout = 10,
-        width = 200
+        timeout = 5, hover_timeout = 30,
+        width = 220
     }
 end)
 weather_widget:connect_signal("mouse::leave", function()
