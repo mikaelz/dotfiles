@@ -136,20 +136,20 @@ ifaces = { 'eth0', 'wlan0' }
 netwidget = wibox.widget.textbox()
 vicious.register(netwidget, vicious.widgets.net,
 function(widget, args)
-    t=''  
+    t=''
     for i = 1, #ifaces do
-        e = ifaces[i]       
+        e = ifaces[i]
         if args["{"..e.." carrier}"] == 1 then
             if e == 'wlan0' then
                 t=t..' | '..'<b>wlan0</b> '..args['{'..e..' down_kb}']..'kB/' ..args['{'..e..' up_kb}']..'kB '
-            else          
+            else
                 t=t..'|'..'<b>eth0</b> '..args['{'..e..' down_kb}']..'kB/' ..args['{'..e..' up_kb}']..'kB'
             end
         end
-    end               
+    end
     if string.len(t)>0 then -- remove leading '|'
         return string.sub(t,2,-1)
-    end               
+    end
     return 'No network'
 end
 , 2)
@@ -293,12 +293,12 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
-    awful.key({ modkey,           }, "j",
+    awful.key({ modkey,           }, "k",
         function ()
             awful.client.focus.byidx( 1)
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey,           }, "k",
+    awful.key({ modkey,           }, "j",
         function ()
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
@@ -308,8 +308,8 @@ globalkeys = awful.util.table.join(
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
-    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
-    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
+    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative( 1) end),
+    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative(-1) end),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
     awful.key({ modkey,           }, "Tab",
         function ()
@@ -320,7 +320,7 @@ globalkeys = awful.util.table.join(
         end),
 
     -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal, {tag = mouse.screen.selected_tag}) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
