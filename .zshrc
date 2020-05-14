@@ -155,8 +155,11 @@ alias d='docker'
 alias dcor='docker-compose down && docker-compose up'
 alias ds='[[ -f ./docker/start.sh ]] && ./docker/start.sh; [[ -f ./.docker/start.sh ]] && ./.docker/start.sh'
 alias dps='docker ps -a'
-alias di='docker inspect'
 alias dit='docker exec -i -t'
+
+function di {
+    docker-compose ps --services | while read container; do docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $container | cut -c2-; done
+}
 
 # GIT aliases
 alias ga='git add'
