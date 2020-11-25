@@ -52,7 +52,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(composer docker docker-compose history screen wp-cli)
+plugins=(docker docker-compose history screen wp-cli)
 
 source $ZSH/oh-my-zsh.sh
 [[ -f $HOME/.zshrc_priv ]] && source $HOME/.zshrc_priv
@@ -60,7 +60,7 @@ source $ZSH/oh-my-zsh.sh
 
 export HISTSIZE=1000000
 export SAVEHIST=1000000
-export PATH="$HOME/Dropbox/home/bin:./node_modules/.bin:$HOME/.composer/vendor/bin:/opt/bin:/usr/local/bin:$PATH"
+export PATH="$HOME/.symfony/bin:$HOME/Dropbox/home/bin:./node_modules/.bin:$HOME/.composer/vendor/bin:/opt/bin:/usr/local/bin:$PATH"
 export EDITOR=vim
 export VISUAL=$EDITOR
 export PAGER=less
@@ -110,6 +110,7 @@ alias ll='ls -Fhl'
 alias cp='cp -rv'
 alias mv='mv -v'
 alias rm='rm -iv'
+alias pm='progress -m'
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 alias sx='startx'
@@ -152,9 +153,9 @@ alias svn_cleanup='svn status --no-ignore | grep '^\?' | sed 's/^\?     //'  | x
 
 # Docker aliases
 alias d='docker'
-alias dcor='docker-compose down && docker-compose up'
+alias dcor='docker-compose down --remove-orphans && docker-compose up'
 alias ds='[[ -f ./docker/start.sh ]] && ./docker/start.sh; [[ -f ./.docker/start.sh ]] && ./.docker/start.sh'
-alias dps='docker ps -a'
+alias dps='docker ps -a --format "table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.CreatedAt}}\t{{.Status}}\t{{.Ports}}"'
 alias di='docker inspect '
 alias dit='docker exec -i -t'
 
@@ -166,6 +167,7 @@ function dip {
 alias ga='git add'
 alias gb='git branch'
 alias gs='git status'
+alias gsuno='git status --untracked-files=no'
 alias gst='git stash'
 alias gstl='git stash list'
 alias gd='git diff'
@@ -190,8 +192,8 @@ if [[ "$(uname)" == "Linux" ]]; then
     vim() STTY=-ixon command vim "$@"
 
     alias ls='ls --group-directories-first --color=auto'
-    alias pbcopy='xsel --clipboard --input'
-    alias pbpaste='xsel --clipboard --output'
+    alias pbcopy='DISPLAY=:0 xsel --clipboard --input'
+    alias pbpaste='DISPLAY=:0 xsel --clipboard --output'
     alias rD='echo -e "Restarting Docker" && sudo systemctl restart docker.service && systemctl status docker.service'
     alias rH='echo -e "Restarting Apache" && sudo systemctl restart httpd.service && systemctl status httpd.service'
     alias kH='echo -e "Killing Apache" && sudo systemctl stop httpd.service && systemctl status httpd.service'
