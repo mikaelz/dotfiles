@@ -218,16 +218,6 @@ if executable('ag')
 endif
 let g:ctrlp_max_height = 30
 
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-" let g:neocomplete#enable_auto_select = 1
-
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
 if &runtimepath =~ 'ale'
     let g:ale_enabled = 0
     let g:ale_statusline_format = ['Errors: %d', 'Warnings: %d', '⬥ ok']
@@ -324,6 +314,7 @@ if exists('+colorcolumn')
 endif
 
 let g:auto_save = 1  " enable AutoSave on Vim startup
+let g:auto_save_silent = 1
 
 " https://coderwall.com/p/faceag/format-json-in-vim#comment_11021
 autocmd FileType json nnoremap <leader>f :%!python -m json.tool<CR>
