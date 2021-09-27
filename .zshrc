@@ -66,6 +66,7 @@ export VISUAL=$EDITOR
 export PAGER=less
 export BROWSER=/usr/bin/brave
 export TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S'
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
 # export VDPAU_DRIVER=nvidia
 # export LIBVA_DRIVER_NAME=vdpau
 
@@ -102,7 +103,7 @@ alias eV='vi ~/.vimrc'
 alias eG='vi ~/.gitconfig'
 
 # commands
-alias k='exit'
+alias bc='bc -l'
 alias h='history'
 alias bc='bc -q'
 alias la='ls -Fa'
@@ -111,6 +112,7 @@ alias cp='cp -rv'
 alias mv='mv -v'
 alias rm='rm -iv'
 alias pm='progress -m'
+alias csvlook='csvlook -I'
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 alias sx='startx'
