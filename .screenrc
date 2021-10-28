@@ -8,6 +8,7 @@
 startup_message off
 
 # defshell -bash # dash makes it a login shell
+defshell zsh
 # shelltitle "$ |zsh"
 
 vbell on # no annoying audible bell
