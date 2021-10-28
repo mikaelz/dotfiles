@@ -52,7 +52,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(docker docker-compose history screen wp-cli)
+plugins=(docker docker-compose history)
 
 source $ZSH/oh-my-zsh.sh
 [[ -f $HOME/.zshrc_priv ]] && source $HOME/.zshrc_priv
@@ -103,9 +103,8 @@ alias eV='vi ~/.vimrc'
 alias eG='vi ~/.gitconfig'
 
 # commands
-alias bc='bc -l'
 alias h='history'
-alias bc='bc -q'
+alias bc='bc -ql'
 alias la='ls -Fa'
 alias ll='ls -Fhl'
 alias cp='cp -rv'
@@ -156,6 +155,8 @@ alias svn_cleanup='svn status --no-ignore | grep '^\?' | sed 's/^\?     //'  | x
 
 # Docker aliases
 alias d='docker'
+alias docker-compose='docker compose'
+alias dclf='docker-compose logs -f'
 alias dcor='docker-compose down --remove-orphans && docker-compose up'
 alias ds='[[ -f ./docker/start.sh ]] && ./docker/start.sh; [[ -f ./.docker/start.sh ]] && ./.docker/start.sh'
 alias dps='docker ps -a --format "table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.CreatedAt}}\t{{.Status}}\t{{.Ports}}"'
