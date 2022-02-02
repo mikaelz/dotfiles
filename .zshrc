@@ -190,7 +190,7 @@ alias gdamb='git branch --merged | egrep -v "(^\*|master)" | xargs git branch -d
 alias RS='systemctl --user restart synergys.service'
 alias restart-samba='sudo systemctl restart smbd.service;sudo systemctl restart nmbd.service'
 alias record='ffmpeg -f pulse -ac 2 -i default -f x11grab -r 25 -s 1920x1080 -i :0.0 -vcodec libx264 -preset ultrafast -threads 5 ~/Downloads/screencast.mp4'
-alias record-muted='ffmpeg -f x11grab -r 30 -s 1920x1080 -i :0.0 -vcodec libx264 -preset ultrafast -threads 5 ~/Downloads/muted-screencast.mp4'
+alias record-muted='ffmpeg -f x11grab -r 25 -s 1920x1080 -i :0.0 -vcodec libx264 -preset ultrafast -threads 5 ~/Downloads/muted-screencast.mp4'
 
 if [[ "$(uname)" == "Linux" ]]; then
     vim() STTY=-ixon command vim "$@"
