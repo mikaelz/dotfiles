@@ -45,7 +45,7 @@ bind > eval writebuf "exec sh -c 'xsel -bi </tmp/screen-exchange'"
 bind < eval "exec sh -c 'xsel -bo >/tmp/screen-exchange'" readbuf
 
 screen 0
-screen 1
+# screen 1
 
 select 0
 
