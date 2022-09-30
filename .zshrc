@@ -21,7 +21,7 @@ ZSH_THEME="tonotdo"
 DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+export UPDATE_ZSH_DAYS=7
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -52,7 +52,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(docker docker-compose history)
+plugins=(docker docker-compose history screen git-open)
 
 source $ZSH/oh-my-zsh.sh
 [[ -f $HOME/.zshrc_priv ]] && source $HOME/.zshrc_priv
@@ -155,7 +155,6 @@ alias svn_cleanup='svn status --no-ignore | grep '^\?' | sed 's/^\?     //'  | x
 
 # Docker aliases
 alias d='docker'
-alias docker-compose='docker compose'
 alias dclf='docker-compose logs -f'
 alias dcor='docker-compose down --remove-orphans && docker-compose up'
 alias ds='[[ -f ./docker/start.sh ]] && ./docker/start.sh; [[ -f ./.docker/start.sh ]] && ./.docker/start.sh'
