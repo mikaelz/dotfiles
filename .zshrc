@@ -52,7 +52,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(docker docker-compose history screen git-open)
+plugins=(docker docker-compose copybuffer copyfile copypath dirhistory history screen git-open systemadmin zsh-autosuggestions z)
 
 source $ZSH/oh-my-zsh.sh
 [[ -f $HOME/.zshrc_priv ]] && source $HOME/.zshrc_priv
