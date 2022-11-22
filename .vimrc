@@ -154,11 +154,8 @@ else
 	endf
 endif
 
-" colorscheme xoria256
 " :silent! colorscheme wombat256
-" colorscheme molokai
-" colorscheme greenvision
-:silent colorscheme desert
+:silent colorscheme molokai
 
 " correct some spelling mistakes Insert mode
 iabbrev PSOT POST
