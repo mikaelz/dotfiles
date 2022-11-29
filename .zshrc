@@ -59,6 +59,9 @@ source $ZSH/oh-my-zsh.sh
 [[ -f $HOME/.zshrc_priv ]] && source $HOME/.zshrc_priv
 [[ -f $HOME/.zshrc_host ]] && source $HOME/.zshrc_host
 
+# Add host to prompt
+PROMPT='%{$fg[$NCOLOR]%}%B%n@%m%b%{$reset_color%}:%{$fg[blue]%}%B%c/%b%{$reset_color%} $(git_prompt_info)%(!.#.$) '
+
 export HISTSIZE=1000000
 export SAVEHIST=1000000
 export PATH="$HOME/.symfony/bin:$HOME/Dropbox/home/bin:./node_modules/.bin:$HOME/.composer/vendor/bin:/opt/bin:/usr/local/bin:$PATH"
