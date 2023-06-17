@@ -29,8 +29,8 @@ activity "%"  # tell me when stuff happens!
 # allow bold colors - necessary for some reason
 attrcolor b ".I"
 
-# term screen-256color-bce
-term xterm-256color
+# term xterm-256color
+term screen-256color
 termcapinfo xterm* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 termcapinfo xterm* ti@:te@ # make scrollbar work
 
