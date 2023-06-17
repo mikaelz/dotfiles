@@ -132,10 +132,9 @@ filetype plugin indent on
 " Enable extended % matching
 ru macros/matchit.vim
 
-" if $TERM == 'xterm-256color' || $TERM == 'screen-256color'
-    " set t_Co=256
-" endif
-set t_Co=16
+if $TERM == 'xterm-256color' || $TERM == 'screen-256color' || $TERM == 'rxvt-unicode-256color'
+    set t_Co=256
+endif
 
 if has('gui_running')
     set guicursor=a:blinkon0 " Disable blinking cursor
