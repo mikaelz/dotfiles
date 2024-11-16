@@ -25,6 +25,10 @@ bind-key U show-urls
 bind-key ^d pagedown
 bind-key ^u pageup
 
+unbind-key C feedlist
+confirm-exit no
+cleanup-on-quit no
+
 highlight article "^Feed:.*" color5 color0
 highlight article "^Title:.*" color3 color0 bold
 highlight article "^Author:.*" color2 color0
