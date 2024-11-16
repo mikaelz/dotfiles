@@ -46,7 +46,9 @@ color listfocus_unread yellow default bold
 color info red black bold
 color article cyan default
 
+ignore-mode "display"
 ignore-article "*" "title =~ \"ipad|iphone\""
+ignore-article "*" "title =~ \"fiat|peugeot|honda|renault\""
 ignore-article "*" "title =~ \"oppo\""
 ignore-article "*" "title =~ \"vscode\""
 ignore-article "*" "title =~ \"RT by\""
