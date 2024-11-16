@@ -1,9 +1,10 @@
-
-# https://github.com/tallguyjenks/.dotfiles/blob/5202ba6858f244d43d38914797ad40879f390f3a/newsboat/.config/newsboat/config
+# https://newsboat.org/
+# https://github.com/tallguyjenks/.dotfiles/blob/master/newsboat/.config/newsboat/config
+# https://github.com/LukeSmithxyz/voidrice/blob/master/.config/newsboat/config
 #
 
 #prepopulate-query-feeds yes
-# auto-reload yes
+#auto-reload yes
 
 show-read-feeds no
 reload-threads 50
