@@ -159,6 +159,7 @@ alias dclf='docker-compose logs -f'
 alias dcor='docker-compose down --remove-orphans && docker-compose up'
 alias ds='[[ -f ./docker/start.sh ]] && ./docker/start.sh; [[ -f ./.docker/start.sh ]] && ./.docker/start.sh'
 alias dps='docker ps -a --format "table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.CreatedAt}}\t{{.Status}}\t{{.Ports}}"'
+alias dsp='docker system prune'
 alias di='docker inspect '
 alias dit='docker exec -i -t'
 
