@@ -1,0 +1,45 @@
+
+# https://github.com/tallguyjenks/.dotfiles/blob/5202ba6858f244d43d38914797ad40879f390f3a/newsboat/.config/newsboat/config
+#
+
+#prepopulate-query-feeds yes
+# auto-reload yes
+
+show-read-feeds no
+reload-threads 50
+
+error-log ".newsboat/error.log"
+
+# Copy article url into clipboard
+macro c set browser "xsel -b <<<" ; open-in-browser ; set browser linkhandler
+
+bind-key j down
+bind-key k up
+bind-key j next articlelist
+bind-key k prev articlelist
+bind-key J next-feed articlelist
+bind-key K prev-feed articlelist
+bind-key U show-urls
+bind-key ^d pagedown
+bind-key ^u pageup
+
+highlight article "^Feed:.*" color5 color0
+highlight article "^Title:.*" color3 color0 bold
+highlight article "^Author:.*" color2 color0
+highlight article "^Date:.*" color223 color0
+highlight article "^Link:.*" color4 color0
+highlight article "^Flags:.*" color9 color0
+highlight article "\\[[0-9][0-9]*\\]" color66 default bold
+highlight article "\\[image [0-9][0-9]*\\]" color109 default bold
+highlight article "\\[embedded flash: [0-9][0-9]*\\]" color66 default bold
+
+color listnormal cyan default
+color listfocus black yellow standout bold
+color listnormal_unread blue default
+color listfocus_unread yellow default bold
+color info red black bold
+color article cyan default
+
+ignore-article "*" "title =~ \"ipad|iphone\""
+ignore-article "*" "title =~ \"oppo\""
+ignore-article "*" "title =~ \"\.net|angular|vue|vuejs\""
