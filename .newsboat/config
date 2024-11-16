@@ -8,6 +8,7 @@
 
 show-read-feeds no
 reload-threads 50
+feed-sort-order unreadarticlecount-asc
 
 error-log ".newsboat/error.log"
 
