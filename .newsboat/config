@@ -40,17 +40,26 @@ highlight article "\\[[0-9][0-9]*\\]" color66 default bold
 highlight article "\\[image [0-9][0-9]*\\]" color109 default bold
 highlight article "\\[embedded flash: [0-9][0-9]*\\]" color66 default bold
 
-color listnormal cyan default
-color listfocus black yellow standout bold
-color listnormal_unread blue default
-color listfocus_unread yellow default bold
-color info default default reverse
-color article cyan default
+color listnormal        white black
+color listnormal_unread white black
+color listfocus         white red bold
+color listfocus_unread  white red bold
+color info              cyan blue
+color background        white black
+color article           white black
 
 ignore-mode "display"
-ignore-article "*" "title =~ \"ipad|iphone\""
+ignore-article "*" "title =~ \"ipad|iphone|ios|apple id\""
+ignore-article "*" "title =~ \"icinga|zabbix|kde plasma|mastodon|qt \""
+ignore-article "*" "title =~ \"dogecoin|solana|ethereum|altcoin|monero\""
 ignore-article "*" "title =~ \"fiat|peugeot|honda|renault\""
-ignore-article "*" "title =~ \"oppo\""
-ignore-article "*" "title =~ \"vscode\""
-ignore-article "*" "title =~ \"RT by\""
+ignore-article "*" "title =~ \"oppo| nest \""
+ignore-article "*" "title =~ \"alexa|vmware\""
+ignore-article "*" "title =~ \"tiktok|whatsapp\""
+ignore-article "*" "title =~ \"hulu|netflix|disney\""
+ignore-article "*" "title =~ \"vscode|copilot\""
+ignore-article "*" "title =~ \"futbal|hokej|nba |nhl |tenis\""
 ignore-article "*" "title =~ \"\.net|angular|vue|vuejs\""
+
+ignore-article "https://9to5google.com/feed/" "title =~ \"samsung\""
+ignore-article "https://www.financnasprava.sk/sk/rss/rss-novinky" "title =~ \"odstávka\""
