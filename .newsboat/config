@@ -44,4 +44,6 @@ color article cyan default
 
 ignore-article "*" "title =~ \"ipad|iphone\""
 ignore-article "*" "title =~ \"oppo\""
+ignore-article "*" "title =~ \"vscode\""
+ignore-article "*" "title =~ \"RT by\""
 ignore-article "*" "title =~ \"\.net|angular|vue|vuejs\""
