@@ -13,6 +13,7 @@ error-log ".newsboat/error.log"
 
 # Copy article url into clipboard
 macro c set browser "xsel -b <<<" ; open-in-browser ; set browser linkhandler
+macro w set browser "links" ; open-in-browser ; set browser linkhandler
 
 bind-key j down
 bind-key k up
