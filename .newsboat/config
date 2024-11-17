@@ -11,8 +11,8 @@ show-read-feeds no
 reload-threads 60
 feed-sort-order unreadarticlecount-asc
 
-feedlist-format "%4i %n %S %11u %t"
-articlelist-format  "%4i %f %D %?T?|%-17T| ?%t %L"
+feedlist-format "%3i %n %S %8u %t (%T)"
+articlelist-format  "%4i %f %D %?T?|%-17T| ?%t"
 
 error-log ".newsboat/error.log"
 
