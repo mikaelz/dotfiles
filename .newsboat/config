@@ -1,3 +1,4 @@
+#
 # https://newsboat.org/
 # https://github.com/tallguyjenks/.dotfiles/blob/master/newsboat/.config/newsboat/config
 # https://github.com/LukeSmithxyz/voidrice/blob/master/.config/newsboat/config
@@ -7,8 +8,11 @@
 #auto-reload yes
 
 show-read-feeds no
-reload-threads 50
+reload-threads 60
 feed-sort-order unreadarticlecount-asc
+
+feedlist-format "%4i %n %S %11u %t"
+articlelist-format  "%4i %f %D %?T?|%-17T| ?%t %L"
 
 error-log ".newsboat/error.log"
 
