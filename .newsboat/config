@@ -4,8 +4,8 @@
 # https://github.com/LukeSmithxyz/voidrice/blob/master/.config/newsboat/config
 #
 
-#prepopulate-query-feeds yes
-#auto-reload yes
+# prepopulate-query-feeds yes
+auto-reload yes
 
 show-read-feeds no
 reload-threads 60
