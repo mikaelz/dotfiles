@@ -14,7 +14,7 @@ feed-sort-order unreadarticlecount-asc
 feedlist-format "%3i %n %S %8u %t (%T)"
 articlelist-format  "%4i %f %D %?T?|%-17T| ?%t"
 
-error-log ".newsboat/error.log"
+error-log ~/.newsboat/error.log
 
 # Copy article url into clipboard
 macro c set browser "xsel -b <<<" ; open-in-browser ; set browser linkhandler
