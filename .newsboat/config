@@ -6,6 +6,7 @@
 
 # prepopulate-query-feeds yes
 auto-reload yes
+browser "xdg-open %u"
 
 show-read-feeds no
 reload-threads 60
