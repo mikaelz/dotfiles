@@ -4,7 +4,7 @@
 # https://github.com/LukeSmithxyz/voidrice/blob/master/.config/newsboat/config
 #
 
-# prepopulate-query-feeds yes
+prepopulate-query-feeds yes
 auto-reload yes
 browser "xdg-open %u"
 
@@ -56,24 +56,25 @@ color article           white black
 ignore-mode "display"
 ignore-article "*" "title =~ \"ipad|iphone|ios|imac|apple id\""
 ignore-article "*" "title =~ \"icinga|zabbix|kde plasma|mastodon|qt \""
-ignore-article "*" "title =~ \"dogecoin| doge | shib |solana|cardano|memecoin|ethereum|altcoin|monero\""
+ignore-article "*" "title =~ \"dogecoin| shib |solana|cardano|memecoin|ethereum|altcoin|monero\""
 ignore-article "*" "title =~ \"bugatti|cadillac|chevrolet|fiat|peugeot|dacia|honda|lada|renault|jaguar\""
 ignore-article "*" "title =~ \"qubes|openwrt| macos | macosx \""
 ignore-article "*" "title =~ \"oppo|motorola| nest \""
 ignore-article "*" "title =~ \"chromebook|playstation|nintendo|steam deck|pixel tablet|oneplus pad\""
 ignore-article "*" "title =~ \"yettel|razr\""
-ignore-article "*" "title =~ \"walmart|costco|vivaldi\""
+ignore-article "*" "title =~ \"warcraft|minecraft\""
+ignore-article "*" "title =~ \"walmart|costco|google store\""
 ignore-article "*" "title =~ \"alexa|vmware|chrome os|chromeos|fedora|suse|asahi|almalinux\""
 ignore-article "*" "title =~ \"tiktok|whatsapp|snapchat|telegram\""
 ignore-article "*" "title =~ \"xfs|reiserfs|btrfs\""
 ignore-article "*" "title =~ \"hulu|netflix|disney|voyo|skylink|antik|hbo|skyshowtime|upc\""
-ignore-article "*" "title =~ \"vscode|copilot|webstorm|outlook\""
+ignore-article "*" "title =~ \"vscode|copilot|webstorm|resharper|outlook|vivaldi\""
 ignore-article "*" "title =~ \"futbal|hokej|nba |nhl |tenis\""
-ignore-article "*" "title =~ \"freecad|blender\""
+ignore-article "*" "title =~ \"freecad|blender|scikit\""
 ignore-article "*" "title =~ \"\.net|angular|vue|vuejs|ruby|java|graphql|typescript|c\#\""
 ignore-article "*" "title =~ \"uložení zásielky\""
 
-ignore-article "http://kryptomagazin.sk/feed/" "title =~ \"shib|mtaur|pepe|jupiter|xrp|binance\""
+ignore-article "http://kryptomagazin.sk/feed/" "title =~ \"shib|mtaur|pepe|jupiter|xrp|binance|doge\""
 ignore-article "https://9to5google.com/feed/" "title =~ \"samsung|galaxy|rog\""
 ignore-article "https://auto.pravda.sk/rss/xml/" "title =~ \"tatra\""
 ignore-article "https://www.financnasprava.sk/sk/rss/rss-novinky" "title =~ \"odstávka\""
