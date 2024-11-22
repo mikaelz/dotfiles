@@ -7,13 +7,14 @@
 prepopulate-query-feeds yes
 auto-reload yes
 browser "xdg-open %u"
+user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
 
 show-read-feeds no
 reload-threads 60
 feed-sort-order unreadarticlecount-asc
 
 feedlist-format "%3i %n %S %8u %t (%T)"
-articlelist-format  "%4i %f %D %?T?|%-17T| ?%t"
+articlelist-format  "%4i %f %D %?T?|%-20T| ?%t"
 
 error-log ~/.newsboat/error.log
 
