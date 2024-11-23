@@ -1,0 +1,10 @@
+# https://newsboat.org/
+
+"query:All Unread:unread = \"yes\"" "Filter"
+"query:Today Unread:unread = \"yes\" and age < 1" "Filter"
+
+http://www.fourhourworkweek.com/blog/feed/ "Blog"
+http://blog.jetbrains.com/phpstorm/feed/ "Programming"
+https://github.com/blog/engineering.atom "Programming"
+https://php.watch/feed/articles.xml "Programming"
+https://mwop.net/blog/rss.xml "Programming"
