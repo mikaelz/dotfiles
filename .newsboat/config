@@ -4,8 +4,8 @@
 # https://github.com/LukeSmithxyz/voidrice/blob/master/.config/newsboat/config
 #
 
-prepopulate-query-feeds yes
 auto-reload yes
+prepopulate-query-feeds yes
 browser "xdg-open %u"
 user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
 
@@ -34,7 +34,7 @@ bind-key ^u pageup
 
 unbind-key C feedlist
 confirm-exit no
-cleanup-on-quit no
+cleanup-on-quit yes
 
 highlight article "^Feed:.*" color5 color0
 highlight article "^Title:.*" color3 color0 bold
@@ -76,7 +76,8 @@ ignore-article "*" "title =~ \"freecad|blender|scikit|django\""
 ignore-article "*" "title =~ \"\.net|angular|vue|vuejs|ruby|java|graphql|typescript|c\#\""
 ignore-article "*" "title =~ \"uložení zásielky\""
 
-ignore-article "http://kryptomagazin.sk/feed/" "title =~ \"kryptomien|kryptomeny|shib|mtaur|pepe|jupiter|xrp|binance|doge|ripple|minotaurus|catzilla|toncoin\""
+ignore-article "http://kryptomagazin.sk/feed/" "title =~ \"kryptomien|kryptomeny|ether|shib|mtaur|pepe|jupiter|xrp|binance|doge|ripple|minotaurus|catzilla|toncoin\""
 ignore-article "https://9to5google.com/feed/" "title =~ \"samsung|galaxy|rog\""
 ignore-article "https://auto.pravda.sk/rss/xml/" "title =~ \"tatra\""
 ignore-article "https://www.financnasprava.sk/sk/rss/rss-novinky" "title =~ \"odstávka\""
+#ignore-article "*" "tags =~ \"Prepping\"" "title =~ \"pets|mylar\""
