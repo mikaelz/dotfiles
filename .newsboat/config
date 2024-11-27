@@ -11,6 +11,7 @@ user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Geck
 
 show-read-feeds no
 reload-threads 60
+reload-time 20
 feed-sort-order unreadarticlecount-asc
 
 feedlist-format "%3i %n %S %8u %t (%T)"
