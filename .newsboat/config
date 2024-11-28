@@ -12,7 +12,10 @@ user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Geck
 show-read-feeds no
 reload-threads 10
 reload-time 20
+keep-articles-days 30
 text-width 80
+download-retries 2
+download-timeout 60
 feed-sort-order unreadarticlecount-asc
 
 feedlist-format "%3i %n %S %8u %t (%T)"
@@ -30,6 +33,8 @@ bind-key j next articlelist
 bind-key k prev articlelist
 bind-key J next-feed articlelist
 bind-key K prev-feed articlelist
+bind-key g home
+bind-key G end
 bind-key U show-urls
 bind-key ^d pagedown
 bind-key ^u pageup
