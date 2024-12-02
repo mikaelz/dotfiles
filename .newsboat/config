@@ -10,8 +10,8 @@ browser "xdg-open %u"
 user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
 
 show-read-feeds no
-reload-threads 10
-reload-time 20
+reload-threads 12
+reload-time 30
 keep-articles-days 30
 text-width 80
 download-retries 2
