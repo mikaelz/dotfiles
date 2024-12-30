@@ -11,7 +11,7 @@ user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Geck
 
 show-read-feeds no
 reload-threads 12
-reload-time 30
+reload-time 20
 keep-articles-days 30
 text-width 80
 download-retries 2
@@ -62,27 +62,28 @@ color background        white black
 color article           white black
 
 ignore-mode "display"
-ignore-article "*" "title =~ \"ipad|iphone|ios|icloud|macos|imac|apple id|apple watch\""
-ignore-article "*" "title =~ \"icinga|zabbix|kde plasma|mastodon|qt \""
+ignore-article "*" "title =~ \"ipad|iphone|ios|icloud|macos|imac|apple id|apple pay|applepay|apple watch\""
+ignore-article "*" "title =~ \"icinga|zabbix|kde plasma|mastodon|qt|hyprland|pipewire\""
 ignore-article "*" "title =~ \"cardana|dogecoin| shib |solana|cardano|memecoin|meme coin|ethereum|altcoin|monero\""
 ignore-article "*" "title =~ \"audi|opel|bugatti|cadillac|chevrolet|fiat|peugeot|dacia|honda|lada|renault|jaguar|stellantis\""
 ignore-article "*" "title =~ \"qubes|openwrt| macos | macosx \""
 ignore-article "*" "title =~ \"oppo|motorola|hisense|oneplus| nest \""
 ignore-article "*" "title =~ \"chromebook|playstation|nintendo\""
-ignore-article "*" "title =~ \"nvidia shield|steam deck|pixel tablet|oneplus pad|pixel bud|pixel watch\""
-ignore-article "*" "title =~ \"yettel|razr\""
-ignore-article "*" "title =~ \"warcraft|minecraft|pokémon|pokemon\""
+ignore-article "*" "title =~ \"nvidia shield|steam deck|pixel tablet|oneplus pad|pixel bud|pixel watch|pixel 9|galaxy s\""
+ignore-article "*" "title =~ \"yettel|razr|vodafone\""
+ignore-article "*" "title =~ \"warcraft|minecraft|pokémon|pokemon|roblox|twitch\""
 ignore-article "*" "title =~ \"walmart|costco|google store|roborock\""
 ignore-article "*" "title =~ \"alexa|vmware|chrome os|chromeos|fedora|rhel|suse|asahi|almalinux\""
 ignore-article "*" "title =~ \"tiktok|whatsapp|snapchat|telegram\""
 ignore-article "*" "title =~ \"xfs|reiserfs|btrfs\""
 ignore-article "*" "title =~ \"bluetti|flour|mre|ecoflow\""
 ignore-article "*" "title =~ \"hulu|netflix|disney|voyo|skylink|antik|hbo|skyshowtime|roku|upc|plustelka\""
-ignore-article "*" "title =~ \"vscode|copilot|webstorm|resharper|vivaldi\""
-ignore-article "*" "title =~ \"bing|outlook|m365\""
+ignore-article "*" "title =~ \"vscode|vs code|copilot|webstorm|resharper|vivaldi|jenkins\""
+ignore-article "*" "title =~ \"bing|outlook|m365|wsl\""
+ignore-article "*" "title =~ \"kofola|vinea|sedita\""
 ignore-article "*" "title =~ \"futbal|hokej|nba |nhl |tenis|slovan\""
-ignore-article "*" "title =~ \"freecad|blender|scikit|django\""
-ignore-article "*" "title =~ \"\.net|angular|vue|react native|vuejs|ruby|java|graphql|typescript|c\#\""
+ignore-article "*" "title =~ \"freecad|blender|scikit|django|postgres\""
+ignore-article "*" "title =~ \"\.net|angular|vue|react native|c++|vuejs|ruby|java|graphql|typescript|c\#\""
 ignore-article "*" "title =~ \"uložení zásielky\""
 
 ignore-article "http://kryptomagazin.sk/feed/" "title =~ \"kryptomien|kryptomeny|ether|shib|mtaur|pepe|jupiter|xrp|binance|doge|ripple|minotaurus|catzilla|toncoin\""
@@ -90,5 +91,5 @@ ignore-article "https://9to5google.com/feed/" "title =~ \"samsung|galaxy|rog|pro
 ignore-article "https://auto.pravda.sk/rss/xml/" "title =~ \"tatra|leon\""
 ignore-article "http://www.satelitnatv.sk/feed/" "title =~ \"prima|sport\""
 ignore-article "https://www.financnasprava.sk/sk/rss/rss-novinky" "title =~ \"odstávka\""
-ignore-article "regex:https?://www.reddit.com/r/prepp.*" "title =~ \"pets|mylar|freeze drie|freeze-drie|fuel storage|water storage|power station\"
+ignore-article "regex:https?://www.reddit.com/r/prepp.*" "title =~ \"pets|pet food|mylar|freeze drie|freeze-drie|fuel storage|water storage|power station|rifle\"
 ignore-article "https://news.google.com/rss/topics/CAAqJQgKIh9DQkFTRVFvSUwyMHZNRFV3YXpnU0JXVnVMVWRDS0FBUAE" "title =~ \"samsung|apple|galaxy\""
