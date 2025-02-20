@@ -64,7 +64,7 @@ PROMPT='%{$fg[$NCOLOR]%}%B%n@%m%b%{$reset_color%}:%{$fg[blue]%}%B%c/%b%{$reset_c
 
 export HISTSIZE=1000000
 export SAVEHIST=1000000
-export PATH="$HOME/.symfony/bin:$HOME/Dropbox/home/bin:./node_modules/.bin:$HOME/.composer/vendor/bin:/opt/bin:/usr/local/bin:$PATH"
+export PATH="$HOME/.config/composer/vendor/bin:$HOME/.local/bin:$HOME/Jts:$HOME/Dropbox/home/bin:./node_modules/.bin:/opt/bin:/usr/local/bin:$PATH"
 export EDITOR=vim
 export VISUAL=$EDITOR
 export PAGER=less
@@ -85,7 +85,7 @@ setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history 
 setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 
-PROMPT='%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n@)%m %{$fg_bold[cyan]%}%(!.%1~.%~) $(git_prompt_info)%_$(prompt_char)%{$reset_color%} '
+PROMPT='%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n@)%m %{$fg_bold[cyan]%}%(!.%1~.%~) $(git_prompt_info)$%{$reset_color%} '
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -99,6 +99,7 @@ alias H='cd /srv/http'
 alias eA='vi ~/.config/awesome/rc.lua'
 alias eB='vi ~/.bashrc'
 alias rB='source ~/.bashrc; echo "[ done ] source ~/.bashrc"'
+alias eS='vim ~/.screenrc'
 alias eZ='vim ~/.zshrc'
 alias eH='vim ~/.zsh_history'
 alias rZ='source ~/.zshrc; echo "[ done ] source ~/.zshrc"'
@@ -183,6 +184,7 @@ alias gc='git commit -v'
 alias gco='git checkout'
 alias gg='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --all --decorate --abbrev-commit --date=relative'
 alias gwc='git whatchanged'
+alias gdp='git pull --prune && docker compose pull'
 alias gl='git log --name-status'
 alias git-last-commited-files="git diff-tree -r HEAD@{0}"
 alias gdamb='git branch --merged | egrep -v "(^\*|master)" | xargs git branch -d'
@@ -264,8 +266,3 @@ transfer() {
 accept-line() {: "${BUFFER:="ls -lah"}"; zle ".$WIDGET"}
 zle -N accept-line
 
-function prompt_char {
-    git branch >/dev/null 2>/dev/null && echo '±' && return
-    hg root >/dev/null 2>/dev/null && echo '☿' && return
-    echo '$'
-}
