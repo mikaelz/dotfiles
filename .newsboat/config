@@ -16,7 +16,8 @@ keep-articles-days 30
 text-width 80
 download-retries 3
 download-timeout 30
-feed-sort-order unreadarticlecount-asc
+#feed-sort-order unreadarticlecount-asc
+feed-sort-order latestunread
 
 feedlist-format "%3i %n %S %8u %t (%T)"
 articlelist-format  "%4i %f %D %?T?|%-20T| ?%t"
