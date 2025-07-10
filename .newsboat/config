@@ -42,7 +42,7 @@ bind-key ^u pageup
 
 unbind-key C feedlist
 confirm-exit no
-cleanup-on-quit yes
+cleanup-on-quit nudge
 
 highlight article "^Feed:.*" color5 color0
 highlight article "^Title:.*" color3 color0 bold
