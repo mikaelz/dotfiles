@@ -104,7 +104,7 @@ set swapfile                  " use a swap file for this buffer
 set directory^=/tmp//         " list of directories for the swap file
 
 " command line editing
-set history=200               " how many command lines are remembered
+set history=300               " how many command lines are remembered
 set wildmode=list:longest,full             " specifies how command line completion works
 set wildignore+=*.o,*.obj,*.pyc,*.db " list of patterns to ignore files for file name completion
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
@@ -181,7 +181,9 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS noci
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType sql set omnifunc=sqlcomplete#CompleteSQL
+
+" autocmd FileType sql set omnifunc=sqlcomplete#CompleteSQL
+autocmd BufNewFile,BufRead *.sql setlocal syntax=off
 
 autocmd BufNewFile,BufRead *.less set filetype=css
 autocmd BufRead,BufNewFile *.tpl set filetype=smarty
