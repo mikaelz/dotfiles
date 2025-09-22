@@ -52,4 +52,4 @@ select 0
 backtick 0 0 0 whoami # use "%0`" to equal the output
 # backtick 1 0 5 $HOME/bin/screen_disk_usage # use "%1`" to equal the output
 
-hardstatus alwayslastline "%{.bW} %-w%{.rW}%n %t%{-}%+w %=%{..} %l | %0`@%H | %D %c:%s %d.%m.%Y"
+hardstatus alwayslastline "%{.bW} %-w%{.rW}%n %t%{-}%+w %=%{..} %l | %0`@%H | %c %D %d.%m.%Y"
