@@ -91,7 +91,7 @@ ignore-article "*" "title =~ \"uložení zásielky\""
 ignore-article "*" "link =~ \"youtube\.com/shorts\""
 
 ignore-article "http://kryptomagazin.sk/feed/" "title =~ \"kryptomien|kryptomeny|ether|shib|mtaur|pepe|jupiter|xrp|binance|doge|ripple|minotaurus|catzilla|toncoin\""
-ignore-article "https://9to5google.com/feed/" "title =~ \"samsung|galaxy|rog|projector\""
+ignore-article "https://9to5google.com/feed/" "title =~ \"samsung|galaxy|rog|projector|app.deals\""
 ignore-article "https://auto.pravda.sk/rss/xml/" "title =~ \"tatra|leon\""
 ignore-article "http://www.satelitnatv.sk/feed/" "title =~ \"prima|sport\""
 ignore-article "https://www.financnasprava.sk/sk/rss/rss-novinky" "title =~ \"odstávka\""
