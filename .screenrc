@@ -29,10 +29,14 @@ activity "%"  # tell me when stuff happens!
 # allow bold colors - necessary for some reason
 attrcolor b ".I"
 
-# term xterm-256color
 term screen-256color
-termcapinfo xterm* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
-termcapinfo xterm* ti@:te@ # make scrollbar work
+truecolor on
+# Tell screen how to set colors for 256-color support
+# This line matches rxvt-unicode specifically and generic rxvt/xterm
+termcapinfo xterm*|rxvt*|kterm*|Eterm* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+
+# OPTIONAL: Fix scrolling in urxvt
+termcapinfo rxvt* ti@:te@
 
 # erase background with current bg color
 defbce on
