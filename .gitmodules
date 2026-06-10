@@ -61,3 +61,9 @@
 [submodule ".vim/bundle/vim-auto-save"]
 	path = .vim/bundle/vim-auto-save
 	url = https://github.com/907th/vim-auto-save.git
+[submodule ".vim/bundle/vim-ai"]
+	path = .vim/bundle/vim-ai
+	url = https://github.com/madox2/vim-ai.git
+[submodule ".vim/bundle/vim-commentary"]
+	path = .vim/bundle/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git
