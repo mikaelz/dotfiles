@@ -240,6 +240,8 @@ if &runtimepath =~ 'ale'
     nnoremap <F10> :ALEToggle<CR>
 endif
 
+" By default <leader> is \
+
 " open taglist
 nnoremap <F2> :TlistOpen<CR>
 inoremap <F2> <Esc>:TlistOpen<CR>
@@ -289,6 +291,24 @@ nmap <silent> <UP>    :lprev<CR>
 nmap <silent> <DOWN>  :lnext<CR>
 nmap <silent> <LEFT>  :cprev<CR>
 nmap <silent> <RIGHT> :cnext<CR>
+
+" stop async chat generation
+nnoremap <leader>s :AIStopChat<CR>
+
+" complete text on the current line or in visual selection
+nnoremap <leader>a :AI<CR>
+xnoremap <leader>a :AI<CR>
+
+" edit text with a custom prompt
+xnoremap <leader>s :AIEdit fix grammar and spelling<CR>
+nnoremap <leader>s :AIEdit fix grammar and spelling<CR>
+
+" trigger chat
+xnoremap <leader>c :AIChat<CR>
+nnoremap <leader>c :AIChat<CR>
+
+" redo last AI command
+nnoremap <leader>r :AIRedo<CR>
 
 " Keep undo history across sessions by storing it in a file
 if has('persistent_undo')
