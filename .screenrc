@@ -1,14 +1,8 @@
-# ~/.screenrc
-#
-# Thanks to:
-# https://www.gnu.org/software/screen/manual/screen.html#Command-Summary
-# http://www.debian-administration.org/articles/560
-# http://www.alexandrulazar.com/junk/articles/.screenrc
 
 startup_message off
 
 # defshell -bash # dash makes it a login shell
-defshell zsh
+# defshell zsh
 # shelltitle "$ |zsh"
 
 vbell on # no annoying audible bell
