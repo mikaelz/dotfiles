@@ -1,0 +1,35 @@
+[DEFAULT]
+checkout = git clone %p %d
+update = git pull
+
+[ale]
+project = https://github.com/w0rp/ale.git
+directory = ale
+
+[commentary]
+project = https://tpope.io/vim/commentary.git
+directory = commentary
+
+[vim-ai]
+project = https://github.com/madox2/vim-ai.git
+directory = vim-ai
+
+[vim-auto-save]
+project = https://github.com/vim-scripts/vim-auto-save.git
+directory = vim-auto-save
+
+[vim-fat-finger]
+project = https://github.com/chip/vim-fat-finger.git
+directory = vim-fat-finger
+
+[vim-unimpaired]
+project = https://github.com/tpope/vim-unimpaired.git
+directory = vim-unimpaired
+
+[vim-surround]
+project = https://github.com/tpope/vim-surround.git
+directory = vim-surround
+
+[editorconfig-vim]
+project = https://github.com/editorconfig/editorconfig-vim.git
+directory = editorconfig-vim
