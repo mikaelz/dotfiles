@@ -42,6 +42,12 @@ bind % screen -t htop htop
 bind > eval writebuf "exec sh -c 'xsel -bi </tmp/screen-exchange'"
 bind < eval "exec sh -c 'xsel -bo >/tmp/screen-exchange'" readbuf
 
+# Navigate regions using Prefix + hjkl
+bind h focus left
+bind j focus down
+bind k focus up
+bind l focus right
+
 screen 0
 # screen 1
 
